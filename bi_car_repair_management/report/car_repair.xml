@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="car_repair_report_id" model="ir.actions.report">
+            <field name="name">Car Repair</field>
+            <field name="model">car.repair</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bi_car_repair_management.car_repair_temp_id</field>
+            <field name="report_file">bi_car_repair_management.car_repair_temp_id</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_car_repair"/>
+
+        </record>
+
+
+
+        <record id="car_repair_label_report_id" model="ir.actions.report">
+            <field name="name">Car Label</field>
+            <field name="model">car.repair</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bi_car_repair_management.car_repair_label_temp_id</field>
+            <field name="report_file">bi_car_repair_management.car_repair_label_temp_id</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_car_repair"/>
+
+        </record>
+				
+	</data>
+</odoo>
