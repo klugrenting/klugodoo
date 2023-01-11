@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+	<data noupdate='1'>
+		<record id="com_001" model="res.country.commune">
+			<field name="name">Iquique</field>
+			<field name="code">01101</field>
+<!--			<field name="prov_id" ref="pro_01" />-->
+		</record>
+		<record id="com_002" model="res.country.commune">
+			<field name="name">Alto Hospicio</field>
+			<field name="code">01107</field>
+<!--			<field name="prov_id" ref="pro_01" />-->
+		</record>
+		<record id="com_003" model="res.country.commune">
+			<field name="name">Pozo Almonte</field>
+			<field name="code">01401</field>
+<!--			<field name="prov_id" ref="pro_02" />-->
+		</record>
+		<record id="com_004" model="res.country.commune">
+			<field name="name">Camiña</field>
+			<field name="code">01402</field>
+<!--			<field name="prov_id" ref="pro_02" />-->
+		</record>
+		<record id="com_005" model="res.country.commune">
+			<field name="name">Colchane</field>
+			<field name="code">01403</field>
+<!--			<field name="prov_id" ref="pro_02" />-->
+		</record>
+		<record id="com_006" model="res.country.commune">
+			<field name="name">Huara</field>
+			<field name="code">01404</field>
+<!--			<field name="prov_id" ref="pro_02" />-->
+		</record>
+		<record id="com_007" model="res.country.commune">
+			<field name="name">Pica</field>
+			<field name="code">01405</field>
+<!--			<field name="prov_id" ref="pro_02" />-->
+		</record>
+		<record id="com_008" model="res.country.commune">
+			<field name="name">Antofagasta</field>
+			<field name="code">02101</field>
+<!--			<field name="prov_id" ref="pro_03" />-->
+		</record>
+		<record id="com_009" model="res.country.commune">
+			<field name="name">Mejillones</field>
+			<field name="code">02102</field>
+<!--			<field name="prov_id" ref="pro_03" />-->
+		</record>
+		<record id="com_010" model="res.country.commune">
+			<field name="name">Sierra Gorda</field>
+			<field name="code">02103</field>
+<!--			<field name="prov_id" ref="pro_03" />-->
+		</record>
+		<record id="com_011" model="res.country.commune">
+			<field name="name">Tal-Tal</field>
+			<field name="code">02104</field>
+<!--			<field name="prov_id" ref="pro_03" />-->
+		</record>
+		<record id="com_012" model="res.country.commune">
+			<field name="name">Calama</field>
+			<field name="code">02201</field>
+<!--			<field name="prov_id" ref="pro_04" />-->
+		</record>
+		<record id="com_013" model="res.country.commune">
+			<field name="name">Ollagüe</field>
+			<field name="code">02202</field>
+<!--			<field name="prov_id" ref="pro_04" />-->
+		</record>
+		<record id="com_014" model="res.country.commune">
+			<field name="name">San Pedro de Atacama</field>
+			<field name="code">02203</field>
+<!--			<field name="prov_id" ref="pro_04" />-->
+		</record>
+		<record id="com_015" model="res.country.commune">
+			<field name="name">Tocopilla</field>
+			<field name="code">02301</field>
+<!--			<field name="prov_id" ref="pro_05" />-->
+		</record>
+		<record id="com_016" model="res.country.commune">
+			<field name="name">María Elena</field>
+			<field name="code">02302</field>
+<!--			<field name="prov_id" ref="pro_05" />-->
+		</record>
+		<record id="com_017" model="res.country.commune">
+			<field name="name">Copiapó</field>
+			<field name="code">03101</field>
+<!--			<field name="prov_id" ref="pro_06" />-->
+		</record>
+		<record id="com_018" model="res.country.commune">
+			<field name="name">Caldera</field>
+			<field name="code">03102</field>
+<!--			<field name="prov_id" ref="pro_06" />-->
+		</record>
+		<record id="com_019" model="res.country.commune">
+			<field name="name">Tierra Amarilla</field>
+			<field name="code">03103</field>
+<!--			<field name="prov_id" ref="pro_06" />-->
+		</record>
+		<record id="com_020" model="res.country.commune">
+			<field name="name">Chañaral</field>
+			<field name="code">03201</field>
+<!--			<field name="prov_id" ref="pro_07" />-->
+		</record>
+		<record id="com_021" model="res.country.commune">
+			<field name="name">Diego de Almagro</field>
+			<field name="code">03202</field>
+<!--			<field name="prov_id" ref="pro_07" />-->
+		</record>
+		<record id="com_022" model="res.country.commune">
+			<field name="name">Vallenar</field>
+			<field name="code">03301</field>
+<!--			<field name="prov_id" ref="pro_08" />-->
+		</record>
+		<record id="com_023" model="res.country.commune">
+			<field name="name">Alto del Carmen</field>
+			<field name="code">03302</field>
+<!--			<field name="prov_id" ref="pro_08" />-->
+		</record>
+		<record id="com_024" model="res.country.commune">
+			<field name="name">Freirina</field>
+			<field name="code">03303</field>
+<!--			<field name="prov_id" ref="pro_08" />-->
+		</record>
+		<record id="com_025" model="res.country.commune">
+			<field name="name">Huasco</field>
+			<field name="code">03304</field>
+<!--			<field name="prov_id" ref="pro_08" />-->
+		</record>
+		<record id="com_026" model="res.country.commune">
+			<field name="name">La Serena</field>
+			<field name="code">04101</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_027" model="res.country.commune">
+			<field name="name">Coquimbo</field>
+			<field name="code">04102</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_028" model="res.country.commune">
+			<field name="name">Andacollo</field>
+			<field name="code">04103</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_029" model="res.country.commune">
+			<field name="name">La Higuera</field>
+			<field name="code">04104</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_030" model="res.country.commune">
+			<field name="name">Paiguano</field>
+			<field name="code">04105</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_031" model="res.country.commune">
+			<field name="name">Vicuña</field>
+			<field name="code">04106</field>
+<!--			<field name="prov_id" ref="pro_09" />-->
+		</record>
+		<record id="com_032" model="res.country.commune">
+			<field name="name">Illapel</field>
+			<field name="code">04201</field>
+<!--			<field name="prov_id" ref="pro_10" />-->
+		</record>
+		<record id="com_033" model="res.country.commune">
+			<field name="name">Canela</field>
+			<field name="code">04202</field>
+<!--			<field name="prov_id" ref="pro_10" />-->
+		</record>
+		<record id="com_034" model="res.country.commune">
+			<field name="name">Los Vilos</field>
+			<field name="code">04203</field>
+<!--			<field name="prov_id" ref="pro_10" />-->
+		</record>
+		<record id="com_035" model="res.country.commune">
+			<field name="name">Salamanca</field>
+			<field name="code">04204</field>
+<!--			<field name="prov_id" ref="pro_10" />-->
+		</record>
+		<record id="com_036" model="res.country.commune">
+			<field name="name">Ovalle</field>
+			<field name="code">04301</field>
+<!--			<field name="prov_id" ref="pro_11" />-->
+		</record>
+		<record id="com_037" model="res.country.commune">
+			<field name="name">Combarbalá</field>
+			<field name="code">04302</field>
+<!--			<field name="prov_id" ref="pro_11" />-->
+		</record>
+		<record id="com_038" model="res.country.commune">
+			<field name="name">Monte Patria</field>
+			<field name="code">04303</field>
+<!--			<field name="prov_id" ref="pro_11" />-->
+		</record>
+		<record id="com_039" model="res.country.commune">
+			<field name="name">Punitaqui</field>
+			<field name="code">04304</field>
+<!--			<field name="prov_id" ref="pro_11" />-->
+		</record>
+		<record id="com_040" model="res.country.commune">
+			<field name="name">Río Hurtado</field>
+			<field name="code">04305</field>
+<!--			<field name="prov_id" ref="pro_11" />-->
+		</record>
+		<record id="com_041" model="res.country.commune">
+			<field name="name">Valparaíso</field>
+			<field name="code">05101</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_042" model="res.country.commune">
+			<field name="name">Casa Blanca</field>
+			<field name="code">05102</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_043" model="res.country.commune">
+			<field name="name">Concón</field>
+			<field name="code">05103</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_044" model="res.country.commune">
+			<field name="name">Juan Fernández</field>
+			<field name="code">05104</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_045" model="res.country.commune">
+			<field name="name">Puchuncaví</field>
+			<field name="code">05105</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_046" model="res.country.commune">
+			<field name="name">Quintero</field>
+			<field name="code">05107</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_047" model="res.country.commune">
+			<field name="name">Viña del Mar</field>
+			<field name="code">05109</field>
+<!--			<field name="prov_id" ref="pro_12" />-->
+		</record>
+		<record id="com_048" model="res.country.commune">
+			<field name="name">Isla de Pascua</field>
+			<field name="code">05201</field>
+<!--			<field name="prov_id" ref="pro_13" />-->
+		</record>
+		<record id="com_049" model="res.country.commune">
+			<field name="name">Los Andes</field>
+			<field name="code">05301</field>
+<!--			<field name="prov_id" ref="pro_14" />-->
+		</record>
+		<record id="com_050" model="res.country.commune">
+			<field name="name">Calle Larga</field>
+			<field name="code">05302</field>
+<!--			<field name="prov_id" ref="pro_14" />-->
+		</record>
+		<record id="com_051" model="res.country.commune">
+			<field name="name">Rinconada</field>
+			<field name="code">05303</field>
+<!--			<field name="prov_id" ref="pro_14" />-->
+		</record>
+		<record id="com_052" model="res.country.commune">
+			<field name="name">San Esteban</field>
+			<field name="code">05304</field>
+<!--			<field name="prov_id" ref="pro_14" />-->
+		</record>
+		<record id="com_053" model="res.country.commune">
+			<field name="name">La Ligua</field>
+			<field name="code">05401</field>
+<!--			<field name="prov_id" ref="pro_15" />-->
+		</record>
+		<record id="com_054" model="res.country.commune">
+			<field name="name">Cabildo</field>
+			<field name="code">05402</field>
+<!--			<field name="prov_id" ref="pro_15" />-->
+		</record>
+		<record id="com_055" model="res.country.commune">
+			<field name="name">Papudo</field>
+			<field name="code">05403</field>
+<!--			<field name="prov_id" ref="pro_15" />-->
+		</record>
+		<record id="com_056" model="res.country.commune">
+			<field name="name">Petorca</field>
+			<field name="code">05404</field>
+<!--			<field name="prov_id" ref="pro_15" />-->
+		</record>
+		<record id="com_057" model="res.country.commune">
+			<field name="name">Zapallar</field>
+			<field name="code">05405</field>
+<!--			<field name="prov_id" ref="pro_15" />-->
+		</record>
+		<record id="com_058" model="res.country.commune">
+			<field name="name">Quillota</field>
+			<field name="code">05501</field>
+<!--			<field name="prov_id" ref="pro_16" />-->
+		</record>
+		<record id="com_059" model="res.country.commune">
+			<field name="name">Calera</field>
+			<field name="code">05502</field>
+<!--			<field name="prov_id" ref="pro_16" />-->
+		</record>
+		<record id="com_060" model="res.country.commune">
+			<field name="name">Hijuelas</field>
+			<field name="code">05503</field>
+<!--			<field name="prov_id" ref="pro_16" />-->
+		</record>
+		<record id="com_061" model="res.country.commune">
+			<field name="name">La Cruz</field>
+			<field name="code">05504</field>
+<!--			<field name="prov_id" ref="pro_16" />-->
+		</record>
+		<record id="com_062" model="res.country.commune">
+			<field name="name">Nogales</field>
+			<field name="code">05506</field>
+<!--			<field name="prov_id" ref="pro_16" />-->
+		</record>
+		<record id="com_063" model="res.country.commune">
+			<field name="name">San Antonio</field>
+			<field name="code">05601</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_064" model="res.country.commune">
+			<field name="name">Algarrobo</field>
+			<field name="code">05602</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_065" model="res.country.commune">
+			<field name="name">Cartagena</field>
+			<field name="code">05603</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_066" model="res.country.commune">
+			<field name="name">El Quisco</field>
+			<field name="code">05604</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_067" model="res.country.commune">
+			<field name="name">El Tabo</field>
+			<field name="code">05605</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_068" model="res.country.commune">
+			<field name="name">Santo Domingo</field>
+			<field name="code">05606</field>
+<!--			<field name="prov_id" ref="pro_17" />-->
+		</record>
+		<record id="com_069" model="res.country.commune">
+			<field name="name">San Felipe</field>
+			<field name="code">05701</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_070" model="res.country.commune">
+			<field name="name">Catemu</field>
+			<field name="code">05702</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_071" model="res.country.commune">
+			<field name="name">Llaillay</field>
+			<field name="code">05703</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_072" model="res.country.commune">
+			<field name="name">Panquehue</field>
+			<field name="code">05704</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_073" model="res.country.commune">
+			<field name="name">Putaendo</field>
+			<field name="code">05705</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_074" model="res.country.commune">
+			<field name="name">Santa María</field>
+			<field name="code">05706</field>
+<!--			<field name="prov_id" ref="pro_18" />-->
+		</record>
+		<record id="com_075" model="res.country.commune">
+			<field name="name">Quilpué</field>
+			<field name="code">05801</field>
+<!--			<field name="prov_id" ref="pro_19" />-->
+		</record>
+		<record id="com_076" model="res.country.commune">
+			<field name="name">Limache</field>
+			<field name="code">05802</field>
+<!--			<field name="prov_id" ref="pro_19" />-->
+		</record>
+		<record id="com_077" model="res.country.commune">
+			<field name="name">Olmué</field>
+			<field name="code">05803</field>
+<!--			<field name="prov_id" ref="pro_19" />-->
+		</record>
+		<record id="com_078" model="res.country.commune">
+			<field name="name">Villa Alemana</field>
+			<field name="code">05804</field>
+<!--			<field name="prov_id" ref="pro_19" />-->
+		</record>
+		<record id="com_079" model="res.country.commune">
+			<field name="name">Rancagua</field>
+			<field name="code">06101</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_080" model="res.country.commune">
+			<field name="name">Codegua</field>
+			<field name="code">06102</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_081" model="res.country.commune">
+			<field name="name">Coinco</field>
+			<field name="code">06103</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_082" model="res.country.commune">
+			<field name="name">Coltauco</field>
+			<field name="code">06104</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_083" model="res.country.commune">
+			<field name="name">Doñihue</field>
+			<field name="code">06105</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_084" model="res.country.commune">
+			<field name="name">Graneros</field>
+			<field name="code">06106</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_085" model="res.country.commune">
+			<field name="name">Las Cabras</field>
+			<field name="code">06107</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_086" model="res.country.commune">
+			<field name="name">Machalí</field>
+			<field name="code">06108</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_087" model="res.country.commune">
+			<field name="name">Malloa</field>
+			<field name="code">06109</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_088" model="res.country.commune">
+			<field name="name">Mostazal</field>
+			<field name="code">06110</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_089" model="res.country.commune">
+			<field name="name">Olivar</field>
+			<field name="code">06111</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_090" model="res.country.commune">
+			<field name="name">Peumo</field>
+			<field name="code">06112</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_091" model="res.country.commune">
+			<field name="name">Pichidegua</field>
+			<field name="code">06113</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_092" model="res.country.commune">
+			<field name="name">Quinta de Tilcoco</field>
+			<field name="code">06114</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_093" model="res.country.commune">
+			<field name="name">Rengo</field>
+			<field name="code">06115</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_094" model="res.country.commune">
+			<field name="name">Requínoa</field>
+			<field name="code">06116</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_095" model="res.country.commune">
+			<field name="name">San Vicente</field>
+			<field name="code">06117</field>
+<!--			<field name="prov_id" ref="pro_20" />-->
+		</record>
+		<record id="com_096" model="res.country.commune">
+			<field name="name">Pichilemu</field>
+			<field name="code">06201</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_097" model="res.country.commune">
+			<field name="name">La Estrella</field>
+			<field name="code">06202</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_098" model="res.country.commune">
+			<field name="name">Litueche</field>
+			<field name="code">06203</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_099" model="res.country.commune">
+			<field name="name">Marchihue</field>
+			<field name="code">06204</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_100" model="res.country.commune">
+			<field name="name">Navidad</field>
+			<field name="code">06205</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_101" model="res.country.commune">
+			<field name="name">Paredones</field>
+			<field name="code">06206</field>
+<!--			<field name="prov_id" ref="pro_21" />-->
+		</record>
+		<record id="com_102" model="res.country.commune">
+			<field name="name">San Fernando</field>
+			<field name="code">06301</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_103" model="res.country.commune">
+			<field name="name">Chépica</field>
+			<field name="code">06302</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_104" model="res.country.commune">
+			<field name="name">Chimbarongo</field>
+			<field name="code">06303</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_105" model="res.country.commune">
+			<field name="name">Lolol</field>
+			<field name="code">06304</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_106" model="res.country.commune">
+			<field name="name">Nancagua</field>
+			<field name="code">06305</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_107" model="res.country.commune">
+			<field name="name">Palmilla</field>
+			<field name="code">06306</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_108" model="res.country.commune">
+			<field name="name">Peralillo</field>
+			<field name="code">06307</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_109" model="res.country.commune">
+			<field name="name">Placilla</field>
+			<field name="code">06308</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_110" model="res.country.commune">
+			<field name="name">Pumanque</field>
+			<field name="code">06309</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_111" model="res.country.commune">
+			<field name="name">Santa Cruz</field>
+			<field name="code">06310</field>
+<!--			<field name="prov_id" ref="pro_22" />-->
+		</record>
+		<record id="com_112" model="res.country.commune">
+			<field name="name">Talca</field>
+			<field name="code">07101</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_113" model="res.country.commune">
+			<field name="name">Constitución</field>
+			<field name="code">07102</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_114" model="res.country.commune">
+			<field name="name">Curepto</field>
+			<field name="code">07103</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_115" model="res.country.commune">
+			<field name="name">Empedrado</field>
+			<field name="code">07104</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_116" model="res.country.commune">
+			<field name="name">Maule</field>
+			<field name="code">07105</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_117" model="res.country.commune">
+			<field name="name">Pelarco</field>
+			<field name="code">07106</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_118" model="res.country.commune">
+			<field name="name">Pencahue</field>
+			<field name="code">07107</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_119" model="res.country.commune">
+			<field name="name">Río Claro</field>
+			<field name="code">07108</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_120" model="res.country.commune">
+			<field name="name">San Clemente</field>
+			<field name="code">07109</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_121" model="res.country.commune">
+			<field name="name">San Rafael</field>
+			<field name="code">07110</field>
+<!--			<field name="prov_id" ref="pro_23" />-->
+		</record>
+		<record id="com_122" model="res.country.commune">
+			<field name="name">Cauquenes</field>
+			<field name="code">07201</field>
+<!--			<field name="prov_id" ref="pro_24" />-->
+		</record>
+		<record id="com_123" model="res.country.commune">
+			<field name="name">Chanco</field>
+			<field name="code">07202</field>
+<!--			<field name="prov_id" ref="pro_24" />-->
+		</record>
+		<record id="com_124" model="res.country.commune">
+			<field name="name">Pelluhue</field>
+			<field name="code">07203</field>
+<!--			<field name="prov_id" ref="pro_24" />-->
+		</record>
+		<record id="com_125" model="res.country.commune">
+			<field name="name">Curicó</field>
+			<field name="code">07301</field>
+<!--			<field name="prov_id" ref="pro_25" />-->
+		</record>
+		<record id="com_126" model="res.country.commune">
+			<field name="name">Hualañé</field>
+			<field name="code">07302</field>
+<!--			<field name="prov_id" ref="pro_25" />-->
+		</record>
+		<record id="com_127" model="res.country.commune">
+			<field name="name">Licantén</field>
+			<field name="code">07303</field>
+		</record>
+		<record id="com_128" model="res.country.commune">
+			<field name="name">Molina</field>
+			<field name="code">07304</field>
+		</record>
+		<record id="com_129" model="res.country.commune">
+			<field name="name">Rauco</field>
+			<field name="code">07305</field>
+		</record>
+		<record id="com_130" model="res.country.commune">
+			<field name="name">Romeral</field>
+			<field name="code">07306</field>
+		</record>
+		<record id="com_131" model="res.country.commune">
+			<field name="name">Sagrada Familia</field>
+			<field name="code">07307</field>
+		</record>
+		<record id="com_132" model="res.country.commune">
+			<field name="name">Teno</field>
+			<field name="code">07308</field>
+		</record>
+		<record id="com_133" model="res.country.commune">
+			<field name="name">Vichuquén</field>
+			<field name="code">07309</field>
+		</record>
+		<record id="com_134" model="res.country.commune">
+			<field name="name">Linares</field>
+			<field name="code">07401</field>
+		</record>
+		<record id="com_135" model="res.country.commune">
+			<field name="name">Colbún</field>
+			<field name="code">07402</field>
+		</record>
+		<record id="com_136" model="res.country.commune">
+			<field name="name">Longaví</field>
+			<field name="code">07403</field>
+		</record>
+		<record id="com_137" model="res.country.commune">
+			<field name="name">Parral</field>
+			<field name="code">07404</field>
+		</record>
+		<record id="com_138" model="res.country.commune">
+			<field name="name">Retiro</field>
+			<field name="code">07405</field>
+		</record>
+		<record id="com_139" model="res.country.commune">
+			<field name="name">San Javier</field>
+			<field name="code">07406</field>
+		</record>
+		<record id="com_140" model="res.country.commune">
+			<field name="name">Villa Alegre</field>
+			<field name="code">07407</field>
+		</record>
+		<record id="com_141" model="res.country.commune">
+			<field name="name">Yerbas Buenas</field>
+			<field name="code">07408</field>
+		</record>
+		<record id="com_142" model="res.country.commune">
+			<field name="name">Concepción</field>
+			<field name="code">08101</field>
+		</record>
+		<record id="com_143" model="res.country.commune">
+			<field name="name">Coronel</field>
+			<field name="code">08102</field>
+		</record>
+		<record id="com_144" model="res.country.commune">
+			<field name="name">Chiguayante</field>
+			<field name="code">08103</field>
+		</record>
+		<record id="com_145" model="res.country.commune">
+			<field name="name">Florida</field>
+			<field name="code">08104</field>
+		</record>
+		<record id="com_146" model="res.country.commune">
+			<field name="name">Hualqui</field>
+			<field name="code">08105</field>
+		</record>
+		<record id="com_147" model="res.country.commune">
+			<field name="name">Lota</field>
+			<field name="code">08106</field>
+		</record>
+		<record id="com_148" model="res.country.commune">
+			<field name="name">Penco</field>
+			<field name="code">08107</field>
+		</record>
+		<record id="com_149" model="res.country.commune">
+			<field name="name">San Pedro de la Paz</field>
+			<field name="code">08108</field>
+		</record>
+		<record id="com_150" model="res.country.commune">
+			<field name="name">Santa Juana</field>
+			<field name="code">08109</field>
+		</record>
+		<record id="com_151" model="res.country.commune">
+			<field name="name">Talcahuano</field>
+			<field name="code">08110</field>
+		</record>
+		<record id="com_152" model="res.country.commune">
+			<field name="name">Tomé</field>
+			<field name="code">08111</field>
+		</record>
+		<record id="com_153" model="res.country.commune">
+			<field name="name">Hualpén</field>
+			<field name="code">08112</field>
+		</record>
+		<record id="com_154" model="res.country.commune">
+			<field name="name">Lebu</field>
+			<field name="code">08201</field>
+		</record>
+		<record id="com_155" model="res.country.commune">
+			<field name="name">Arauco</field>
+			<field name="code">08202</field>
+		</record>
+		<record id="com_156" model="res.country.commune">
+			<field name="name">Cañete</field>
+			<field name="code">08203</field>
+		</record>
+		<record id="com_157" model="res.country.commune">
+			<field name="name">Contulmo</field>
+			<field name="code">08204</field>
+		</record>
+		<record id="com_158" model="res.country.commune">
+			<field name="name">Curanilahue</field>
+			<field name="code">08205</field>
+		</record>
+		<record id="com_159" model="res.country.commune">
+			<field name="name">Los Álamos</field>
+			<field name="code">08206</field>
+		</record>
+		<record id="com_160" model="res.country.commune">
+			<field name="name">Tirúa</field>
+			<field name="code">08207</field>
+		</record>
+		<record id="com_161" model="res.country.commune">
+			<field name="name">Los Ángeles</field>
+			<field name="code">08301</field>
+		</record>
+		<record id="com_162" model="res.country.commune">
+			<field name="name">Antuco</field>
+			<field name="code">08302</field>
+		</record>
+		<record id="com_163" model="res.country.commune">
+			<field name="name">Cabrero</field>
+			<field name="code">08303</field>
+		</record>
+		<record id="com_164" model="res.country.commune">
+			<field name="name">Laja</field>
+			<field name="code">08304</field>
+		</record>
+		<record id="com_165" model="res.country.commune">
+			<field name="name">Mulchén</field>
+			<field name="code">08305</field>
+		</record>
+		<record id="com_166" model="res.country.commune">
+			<field name="name">Nacimiento</field>
+			<field name="code">08306</field>
+		</record>
+		<record id="com_167" model="res.country.commune">
+			<field name="name">Negrete</field>
+			<field name="code">08307</field>
+		</record>
+		<record id="com_168" model="res.country.commune">
+			<field name="name">Quilaco</field>
+			<field name="code">08308</field>
+		</record>
+		<record id="com_169" model="res.country.commune">
+			<field name="name">Quilleco</field>
+			<field name="code">08309</field>
+		</record>
+		<record id="com_170" model="res.country.commune">
+			<field name="name">San Rosendo</field>
+			<field name="code">08310</field>
+		</record>
+		<record id="com_171" model="res.country.commune">
+			<field name="name">Santa Bárbara</field>
+			<field name="code">08311</field>
+		</record>
+		<record id="com_172" model="res.country.commune">
+			<field name="name">Tucapel</field>
+			<field name="code">08312</field>
+		</record>
+		<record id="com_173" model="res.country.commune">
+			<field name="name">Yumbel</field>
+			<field name="code">08313</field>
+		</record>
+		<record id="com_174" model="res.country.commune">
+			<field name="name">Alto Biobío</field>
+			<field name="code">08314</field>
+		</record>
+		<record id="com_175" model="res.country.commune">
+			<field name="name">Chillán</field>
+			<field name="code">08401</field>
+		</record>
+		<record id="com_176" model="res.country.commune">
+			<field name="name">Bulnes</field>
+			<field name="code">08402</field>
+		</record>
+		<record id="com_177" model="res.country.commune">
+			<field name="name">Cobquecura</field>
+			<field name="code">08403</field>
+		</record>
+		<record id="com_178" model="res.country.commune">
+			<field name="name">Coelemu</field>
+			<field name="code">08404</field>
+		</record>
+		<record id="com_179" model="res.country.commune">
+			<field name="name">Coihueco</field>
+			<field name="code">08405</field>
+		</record>
+		<record id="com_180" model="res.country.commune">
+			<field name="name">Chillán Viejo</field>
+			<field name="code">08406</field>
+		</record>
+		<record id="com_181" model="res.country.commune">
+			<field name="name">El Carmen</field>
+			<field name="code">08407</field>
+		</record>
+		<record id="com_182" model="res.country.commune">
+			<field name="name">Ninhue</field>
+			<field name="code">08408</field>
+		</record>
+		<record id="com_183" model="res.country.commune">
+			<field name="name">Ñiquén</field>
+			<field name="code">08409</field>
+		</record>
+		<record id="com_184" model="res.country.commune">
+			<field name="name">Pemuco</field>
+			<field name="code">08410</field>
+		</record>
+		<record id="com_185" model="res.country.commune">
+			<field name="name">Pinto</field>
+			<field name="code">08411</field>
+		</record>
+		<record id="com_186" model="res.country.commune">
+			<field name="name">Portezuelo</field>
+			<field name="code">08412</field>
+		</record>
+		<record id="com_187" model="res.country.commune">
+			<field name="name">Quillón</field>
+			<field name="code">08413</field>
+		</record>
+		<record id="com_188" model="res.country.commune">
+			<field name="name">Quirihue</field>
+			<field name="code">08414</field>
+		</record>
+		<record id="com_189" model="res.country.commune">
+			<field name="name">Ránquil</field>
+			<field name="code">08415</field>
+		</record>
+		<record id="com_190" model="res.country.commune">
+			<field name="name">San Carlos</field>
+			<field name="code">08416</field>
+		</record>
+		<record id="com_191" model="res.country.commune">
+			<field name="name">San Fabián</field>
+			<field name="code">08417</field>
+		</record>
+		<record id="com_192" model="res.country.commune">
+			<field name="name">San Ignacio</field>
+			<field name="code">08418</field>
+		</record>
+		<record id="com_193" model="res.country.commune">
+			<field name="name">San Nicolás</field>
+			<field name="code">08419</field>
+		</record>
+		<record id="com_194" model="res.country.commune">
+			<field name="name">Treguaco</field>
+			<field name="code">08420</field>
+		</record>
+		<record id="com_195" model="res.country.commune">
+			<field name="name">Yungay</field>
+			<field name="code">08421</field>
+		</record>
+		<record id="com_196" model="res.country.commune">
+			<field name="name">Temuco</field>
+			<field name="code">09101</field>
+		</record>
+		<record id="com_197" model="res.country.commune">
+			<field name="name">Carahue</field>
+			<field name="code">09102</field>
+		</record>
+		<record id="com_198" model="res.country.commune">
+			<field name="name">Cunco</field>
+			<field name="code">09103</field>
+		</record>
+		<record id="com_199" model="res.country.commune">
+			<field name="name">Curarrehue</field>
+			<field name="code">09104</field>
+		</record>
+		<record id="com_200" model="res.country.commune">
+			<field name="name">Freire</field>
+			<field name="code">09105</field>
+		</record>
+		<record id="com_201" model="res.country.commune">
+			<field name="name">Galvarino</field>
+			<field name="code">09106</field>
+		</record>
+		<record id="com_202" model="res.country.commune">
+			<field name="name">Gorbea</field>
+			<field name="code">09107</field>
+		</record>
+		<record id="com_203" model="res.country.commune">
+			<field name="name">Lautaro</field>
+			<field name="code">09108</field>
+		</record>
+		<record id="com_204" model="res.country.commune">
+			<field name="name">Loncoche</field>
+			<field name="code">09109</field>
+		</record>
+		<record id="com_205" model="res.country.commune">
+			<field name="name">Melipeuco</field>
+			<field name="code">09110</field>
+		</record>
+		<record id="com_206" model="res.country.commune">
+			<field name="name">Nueva Imperial</field>
+			<field name="code">09111</field>
+		</record>
+		<record id="com_207" model="res.country.commune">
+			<field name="name">Padre las Casas</field>
+			<field name="code">09112</field>
+		</record>
+		<record id="com_208" model="res.country.commune">
+			<field name="name">Perquenco</field>
+			<field name="code">09113</field>
+		</record>
+		<record id="com_209" model="res.country.commune">
+			<field name="name">Pitrufquén</field>
+			<field name="code">09114</field>
+		</record>
+		<record id="com_210" model="res.country.commune">
+			<field name="name">Pucón</field>
+			<field name="code">09115</field>
+		</record>
+		<record id="com_211" model="res.country.commune">
+			<field name="name">Saavedra</field>
+			<field name="code">09116</field>
+		</record>
+		<record id="com_212" model="res.country.commune">
+			<field name="name">Teodoro Schmidt</field>
+			<field name="code">09117</field>
+		</record>
+		<record id="com_213" model="res.country.commune">
+			<field name="name">Toltén</field>
+			<field name="code">09118</field>
+		</record>
+		<record id="com_214" model="res.country.commune">
+			<field name="name">Vilcún</field>
+			<field name="code">09119</field>
+		</record>
+		<record id="com_215" model="res.country.commune">
+			<field name="name">Villarrica</field>
+			<field name="code">09120</field>
+		</record>
+		<record id="com_216" model="res.country.commune">
+			<field name="name">Cholchol</field>
+			<field name="code">09121</field>
+		</record>
+		<record id="com_217" model="res.country.commune">
+			<field name="name">Angol</field>
+			<field name="code">09201</field>
+		</record>
+		<record id="com_218" model="res.country.commune">
+			<field name="name">Collipulli</field>
+			<field name="code">09202</field>
+		</record>
+		<record id="com_219" model="res.country.commune">
+			<field name="name">Curacautín</field>
+			<field name="code">09203</field>
+		</record>
+		<record id="com_220" model="res.country.commune">
+			<field name="name">Ercilla</field>
+			<field name="code">09204</field>
+		</record>
+		<record id="com_221" model="res.country.commune">
+			<field name="name">Lonquimay</field>
+			<field name="code">09205</field>
+		</record>
+		<record id="com_222" model="res.country.commune">
+			<field name="name">Los Sauces</field>
+			<field name="code">09206</field>
+		</record>
+		<record id="com_223" model="res.country.commune">
+			<field name="name">Lumaco</field>
+			<field name="code">09207</field>
+		</record>
+		<record id="com_224" model="res.country.commune">
+			<field name="name">Purén</field>
+			<field name="code">09208</field>
+		</record>
+		<record id="com_225" model="res.country.commune">
+			<field name="name">Renaico</field>
+			<field name="code">09209</field>
+		</record>
+		<record id="com_226" model="res.country.commune">
+			<field name="name">Traiguén</field>
+			<field name="code">09210</field>
+		</record>
+		<record id="com_227" model="res.country.commune">
+			<field name="name">Victoria</field>
+			<field name="code">09211</field>
+		</record>
+		<record id="com_228" model="res.country.commune">
+			<field name="name">Puerto Montt</field>
+			<field name="code">10101</field>
+		</record>
+		<record id="com_229" model="res.country.commune">
+			<field name="name">Calbuco</field>
+			<field name="code">10102</field>
+		</record>
+		<record id="com_230" model="res.country.commune">
+			<field name="name">Cochamó</field>
+			<field name="code">10103</field>
+		</record>
+		<record id="com_231" model="res.country.commune">
+			<field name="name">Fresia</field>
+			<field name="code">10104</field>
+		</record>
+		<record id="com_232" model="res.country.commune">
+			<field name="name">Frutillar</field>
+			<field name="code">10105</field>
+		</record>
+		<record id="com_233" model="res.country.commune">
+			<field name="name">Los Muermos</field>
+			<field name="code">10106</field>
+		</record>
+		<record id="com_234" model="res.country.commune">
+			<field name="name">Llanquihue</field>
+			<field name="code">10107</field>
+		</record>
+		<record id="com_235" model="res.country.commune">
+			<field name="name">Maullín</field>
+			<field name="code">10108</field>
+		</record>
+		<record id="com_236" model="res.country.commune">
+			<field name="name">Puerto Varas</field>
+			<field name="code">10109</field>
+		</record>
+		<record id="com_237" model="res.country.commune">
+			<field name="name">Castro</field>
+			<field name="code">10201</field>
+		</record>
+		<record id="com_238" model="res.country.commune">
+			<field name="name">Ancud</field>
+			<field name="code">10202</field>
+		</record>
+		<record id="com_239" model="res.country.commune">
+			<field name="name">Chonchi</field>
+			<field name="code">10203</field>
+		</record>
+		<record id="com_240" model="res.country.commune">
+			<field name="name">Curaco de Vélez</field>
+			<field name="code">10204</field>
+		</record>
+		<record id="com_241" model="res.country.commune">
+			<field name="name">Dalcahue</field>
+			<field name="code">10205</field>
+		</record>
+		<record id="com_242" model="res.country.commune">
+			<field name="name">Puqueldón</field>
+			<field name="code">10206</field>
+		</record>
+		<record id="com_243" model="res.country.commune">
+			<field name="name">Queilén</field>
+			<field name="code">10207</field>
+		</record>
+		<record id="com_244" model="res.country.commune">
+			<field name="name">Quellón</field>
+			<field name="code">10208</field>
+		</record>
+		<record id="com_245" model="res.country.commune">
+			<field name="name">Quemchi</field>
+			<field name="code">10209</field>
+		</record>
+		<record id="com_246" model="res.country.commune">
+			<field name="name">Quinchao</field>
+			<field name="code">10210</field>
+		</record>
+		<record id="com_247" model="res.country.commune">
+			<field name="name">Osorno</field>
+			<field name="code">10301</field>
+		</record>
+		<record id="com_248" model="res.country.commune">
+			<field name="name">Puerto Octay</field>
+			<field name="code">10302</field>
+		</record>
+		<record id="com_249" model="res.country.commune">
+			<field name="name">Purranque</field>
+			<field name="code">10303</field>
+		</record>
+		<record id="com_250" model="res.country.commune">
+			<field name="name">Puyehue</field>
+			<field name="code">10304</field>
+		</record>
+		<record id="com_251" model="res.country.commune">
+			<field name="name">Río Negro</field>
+			<field name="code">10305</field>
+		</record>
+		<record id="com_252" model="res.country.commune">
+			<field name="name">San Juan de la Costa</field>
+			<field name="code">10306</field>
+		</record>
+		<record id="com_253" model="res.country.commune">
+			<field name="name">San Pablo</field>
+			<field name="code">10307</field>
+		</record>
+		<record id="com_254" model="res.country.commune">
+			<field name="name">Chaitén</field>
+			<field name="code">10401</field>
+		</record>
+		<record id="com_255" model="res.country.commune">
+			<field name="name">Futaleufú</field>
+			<field name="code">10402</field>
+		</record>
+		<record id="com_256" model="res.country.commune">
+			<field name="name">Hualaihué</field>
+			<field name="code">10403</field>
+		</record>
+		<record id="com_257" model="res.country.commune">
+			<field name="name">Palena</field>
+			<field name="code">10404</field>
+		</record>
+		<record id="com_258" model="res.country.commune">
+			<field name="name">Coyhaique</field>
+			<field name="code">11101</field>
+		</record>
+		<record id="com_259" model="res.country.commune">
+			<field name="name">Lago Verde</field>
+			<field name="code">11102</field>
+		</record>
+		<record id="com_260" model="res.country.commune">
+			<field name="name">Aysén</field>
+			<field name="code">11201</field>
+		</record>
+		<record id="com_261" model="res.country.commune">
+			<field name="name">Cisnes</field>
+			<field name="code">11202</field>
+		</record>
+		<record id="com_262" model="res.country.commune">
+			<field name="name">Guaitecas</field>
+			<field name="code">11203</field>
+		</record>
+		<record id="com_263" model="res.country.commune">
+			<field name="name">Cochrane</field>
+			<field name="code">11301</field>
+		</record>
+		<record id="com_264" model="res.country.commune">
+			<field name="name">O’Higgins</field>
+			<field name="code">11302</field>
+		</record>
+		<record id="com_265" model="res.country.commune">
+			<field name="name">Tortel</field>
+			<field name="code">11303</field>
+		</record>
+		<record id="com_266" model="res.country.commune">
+			<field name="name">Chile Chico</field>
+			<field name="code">11401</field>
+		</record>
+		<record id="com_267" model="res.country.commune">
+			<field name="name">Río Ibáñez</field>
+			<field name="code">11402</field>
+		</record>
+		<record id="com_268" model="res.country.commune">
+			<field name="name">Punta Arenas</field>
+			<field name="code">12101</field>
+		</record>
+		<record id="com_269" model="res.country.commune">
+			<field name="name">Laguna Blanca</field>
+			<field name="code">12102</field>
+		</record>
+		<record id="com_270" model="res.country.commune">
+			<field name="name">Río Verde</field>
+			<field name="code">12103</field>
+		</record>
+		<record id="com_271" model="res.country.commune">
+			<field name="name">San Gregorio</field>
+			<field name="code">12104</field>
+		</record>
+		<record id="com_272" model="res.country.commune">
+			<field name="name">Cabo de Hornos (Ex Navarino)</field>
+			<field name="code">12201</field>
+		</record>
+		<record id="com_273" model="res.country.commune">
+			<field name="name">Antártica</field>
+			<field name="code">12202</field>
+		</record>
+		<record id="com_274" model="res.country.commune">
+			<field name="name">Porvenir</field>
+			<field name="code">12301</field>
+		</record>
+		<record id="com_275" model="res.country.commune">
+			<field name="name">Primavera</field>
+			<field name="code">12302</field>
+		</record>
+		<record id="com_276" model="res.country.commune">
+			<field name="name">Timaukel</field>
+			<field name="code">12303</field>
+		</record>
+		<record id="com_277" model="res.country.commune">
+			<field name="name">Natales</field>
+			<field name="code">12401</field>
+		</record>
+		<record id="com_278" model="res.country.commune">
+			<field name="name">Torres del Paine</field>
+			<field name="code">12402</field>
+		</record>
+		<record id="com_279" model="res.country.commune">
+			<field name="name">Santiago</field>
+			<field name="code">13101</field>
+		</record>
+		<record id="com_280" model="res.country.commune">
+			<field name="name">Cerrillos</field>
+			<field name="code">13102</field>
+		</record>
+		<record id="com_281" model="res.country.commune">
+			<field name="name">Cerro Navia</field>
+			<field name="code">13103</field>
+		</record>
+		<record id="com_282" model="res.country.commune">
+			<field name="name">Conchalí</field>
+			<field name="code">13104</field>
+		</record>
+		<record id="com_283" model="res.country.commune">
+			<field name="name">El Bosque</field>
+			<field name="code">13105</field>
+		</record>
+		<record id="com_284" model="res.country.commune">
+			<field name="name">Estación Central</field>
+			<field name="code">13106</field>
+		</record>
+		<record id="com_285" model="res.country.commune">
+			<field name="name">Huechuraba</field>
+			<field name="code">13107</field>
+		</record>
+		<record id="com_286" model="res.country.commune">
+			<field name="name">Independencia</field>
+			<field name="code">13108</field>
+		</record>
+		<record id="com_287" model="res.country.commune">
+			<field name="name">La Cisterna</field>
+			<field name="code">13109</field>
+		</record>
+		<record id="com_288" model="res.country.commune">
+			<field name="name">La Florida</field>
+			<field name="code">13110</field>
+		</record>
+		<record id="com_289" model="res.country.commune">
+			<field name="name">La Granja</field>
+			<field name="code">13111</field>
+		</record>
+		<record id="com_290" model="res.country.commune">
+			<field name="name">La Pintana</field>
+			<field name="code">13112</field>
+		</record>
+		<record id="com_291" model="res.country.commune">
+			<field name="name">La Reina</field>
+			<field name="code">13113</field>
+		</record>
+		<record id="com_292" model="res.country.commune">
+			<field name="name">Las Condes</field>
+			<field name="code">13114</field>
+		</record>
+		<record id="com_293" model="res.country.commune">
+			<field name="name">Lo Barnechea</field>
+			<field name="code">13115</field>
+		</record>
+		<record id="com_294" model="res.country.commune">
+			<field name="name">Lo Espejo</field>
+			<field name="code">13116</field>
+		</record>
+		<record id="com_295" model="res.country.commune">
+			<field name="name">Lo Prado</field>
+			<field name="code">13117</field>
+		</record>
+		<record id="com_296" model="res.country.commune">
+			<field name="name">Macul</field>
+			<field name="code">13118</field>
+		</record>
+		<record id="com_297" model="res.country.commune">
+			<field name="name">Maipú</field>
+			<field name="code">13119</field>
+		</record>
+		<record id="com_298" model="res.country.commune">
+			<field name="name">Ñuñoa</field>
+			<field name="code">13120</field>
+		</record>
+		<record id="com_299" model="res.country.commune">
+			<field name="name">Pedro Aguirre Cerda</field>
+			<field name="code">13121</field>
+		</record>
+		<record id="com_300" model="res.country.commune">
+			<field name="name">Peñalolén</field>
+			<field name="code">13122</field>
+		</record>
+		<record id="com_301" model="res.country.commune">
+			<field name="name">Providencia</field>
+			<field name="code">13123</field>
+		</record>
+		<record id="com_302" model="res.country.commune">
+			<field name="name">Pudahuel</field>
+			<field name="code">13124</field>
+		</record>
+		<record id="com_303" model="res.country.commune">
+			<field name="name">Quilicura</field>
+			<field name="code">13125</field>
+		</record>
+		<record id="com_304" model="res.country.commune">
+			<field name="name">Quinta Normal</field>
+			<field name="code">13126</field>
+		</record>
+		<record id="com_305" model="res.country.commune">
+			<field name="name">Recoleta</field>
+			<field name="code">13127</field>
+		</record>
+		<record id="com_306" model="res.country.commune">
+			<field name="name">Renca</field>
+			<field name="code">13128</field>
+		</record>
+		<record id="com_307" model="res.country.commune">
+			<field name="name">San Joaquín</field>
+			<field name="code">13129</field>
+		</record>
+		<record id="com_308" model="res.country.commune">
+			<field name="name">San Miguel</field>
+			<field name="code">13130</field>
+		</record>
+		<record id="com_309" model="res.country.commune">
+			<field name="name">San Ramón</field>
+			<field name="code">13131</field>
+		</record>
+		<record id="com_310" model="res.country.commune">
+			<field name="name">Vitacura</field>
+			<field name="code">13132</field>
+		</record>
+		<record id="com_311" model="res.country.commune">
+			<field name="name">Puente Alto</field>
+			<field name="code">13201</field>
+		</record>
+		<record id="com_312" model="res.country.commune">
+			<field name="name">Pirque</field>
+			<field name="code">13202</field>
+		</record>
+		<record id="com_313" model="res.country.commune">
+			<field name="name">San José de Maipo</field>
+			<field name="code">13203</field>
+		</record>
+		<record id="com_314" model="res.country.commune">
+			<field name="name">Colina</field>
+			<field name="code">13301</field>
+		</record>
+		<record id="com_315" model="res.country.commune">
+			<field name="name">Lampa</field>
+			<field name="code">13302</field>
+		</record>
+		<record id="com_316" model="res.country.commune">
+			<field name="name">Til Til</field>
+			<field name="code">13303</field>
+		</record>
+		<record id="com_317" model="res.country.commune">
+			<field name="name">San Bernardo</field>
+			<field name="code">13401</field>
+		</record>
+		<record id="com_318" model="res.country.commune">
+			<field name="name">Buin</field>
+			<field name="code">13402</field>
+		</record>
+		<record id="com_319" model="res.country.commune">
+			<field name="name">Calera de Tango</field>
+			<field name="code">13403</field>
+		</record>
+		<record id="com_320" model="res.country.commune">
+			<field name="name">Paine</field>
+			<field name="code">13404</field>
+		</record>
+		<record id="com_321" model="res.country.commune">
+			<field name="name">Melipilla</field>
+			<field name="code">13501</field>
+		</record>
+		<record id="com_322" model="res.country.commune">
+			<field name="name">Alhué</field>
+			<field name="code">13502</field>
+<!--			<field name="prov_id" ref="pro_49" />-->
+		</record>
+		<record id="com_323" model="res.country.commune">
+			<field name="name">Curacaví</field>
+			<field name="code">13503</field>
+		</record>
+		<record id="com_324" model="res.country.commune">
+			<field name="name">María Pinto</field>
+			<field name="code">13504</field>
+		</record>
+		<record id="com_325" model="res.country.commune">
+			<field name="name">San Pedro</field>
+			<field name="code">13505</field>
+		</record>
+		<record id="com_326" model="res.country.commune">
+			<field name="name">Talagante</field>
+			<field name="code">13601</field>
+		</record>
+		<record id="com_327" model="res.country.commune">
+			<field name="name">El Monte</field>
+			<field name="code">13602</field>
+		</record>
+		<record id="com_328" model="res.country.commune">
+			<field name="name">Isla de Maipo</field>
+			<field name="code">13603</field>
+		</record>
+		<record id="com_329" model="res.country.commune">
+			<field name="name">Padre Hurtado</field>
+			<field name="code">13604</field>
+		</record>
+		<record id="com_330" model="res.country.commune">
+			<field name="name">Peñaflor</field>
+			<field name="code">13605</field>
+		</record>
+		<record id="com_331" model="res.country.commune">
+			<field name="name">Valdivia</field>
+			<field name="code">14101</field>
+		</record>
+		<record id="com_332" model="res.country.commune">
+			<field name="name">Corral</field>
+			<field name="code">14102</field>
+		</record>
+		<record id="com_333" model="res.country.commune">
+			<field name="name">Lanco</field>
+			<field name="code">14103</field>
+		</record>
+		<record id="com_334" model="res.country.commune">
+			<field name="name">Los Lagos</field>
+			<field name="code">14104</field>
+		</record>
+		<record id="com_335" model="res.country.commune">
+			<field name="name">Máfil</field>
+			<field name="code">14105</field>
+<!--			<field name="prov_id" ref="pro_51" />-->
+		</record>
+		<record id="com_336" model="res.country.commune">
+			<field name="name">Mariquina</field>
+			<field name="code">14106</field>
+		</record>
+		<record id="com_337" model="res.country.commune">
+			<field name="name">Paillaco</field>
+			<field name="code">14107</field>
+		</record>
+		<record id="com_338" model="res.country.commune">
+			<field name="name">Panguipulli</field>
+			<field name="code">14108</field>
+		</record>
+		<record id="com_339" model="res.country.commune">
+			<field name="name">La Unión</field>
+			<field name="code">14201</field>
+		</record>
+		<record id="com_340" model="res.country.commune">
+			<field name="name">Futrono</field>
+			<field name="code">14202</field>
+		</record>
+		<record id="com_341" model="res.country.commune">
+			<field name="name">Lago Ranco</field>
+			<field name="code">14203</field>
+		</record>
+		<record id="com_342" model="res.country.commune">
+			<field name="name">Río Bueno</field>
+			<field name="code">14204</field>
+		</record>
+		<record id="com_343" model="res.country.commune">
+			<field name="name">Arica</field>
+			<field name="code">15101</field>
+		</record>
+		<record id="com_344" model="res.country.commune">
+			<field name="name">Camarones</field>
+			<field name="code">15102</field>
+<!--			<field name="prov_id" ref="pro_53" />-->
+		</record>
+		<record id="com_345" model="res.country.commune">
+			<field name="name">Putre</field>
+			<field name="code">15201</field>
+		</record>
+		<record id="com_346" model="res.country.commune">
+			<field name="name">General Lagos</field>
+			<field name="code">15202</field>
+		</record>
+	</data>
+</odoo>

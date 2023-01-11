@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+    <record id="fleet_vehicle_view_form_inherith_bm" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherith</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='acquisition_date']" position="before">-->
+<!--                <field name="api_odo" invisible="0"/>-->
+<!--                <field name="api_tag" invisible="0"/>-->
+<!--            </xpath>-->
+            <xpath expr="//header" position='inside'>
+                <button name="api_odometer" string="Cargar Odómetro" type="object" class="oe_highlight"/>
+<!--                <button name="call_api_tag" string="API TAG y Multas" type="object" class="oe_highlight"/>-->
+            </xpath>
+            <xpath expr="//notebook/page[last()]" position="after">
+                    <page string="Incidencias API" name="incidencia">
+                        <field name="incidencia_line" readonly="1">
+                            <tree string="Service">
+                                <field name="name"/>
+                                <field name="vehicle_id" invisible="1"/>
+                                <field name="date"/>
+                                <field name="mensaje"/>
+                                <field name="mensaje_consul"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+        </field>
+    </record>
+</odoo>

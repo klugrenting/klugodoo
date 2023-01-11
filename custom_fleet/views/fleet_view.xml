@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="inherit_fleet_form_view" model="ir.ui.view">
+            <field name="name">inherit.fleet.form.view</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobility_card']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='vin_sn']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='acquisition_date']" position="after">
+                  <field name="date_delivery"/>
+                  <field name="date_return" string="Fecha Devolución"/>
+                  <field name="date_expect_refund_subs" string="Fecha Esperada"/>
+                    
+                    <!-- <div class="o_row"> -->
+                    <!--     <span>Fecha Devolución</span><field name="date_return" class="oe_inline" string="Fecha de devolución"/><span>Esperada:</span> -->
+                    <!--     <field name='date_expect_refund_subs' string="Fecha esperada" readonly="1"/> -->
+                    <!-- </div> -->
+                    <field name="subscription"/>
+
+                    
+                </xpath>
+
+                <xpath expr="//field[@name='horsepower_tax']" position="replace">
+    
+                    <field name="purchase" string="Orden de compra"/>
+                    <field name="date_purchase" string="Fecha de OC"/>
+                    <field name="purchase_price_total" string="Total compra"/>
+                    
+                    
+                  </xpath>
+
+                <xpath expr="//field[@name='first_contract_date']" position="after">
+                    <field name="account_move" string="Factura de de venta"/>
+                    <field name="date_account" string="Fecha de factura"/>
+                    <field name="account_price_total" string="Total Factura"/>
+                    <field name="margin_total" string="Margen"/>
+                </xpath>
+                <!-- <xpath expr="//field[@name='x_studio_comprador']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <xpath expr="//field[@name='first_contract_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='car_value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='net_car_value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='residual_value']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model_year']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='transmission']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='color']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='seats']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='doors']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='trailer_hook']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='model_year']" position="after">
+                    <field name="traccion_vehicle" string="Tracción"/>
+                    <field name="accesories_vehicle" string="Accesorios" widget="many2many_tags"/>
+                </xpath>
+                <xpath expr="//field[@name='patente']" position="after">
+                    <field name="attach_1" string="SOAP" widget="binary"/>
+                    <field name="attach_1_fname" string="SOAP" invisible="1"/>
+                    <field name="attach_2" string="Permiso de Circulacion"/>
+                    <field name="attach_2_fname" string="Permiso de Circulacion" invisible="1"/>
+                    <field name="attach_3" string="Homologado"/>
+                    <field name="attach_3_fname" string="Homologado" invisible="1"/>
+                    
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fleet_vehicle_inherit_view_tree" model="ir.ui.view">
+            <field name="name">fleet.vehicle.assignation.view.tree</field>
+            <field name="model">fleet.vehicle.assignation.log</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_assignation_log_view_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_end']" position="after">
+                    <field name="date_delivery"/>
+                    <field name="date_return"/>
+                </xpath>
+                
+            </field>
+        </record>
+
+
+        <menuitem id="accesories_tags" name="Accesorios Vehiculo" sequence="100" parent="fleet.fleet_configuration"/>
+    
+    </data>
+    
+</odoo>

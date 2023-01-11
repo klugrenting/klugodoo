@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="ajust_view_invoice_form" model="ir.ui.view">
+            <field name="name">ajust.view.invoice.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_cl_edi.view_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='l10n_cl_send_dte_to_sii']" position="after">
+                    <button name="l10n_cl_send_boleta_to_sii" type="object" attrs="{'invisible': ['|', ('l10n_cl_dte_status', '!=', 'not_sent'),('l10n_latam_document_type_id_code', '!=', '39')]}" string="⇒ Enviar Boleta al SII" class="oe_inline oe_link" groups="base.group_user"/>
+                    <button name="l10n_cl_verify_boleta_status" type="object" attrs="{'invisible': ['|',('l10n_cl_dte_status', '!=', 'ask_for_status'),('l10n_latam_document_type_id_code', '!=', '39')]}" context="{'send_immediately': True}" string="⇒ Consultar Boleta en SII" class="oe_inline oe_link" groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//button[@name='l10n_cl_send_dte_to_sii']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('l10n_cl_dte_status', '!=', 'not_sent'),('l10n_latam_document_type_id_code', '=', '39')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='l10n_cl_verify_dte_status']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('l10n_cl_dte_status', '!=', 'ask_for_status'),('l10n_latam_document_type_id_code', '=', '39')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='l10n_cl_sii_send_ident']" position="after">
+                    <field name="l10n_latam_document_type_id_code"/>
+                    
+                </xpath>
+            </field>
+        </record>
+        
+
+        <record id="status_sii_view_invoice_tree" model="ir.ui.view">
+            <field name="name">status.sii.view.invoice.tree</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_state']" position="after">
+                    <field name="l10n_cl_dte_status" widget="badge" decoration-danger="l10n_cl_dte_status in ('rejected','cancelled')" decoration-warning="l10n_cl_dte_status in ('ask_for_status')" decoration-success="payment_state in ('accepted', 'objected')" optional="show"/>
+                </xpath>           
+            </field>
+        </record>
+    </data>
+</odoo>

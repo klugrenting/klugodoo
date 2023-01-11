@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                 <field name="fecha_fact_prog"/>
+                 <field name="fecha_estimada"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="tipo_rental_order" invisible="1"/>
+
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="req_orden" invisible="1"/>
+                <field name="l10ncl_domain" invisible="1" widget="many2many_tags" attrs="{'invisible':[('req_orden','!=', True)]}" options="{'no_open':True,'no_create': True}"/>
+                <field name="reference_oc" invisible="1" domain="[('agreement_id','=', agreement_id)]" options="{'no_create': True}"/>
+                <field  name="partner_dir_id" invisible="1"/>
+                <field  name="payment_period" invisible="1"/>
+                <field  name="payment_method" invisible="1"/>
+<!--                <field  name="validation_income" widget="many2many_tags"/>-->
+<!--                <field  name="commission_ids" widget="many2many_tags"/>-->
+                <field name="pre_liquid" invisible="1"/>
+                <field name="agreement_id"/>
+                <field name="agreement_line_ids"/>
+                <field name="periodo_mes"/>
+                <field name="inicio_fecha_alquiler" widget="daterange" options="{'related_end_date': 'fin_fecha_alquiler'}"/>
+                <field name="fin_fecha_alquiler" widget="daterange" options="{'related_start_date': 'inicio_fecha_alquiler'}"/>
+                <field name="agreement_currency_id" invisible="1"/>
+             </xpath>
+            <xpath expr="//page[@name='other_information']" position='after'>
+                <page string="References" name="references" invisible="1">
+                    <group>
+                        <field name="reference_ids"/>
+                    </group>
+                </page>
+                <page string="Nota de Cobro" name="nota_cobro">
+                    <group string="Nota de cobro" colspan="2">
+                        <div class="o_row">
+                            <field name="detail_line" readonly="1" class="oe_inline">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="km_anterior"/>
+                                    <field name="km_acum"/>
+                                    <field name="km_mes"/>
+                                    <field name="mes_contract"/>
+                                    <field name="contract"/>
+                                    <field name="co2_e" sum="Total"/>
+                                    <field name="co2_a" sum="Total"/>
+                                    <field name="order_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </group>
+                    <group string="Detalle Nota de cobro" colspan="2">
+                        <div class="o_row">
+                            <field name="detaill_line" readonly="1" class="oe_inline">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="category"/>
+                                    <field name="concesion"/>
+                                    <field name="description"/>
+                                    <field name="km"/>
+                                    <field name="tarifa" sum="Total"/>
+                                    <field name="order_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,444 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="portal_my_home_maintenance" customize_show="True" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Ordenes de trabajo</t>
+                <t t-set="url" t-value="'/my/maintenance'" />
+                <t t-set="placeholder_count" t-value="'maintenance_count'" />
+
+
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_menu_maintenance" name="Portal layout : maintenance menu entry" inherit_id="portal.portal_breadcrumbs" priority="10">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'maintenance' or maintenance" t-attf-class="breadcrumb-item #{'active ' if not maintenance else ''}">
+                <a t-if="maintenance" t-attf-href="/my/maintenance?{{ keep_query() }}">Ordenes de trabajo</a>
+                <t t-else="">Ordenes de trabajo</t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="maintenance" name="Maintenance">
+
+
+        <t t-call="portal.portal_layout">
+            <t t-set="wrapwrap_classes" t-value="'o_portal_bg_dark'" />
+
+            <div class="row mt16 oe_website_contract o_portal_sidebar">
+
+                <!-- ====== Sidebar  ====== -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+
+                    <t t-set="entries">
+                        <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                            <li class="list-group-item flex-grow-1">
+                                <div>
+                                    <strong>
+                                        Monto total:
+                                        <strong>
+                                            $
+                                            <t t-esc="'{0:,.0f}'.format(int(maintenance['total_tax_incluide'])).replace(',', '.')" />
+                                        </strong>
+                                    </strong>
+                                </div>
+
+                            </li>
+                            <li t-if="maintenance.user_id" class="list-group-item flex-grow-1">
+                                <div class="small mb-1">
+                                    <strong class="text-muted">Técnico Asignado:</strong>
+                                </div>
+                                <div class="row flex-nowrap">
+                                    <div class="col flex-grow-0 pr-2">
+                                        <img class="rounded-circle mr4 float-left o_portal_contact_img" t-attf-src="#{image_data_uri(maintenance.user_id.avatar_1024)}" alt="Contact" />
+                                    </div>
+                                    <div class="col pl-0" style="min-width: 150px">
+                                        <span t-field="maintenance.user_id" t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}' />
+                                        <div>
+                                            <a t-if="is_follower" href="#discussion" class="small">
+                                                <i class="fa fa-comment"></i>
+                                                Send message
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <div class="o_download_pdf_maintenance btn-toolbar flex-sm-nowrap">
+                                    
+                                <div class="btn-group flex-grow-1 mb-1">
+                                    <a class="btn btn-secondary btn-block o_print_btn o_portal_maintenance_print" t-attf-href="/report/pdf/custom_bi_car_repair.maintenance_template_view_temp_id/#{maintenance.id}" id="maintenance_template_view" title="Print" target="_blank"><i class="fa fa-print"/> Imprimir</a>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </t>
+                </t>
+                <div class="col-12 col-lg">
+                    <div class="card oe_website_contract">
+                        <div class="card-header bg-white pb-2 pt-3">
+                            <div class="row">
+                                <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                    <h4 class="mb-0">
+                                        <small class="text-muted">Preview orden de trabajo -</small>
+                                        <span t-esc="maintenance.name" />
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                <div class="col-6 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                    <h3 style="text-align:left;font-weight: bold;">Liquidación Orden de trabajo </h3>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <strong>
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                Cliente
+                                            </strong>
+                                            <br />
+                                            <strong>Empresa: </strong>
+                                            <span t-field="maintenance.partner_id.name" />
+                                            <br />
+                                            <strong> RUT: </strong>
+                                            <span t-field="maintenance.partner_id.vat" />
+                                            <br />
+                                            <strong> Telefono:</strong>
+                                            <span t-field="maintenance.partner_id.phone0" />
+                                            <br />
+                                            <strong> Direccion:</strong>
+                                            <span t-field="maintenance.partner_id.street" />
+                                            <br />
+                                            <strong>Lugar de reparación:</strong>
+                                            <span t-field="maintenance.street" />
+                                        </div>
+                                        <div class="col-4" style="text-align:right;">
+                                            <img t-if="maintenance.image_brand" t-att-src="image_data_uri(maintenance.image_brand)" style="max-height: 45px;" alt="logo_brand" />
+                                        </div>
+                                        <div class="col-4">
+
+                                            <strong>
+                                                <i class="fa fa-car" aria-hidden="true"></i>
+                                                Vehículo
+                                            </strong>
+                                            <br />
+                                            <span t-field="maintenance.model" />
+                                            <span t-field="maintenance.brand" />
+                                            <span t-field="maintenance.year" />
+                                            <br />
+                                            <strong>Matricula:</strong>
+                                            <span t-field="maintenance.license_plate" />
+                                            <br />
+                                            <strong> Color: </strong>
+                                            <span t-field="maintenance.color" />
+                                            <br />
+                                            <t t-if="maintenance.odometer">
+                                                <strong> Kilometraje: </strong>
+                                                <span t-field="maintenance.odometer" />
+                                            </t>
+                                            <br />
+                                            <strong> Fecha Creación Orden: </strong>
+                                            <span t-field="maintenance.request_date" />
+                                            <br />
+                                            <t t-if="maintenance.close_date and maintenance.stage_id.id == 3">
+                                                <strong>Fecha Liquidación: </strong>
+                                                <span t-esc="maintenance.close_date.strftime('%d/%m/%Y')" />
+                                            </t>
+                                            <t t-if="maintenance.schedule_date">
+                                                <strong>Fecha asignación: </strong>
+                                                <span t-esc="maintenance.schedule_date.strftime('%d/%m/%Y')" />
+                                            </t>
+                                            
+                                            <br />
+                                            <t t-if="maintenance.user_id">
+                                                <strong> Técnico Asignado: </strong>
+                                                <span t-esc="maintenance.user_id.name" />
+                                            </t>
+                                        </div>
+                                    </div>
+                                    <br />
+
+
+                                    <div class="row">
+                                        <table class="table table-borderless" style="max-height:14px;">
+                                            <thead>
+                                                <tr style="border-bottom: solid 1px;max-height:14px;">
+                                                    <th>
+                                            Servicios Realizados
+                                        </th>
+                                                    <th style="text-align:center;">
+                                        Cantidad 
+                                        </th>
+                                                    <th>Precio Unit</th>
+                                                    <th>
+                                           Total neto 
+                                        </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="maintenance.maintenance_line_services" t-as="line">
+                                                    <tr>
+                                                        <td style="width:45%;padding:0px;">
+                                                            <span t-field="line.description" />
+                                                        </td>
+                                                        <td style="text-align:center;width:15%;padding:0px;">
+                                                            <span t-esc="line.quantity" />
+                                                        </td>
+                                                        <td style="width:20%;padding:0px;">
+                                                            $
+                                                            <t t-esc="'{0:,.0f}'.format(int(line['price'])).replace(',', '.')" />
+
+                                                        </td>
+                                                        <td style="width:20%;padding:0px;">
+                                                            $
+                                                            <t t-esc="'{0:,.0f}'.format(int(line['total_subtotal_line_services'])).replace(',', '.')" />
+                                                        </td>
+                                                    </tr>
+
+
+                                                </t>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-borderless">
+                                            <thead>
+                                                <tr style="border-bottom: solid 1px;">
+                                                    <th>
+                                            Repuestos Utilizados
+                                        </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="maintenance.maintenance_line_products" t-as="lines">
+                                                    <tr style="text-align:left;">
+                                                        <td style="width:45%;padding:0px;">
+                                                            <span t-field="lines.description" />
+                                                        </td>
+                                                        <td style="text-align:center;width:15%;padding:0px;">
+                                                            <span t-field="lines.quantity" />
+                                                        </td>
+                                                        <td style="width:20%;padding:0px;">
+                                                            $
+                                                            <t t-esc="'{0:,.0f}'.format(int(lines['price'])).replace(',', '.')" />
+                                                        </td>
+                                                        <td style="width:20%;padding:0px;">
+                                                            $
+                                                            <t t-esc="'{0:,.0f}'.format(int(lines['total_subtotal_line_product'])).replace(',', '.')" />
+                                                        </td>
+                                                    </tr>
+
+                                                </t>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="row" style="margin-top:50px;">
+
+                                        <div class="col-6"></div>
+                                        <div class="col-6" style="text-align:right;">
+                                            <table class="table table-borderless">
+                                                <tr>
+                                                    <td style="padding:0px;">
+                                            Subtotal
+                                        </td>
+                                                    <td style="padding:0px;">
+                                                        $
+                                                        <t t-esc="'{0:,.0f}'.format(int(maintenance['total_neto'])).replace(',', '.')" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:0px;">
+                                            IVA 19%
+                                        </td>
+                                                    <td style="padding:0px;">
+                                                        $
+                                                        <t t-esc="'{0:,.0f}'.format(int(maintenance['total_tax'])).replace(',', '.')" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:0px;">Total:</td>
+                                                    <td style="padding:0px;">
+                                                        <strong>
+                                                            $
+                                                            <t t-esc="'{0:,.0f}'.format(int(maintenance['total_tax_incluide'])).replace(',', '.')" />
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <br />
+                                    <br />
+
+
+                                </div>
+                                <div class="footer">
+                                    <footer>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <t t-if="maintenance.description">
+                                                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                                                    <strong>Diagnóstico:</strong>
+                                                    <span t-field="maintenance.description" />
+
+                                                </t>
+
+                                                <t t-if="maintenance.observations">
+                                                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                                                    <strong>Observaciones:</strong>
+                                                    <span t-raw="maintenance.observations" />
+                                                </t>
+                                            </div>
+
+                                        </div>
+                                        <div class="firmas" style="margin-top:50px;">
+
+                                            <div class="row">
+                                                <div class="firma" style="text-align:center; font-size:12px;margin-left:50px;">
+                                                    <div class="texto_firma" style="border-bottom: 1px solid #000; width:300px;"></div>
+                                                    <br />
+                                                    <p style="font-weight: bold;">
+                                                        <span t-esc="maintenance.user_id.name" />
+                                                        <br />
+                                                        KLUG SERVICIOS SPA
+                                                    </p>
+
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div class="firmados" style="text-align:center; font-size:12px;margin-left:50px;">
+                                                    <div class="texto_firmados" style="border-bottom: 1px solid #000; width:300px;"></div>
+                                                    <br />
+                                                    <p style="font-weight: bold;">
+                                                        <span t-esc="maintenance.partner_id.name" />
+                                                        <br />
+                                                        RUT.
+                                                        <span t-esc="maintenance.partner_id.vat" />
+                                                    </p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="discussion">
+                        <h3 class="mt-4">Mensajes</h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="maintenance" />
+                            <t t-set="chatter_mode" t-value="'json'" />
+                        </t>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+
+        </t>
+
+
+    </template>
+
+
+    <template id="portal_my_maintenance" name="Mis Ordenes de trabajo">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Mantenciones</t>
+            </t>
+            <t t-if="not maintenances">
+                <p>No tienes Servicios por realizar</p>
+            </t>
+            <t t-if="maintenances" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Orden de trabajo</th>
+                        <th class="text-center">Patente</th>
+                        <th class="text-center">Técnico responsable</th>
+                        <th class="text-center">Fecha prevista</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Valor</th>
+                    </tr>
+                </thead>
+                <t t-foreach="maintenances" t-as="maintenance">
+                    <tr>
+                        <td class="text-center">
+                            <a t-att-href="'/my/maintenance/'+str(maintenance.id)">
+                                <t t-esc="maintenance.name" />
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <span t-esc="maintenance.license_plate" />
+                        </td>
+                        <td class="text-center">
+                            <span t-esc="maintenance.user_id.name" />
+                        </td>
+                        <td class="text-center">
+                            <t t-if="maintenance.schedule_date">
+                                <span t-esc="maintenance.schedule_date.strftime('%d/%m/%Y')" />
+                            </t>
+                            <t t-else="">
+                                <span class="badge badge-pill badge-primary">
+                                    
+                                    Por asignar
+                                </span>
+                            </t>
+                            
+                        </td>
+                        <td class="text-center">
+                            <t t-if="maintenance.stage_id.id == 5">
+                                <span class="badge badge-pill badge-primary">
+                                    
+                                    Asignado
+                                </span>
+                            </t>
+                            <t t-if="maintenance.stage_id.id == 2">
+                                <span class="badge badge-pill badge-success">
+                                    
+                                    En progreso
+                                </span>
+                            </t>
+                            
+                            <t t-if="maintenance.stage_id.id == 3">
+                                <span class="badge badge-pill badge-success">
+                                    <i class="fa fa-fw fa-check" />
+                                   Terminado
+                                </span>
+                            </t>
+                        </td>
+                        <td class="text-center">
+                            $
+                            <t t-esc="'{0:,.0f}'.format(int(maintenance['total_tax_incluide'])).replace(',', '.')" />
+                        </td>
+                    </tr>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+
+</odoo>

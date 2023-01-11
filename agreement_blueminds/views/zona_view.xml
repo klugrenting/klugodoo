@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<!--
+  © 2021 Jescalante (Jamie Escalante <jamie.escalante7@gmail.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record id="zona_comercial_form" model="ir.ui.view">
+        <field name="name">zona.comercial.form</field>
+        <field name="model">zona.comercial</field>
+        <field name="arch" type="xml">
+            <form string="Zona Comercial">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="name"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="zona_comercial_tree" model="ir.ui.view">
+        <field name="name">zona.comercial.tree</field>
+        <field name="model">zona.comercial</field>
+        <field name="arch" type="xml">
+            <tree string="Agreements">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="zona_comercial_action" model="ir.actions.act_window">
+        <field name="name">Zonas Comerciales</field>
+        <field name="res_model">zona.comercial</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="comuna_comercial_form" model="ir.ui.view">
+        <field name="name">comuna.comercial.form</field>
+        <field name="model">comuna.comercial</field>
+        <field name="arch" type="xml">
+            <form string="Comuna Comercial">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="commune"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                            <field name="zona_id"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="comuna_comercial_tree" model="ir.ui.view">
+        <field name="name">comuna.comercial.tree</field>
+        <field name="model">comuna.comercial</field>
+        <field name="arch" type="xml">
+            <tree string="Comuna Comercial">
+                <field name="commune"/>
+                <field name="code"/>
+                <field name="zona_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="comuna_comercial_action" model="ir.actions.act_window">
+        <field name="name">Comuna Comerciales</field>
+        <field name="res_model">comuna.comercial</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="sector_comercial_form" model="ir.ui.view">
+        <field name="name">sector.comercial.form</field>
+        <field name="model">sector.comercial</field>
+        <field name="arch" type="xml">
+            <form string="Sector Comercial">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="name"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                            <field name="comuna_id"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="sector_comercial_tree" model="ir.ui.view">
+        <field name="name">sector.comercial.tree</field>
+        <field name="model">sector.comercial</field>
+        <field name="arch" type="xml">
+            <tree string="Sector Comercial">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="comuna_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sector_comercial_action" model="ir.actions.act_window">
+        <field name="name">Sector Comercial</field>
+        <field name="res_model">sector.comercial</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="zona_mantencion_form" model="ir.ui.view">
+        <field name="name">zona.mantencion.form</field>
+        <field name="model">zona.mantencion</field>
+        <field name="arch" type="xml">
+            <form string="Zona Mantención">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="name"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="zona_mantencion_tree" model="ir.ui.view">
+        <field name="name">zona.mantencion.tree</field>
+        <field name="model">zona.mantencion</field>
+        <field name="arch" type="xml">
+            <tree string="Zonas de Mantención">
+                <field name="name"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="zona_mantencion_action" model="ir.actions.act_window">
+        <field name="name">Zonas mantencion</field>
+        <field name="res_model">zona.mantencion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="comuna_mantencion_form" model="ir.ui.view">
+        <field name="name">comuna.mantencion.form</field>
+        <field name="model">comuna.mantencion</field>
+        <field name="arch" type="xml">
+            <form string="Comuna Mantención">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="commune"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                            <field name="zona_id"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="comuna_mantencion_tree" model="ir.ui.view">
+        <field name="name">comuna.mantencion.tree</field>
+        <field name="model">comuna.mantencion</field>
+        <field name="arch" type="xml">
+            <tree string="Comunas de Mantención">
+                <field name="commune"/>
+                <field name="code"/>
+                <field name="zona_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="comuna_mantencion_action" model="ir.actions.act_window">
+        <field name="name">Comunas Mantención</field>
+        <field name="res_model">comuna.mantencion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="sector_mantencion_form" model="ir.ui.view">
+        <field name="name">sector.mantencion.form</field>
+        <field name="model">sector.mantencion</field>
+        <field name="arch" type="xml">
+            <form string="Sector Mantención">
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="name"/>
+                        </group>
+                        <group name="right">
+                            <field name="code"/>
+                            <field name="comuna_id"/>
+                        </group>
+                    </group>
+                </sheet>
+    <!--            <div class="oe_chatter">-->
+    <!--                <field name="message_follower_ids" widget="mail_followers"/>-->
+    <!--                <field name="activity_ids" widget="mail_activity"/>-->
+    <!--                <field name="message_ids" widget="mail_thread"/>-->
+    <!--            </div>-->
+            </form>
+        </field>
+    </record>
+
+    <record id="sector_mantencion_tree" model="ir.ui.view">
+        <field name="name">sector.mantencion.tree</field>
+        <field name="model">sector.mantencion</field>
+        <field name="arch" type="xml">
+            <tree string="Sector de Mantención">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="comuna_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sector_mantencion_action" model="ir.actions.act_window">
+        <field name="name">Sector mantencion</field>
+        <field name="res_model">sector.mantencion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem id="zona_comercial_menu"
+        name="Zonas Comerciales"
+        parent="contacts.res_partner_menu_config"
+        sequence="40"
+        action="zona_comercial_action"
+    />
+    <menuitem id="comuna_comercial_menu"
+        name="Comunas Comerciales"
+        parent="contacts.res_partner_menu_config"
+        sequence="50"
+        action="comuna_comercial_action"
+    />
+    <menuitem id="sector_comercial_menu"
+        name="Sectores Comerciales"
+        parent="contacts.res_partner_menu_config"
+        sequence="60"
+        action="sector_comercial_action"
+    />
+    <menuitem id="zona_mantencion_menu"
+        name="Zonas de Mantencion"
+        parent="contacts.res_partner_menu_config"
+        sequence="70"
+        action="zona_mantencion_action"
+    />
+    <menuitem id="comuna_mantencion_menu"
+        name="Comunas de Mantencion"
+        parent="contacts.res_partner_menu_config"
+        sequence="80"
+        action="comuna_mantencion_action"
+    />
+    <menuitem id="sector_mantencion_menu"
+        name="Sectores de Mantencion"
+        parent="contacts.res_partner_menu_config"
+        sequence="90"
+        action="sector_mantencion_action"
+    />
+
+</odoo>

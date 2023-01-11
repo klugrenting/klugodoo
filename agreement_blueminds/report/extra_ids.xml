@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="paperformat_agreement_margin" model="report.paperformat">
+            <field name="name">Agreement A4 without borders</field>
+            <field name="default" eval="False" />
+            <field name="format">custom</field>
+            <field name="page_height">330</field>
+            <field name="page_width">216</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">8</field>
+            <field name="margin_left">8</field>
+            <field name="margin_right">8</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+        </record>
+
+    <record id="partner_agreement_contract_document" model="ir.actions.report">
+        <field name="name">Reporte Dicom Commercial</field>
+        <field name="model">agreement.extra</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">agreement_blueminds.report_agreement_document_new</field>
+        <field name="report_file">agreement_blueminds.report_agreement_document_new</field>
+    </record>
+
+<!--    <report-->
+<!--            id="partner_agreement_contract_document"-->
+<!--            model="agreement.extra"-->
+<!--            string="Contract Document"-->
+<!--            name="agreement_blueminds.report_agreement_document_new"-->
+<!--            paperformat="paperformat_agreement_margin"-->
+<!--            file="agreement_blueminds.report_agreement_document_new"-->
+<!--            report_type="qweb-pdf"/>-->
+
+    <record id="partner_agreement_contract_document_preview" model="ir.actions.report">
+        <field name="name">Reporte Dicom Commercial</field>
+        <field name="model">agreement</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">agreement_blueminds.report_agreement_document_new</field>
+        <field name="report_file">agreement_blueminds.report_agreement_document_new</field>
+    </record>
+
+<!--    <report-->
+<!--            id="partner_agreement_contract_document_preview"-->
+<!--            model="agreement.extra"-->
+<!--            string="Contract Document Preview"-->
+<!--            name="agreement_blueminds.report_agreement_document_new"-->
+<!--            file="agreement_blueminds.report_agreement_document_new"-->
+<!--            report_type="qweb-html"/>-->
+
+    <template id="report_agreement_document_new">
+        <t t-name="agreement.report_agreement_document">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <p t-field="doc.content"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

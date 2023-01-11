@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="machinr_repair_kanban_inherit" model="ir.ui.view">
+            <field name="name">machinr.repair.kanban.inherirt</field>
+            <field name="model">car.repair</field>
+            <field name="inherit_id" ref="bi_car_repair_management.view_car_repair_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban[@class='o_kanban_mobile']" position="attributes">
+                    <attribute name="class">o_kanban_small_column</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+    
+    </data>
+    
+
+</odoo>

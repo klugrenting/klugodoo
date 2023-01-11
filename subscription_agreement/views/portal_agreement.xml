@@ -1,0 +1,704 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="portal_my_subscriptions_inh" inherit_id="sale_subscription.portal_my_subscriptions">
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="replace">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Suscripciones</t>
+                </t>
+                <t t-if="not accounts">
+                    <p>No tiene suscripciones activas</p>
+                </t>
+                <t t-if="accounts" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th class="w-75">Suscripciones</th>
+                            <th class="text-center">Patente</th>
+                            <th class="text-center">Fecha de inicio</th>
+                            <th class="text-center">Fecha devolución</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="accounts" t-as="account">
+                        <tr>
+                            <td>
+                                <a t-att-href="'/my/subscription/'+str(account.id)+'/'+str(account.uuid)+'?'+keep_query()">
+                                    <t t-esc="account.code[0:6]" />
+                                </a>
+                            </td>
+                            <td>
+                                <span t-esc="account.vehicle_id.license_plate" />
+                            </td>
+                            <td>
+                                <span t-esc="account.date_start.strftime('%d/%m/%Y')" />
+                            </td>
+                            <td>
+                                <span t-esc="account.date.strftime('%d/%m/%Y')" />
+                            </td>
+                            <td class="text-center" id="subscription_state">
+                                <t t-if="account.stage_category == 'progress' and not account.to_renew">
+                                    <span class="badge badge-pill badge-success">
+                                        <i class="fa fa-fw fa-check" />
+                                        En progreso
+                                    </span>
+                                </t>
+                                <t t-if="account.to_renew">
+                                    <span class="badge badge-pill badge-warning">
+                                        <i class="fa fa-fw fa-refresh" />
+                                        Para renovar
+                                    </span>
+                                </t>
+                                <t t-if="account.stage_category == 'closed'">
+                                    <span class="badge badge-pill badge-danger">
+                                        <i class="fa fa-fw fa-remove" />
+                                        Finalizado
+                                    </span>
+                                </t>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="account.recurring_total_incl" t-options="{'widget': 'monetary', 'display_currency': account.currency_id}" />
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+
+        </xpath>
+
+    </template>
+
+    <template id="subscription_inh" inherit_id="sale_subscription.subscription">
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="replace">
+            <t t-call="portal.portal_layout">
+                <t t-set="wrapwrap_classes" t-value="'o_portal_bg_dark'" />
+
+                <div class="row mt16 oe_website_contract o_portal_sidebar">
+
+                    <!-- ====== Sidebar  ====== -->
+                    <t t-call="portal.portal_record_sidebar">
+                        <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+
+                        <t t-set="entries">
+                            <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                <li class="list-group-item flex-grow-1">
+                                    <div>
+                                        <strong>
+                                            Próxima fecha de pago:
+                                            <span t-field="account.recurring_next_date" />
+                                        </strong>
+                                    </div>
+                                    <div>
+                                        <strong>
+                                            Monto:
+                                            <span t-field="account.recurring_total_incl" t-options='{"widget": "monetary","display_currency": account.pricelist_id.currency_id}' />
+                                        </strong>
+                                    </div>
+                                    <a t-if="account.stage_category == 'progress' and not account.to_renew and account.template_id and display_change_plan" role="button" class="mt8 btn btn-primary" t-att-href="'/my/subscription/'+str(account.id)+'/change'+'?uuid='+str(account.uuid)">Change plan</a>
+                                    <div t-if="account.payment_token_id">
+                                        Payment method:
+                                        <t t-if="account.payment_token_id.name" t-esc="account.payment_token_id.name" />
+                                        <t t-else="">Unknown token</t>
+                                    </div>
+                                    <t t-if="not account.to_renew and account.stage_category == 'progress'">
+                                        <!-- User is logged in under the partner set on the subscription -->
+                                        <t t-if="user.partner_id == account.partner_id">
+                                            <a t-if="acquirers or tokens" role="button" class="mt8 btn btn-secondary" data-toggle="modal" data-target="#payment_managing" href="#">
+                                                <t t-if="account.payment_token_id">Manage Payment Method</t>
+                                                <t t-else="">Set Payment Method</t>
+                                            </a>
+                                        </t>
+                                        <!-- User is logged in under a partner different than that set on the subscription -->
+                                        <button t-elif="not user._is_public() and user.partner_id != account.partner_id"
+                                            title="Managing payment methods requires to be logged in under the customer account."
+                                            href="#"
+                                            disabled="true"
+                                            role="button"
+                                            class="mt8 btn btn-secondary">
+                                        Manage Payment Methods
+                                    </button>
+                                        <!-- User is logged out -->
+                                        <a t-elif="acquirers or tokens"
+                                            title="You must be logged in to manage your payment methods."
+                                            t-attf-href="/web/login?redirect=/my/subscription/{{account.id}}/{{account.uuid}}"
+                                            role="button"
+                                            class="mt-8 btn btn-secondary">
+                                        Manage Payment Methods
+                                    </a>
+                                    </t>
+                                </li>
+                                <li t-if="display_close" class="list-group-item flex-grow-1">
+                                    <a role="button" data-toggle="modal" data-target="#wc-modal-close" href="#">Close Subscription</a>
+                                </li>
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-attf-href="/report/pdf/subscription_agreement.subscription_agreement_document_new_inh/#{account.id}" id="subscription_agreement_document_new_inh" title="Print" target="_blank">
+                                            <i class="fa fa-print" />
+                                            Imprimir
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="o_download_pdf_2 btn-toolbar flex-sm-nowrap">
+
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print2" t-attf-href="/report/pdf/subscription_agreement.subscription_agreement_delivery_new_inh/#{account.id}" id="partner_agreement_delivery_subscription" title="Print Receipt" target="_blank">
+                                            <i class="fa fa-print" />
+                                            Imprimir Recibo de entrega
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <t t-if="account.stage_category == 'closed'">
+                                    <div class="o_download_pdf_3 btn-toolbar flex-sm-nowrap">
+
+                                        <div class="btn-group flex-grow-1 mb-1">
+                                            <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print3" t-attf-href="/report/pdf/subscription_agreement.subscription_agreement_defund_new_inh/#{account.id}" id="partner_agreement_refund_subscription" title="Print refund" target="_blank">
+                                                <i class="fa fa-print" />
+                                                Imprimir Recibo de devolución
+                                            </a>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <li t-if="account.user_id" class="list-group-item flex-grow-1">
+                                    <div class="small mb-1">
+                                        <strong class="text-muted">Representante:</strong>
+                                    </div>
+                                    <div class="row flex-nowrap">
+                                        <div class="col flex-grow-0 pr-2">
+                                            <img class="rounded-circle mr4 float-left o_portal_contact_img" t-attf-src="#{image_data_uri(account.user_id.avatar_1024)}" alt="Contact" />
+                                        </div>
+                                        <div class="col pl-0" style="min-width: 150px">
+                                            <span t-field="account.user_id" t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}' />
+                                            <div>
+                                                <a t-if="is_follower" href="#discussion" class="small">
+                                                    <i class="fa fa-comment"></i>
+                                                    Send message
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </t>
+                    </t>
+
+                    <!-- ====== Page Content  ====== -->
+                    <div class="col-12 col-lg">
+                        <div class="card oe_website_contract">
+                            <div class="card-header bg-white pb-2 pt-3">
+                                <div class="row">
+                                    <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                        <h4 class="mb-0">
+                                            <small class="text-muted">Preview CONTRATO DE ARRENDAMIENTO DE VEHICULO -</small>
+                                            <span t-esc="account.code[0:6]" />
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                    <div class="col-6 col-lg flex-grow-1 mb-1 mb-lg-0" style="margin-left:80px;width:80%;">
+                                        <h3 style="text-align:center;font-weight: bold;">
+                                        CONTRATO DE ARRENDAMIENTO DE VEHICULO
+                                    </h3>
+                                        <br />
+                                        <p style="text-align:justify; font-size:14px;">
+                                            En Santiago, a
+                                            <t t-if="account.fecha_contrato">
+                                                <span t-esc="account.fecha_contrato.strftime('%d/%m/%Y')" />
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="account.date_start.strftime('%d/%m/%Y')" />
+                                            </t>
+                                            , por una parte entre Klug SpA., RUT: 77.098.135-2,
+                                        domiciliado en Av. Presidente Kennedy 7440 Of. 321, comuna de Vitacura, Santiago, representada Don Marcelo Stade Toral, RUT: 12.467.087-K, en adelante la “ARRENDADORA”, por una parte y por la otra,
+                                            <span t-esc="account.partner_id.name" />
+                                            , cédula de identidad N°
+                                            <span t-esc="account.partner_id.vat" />
+                                            ,
+                                Representado por
+                                            <span t-esc="account.x_studio_many2one_field_UDScD.name" />
+                                            , cédula de identidad N°
+                                            <span t-esc="account.x_studio_many2one_field_UDScD.vat" />
+                                            <t t-if="account.x_studio_replegal_2">
+                                                y
+                                                <span t-esc="account.x_studio_replegal_2.name " />
+                                                , cédula de identidad N°
+                                                <span t-esc="account.x_studio_replegal_2.vat " />
+                                            </t>
+                                            ambos domiciliados en
+                                            <span t-esc="account.partner_id.street" />
+                                            , Comuna
+                                            <span t-esc="account.partner_id.city" />
+                                            , Santiago en adelante
+                        la “ARRENDATARIA"; los comparecientes exponen, que han convenido en la celebración de un contrato de arrendamiento de vehículos
+                         motorizados nuevos, el que se regirá por las estipulaciones contenidas en el presente instrumento.
+                                        </p>
+                                        <br />
+
+                                        <p>
+
+                                            <h5 style="font-weight: bold;">Primero: ARRENDAMIENTO</h5>
+                                        </p>
+                                        <br />
+                                        <p style="text-align:justify; font-size:14px;">
+                                            Por el presente instrumento, La Arrendadora da en arrendamiento el vehículo
+                                            <span t-esc="account.vehicle_id.name" />
+                                            ,
+                                            <span t-esc="account.vehicle_id.license_plate" />
+                                            , a la
+                                            <strong>ARRENDATARIA</strong>
+                                            quien lo acepta para sí.
+                                        </p>
+                                        <p style="text-align:justify; font-size:14px;">
+                                            La
+                                            <strong>ARRENDATARIA</strong>
+                                            se obliga a utilizar el o los vehículos materia de este Contrato para el uso razonable para el que fueron diseñados o construidos, con conductores idóneos que deberán tener la correspondiente licencia para conducir dentro del territorio nacional, respetando las leyes del tránsito, las condiciones generales del contrato de seguro que ampara él o los vehículos y las especificaciones del fabricante.
+                                        </p>
+                                        <p style="text-align:justify; font-size:14px;">
+                                            La arrendataria podrá utilizar el bien arrendado con un tope máximo de
+                                            <span t-esc="account.x_studio_kilmetros_mensuales" />
+                                            Kilometros mensuales, contados desde la fecha de entrega del vehículo. Por cada kilómetro que exceda el límite señalado la arrendataria deberá pagar a la arrendadora el equivalente a:
+                                        </p>
+                                        <p style="text-align:justify; font-size:14px;">
+                                            <ul>
+                                                <span t-esc="account.x_studio_precio_por_kilmetro_adicional" />
+                                                UF + IVA por kilometro
+                                            </ul>
+                                        </p>
+                                        <p>
+
+                                            <h5 style="font-weight: bold;">Segundo: ENTREGA DEL VEHICULO</h5>
+                                        </p>
+                                        <br />
+                                        <p style="text-align:justify; font-size:14px;">
+                    La entrega del vehículo será efectuado por la ARRENDADORA a la ARRENDATARIA en un lugar al interior de la región metropolitana que acuerden las partes. Las partes firmarán un acta de entrega y recepción conforme del vehículo que contendrá la fecha en que la ARRENDATARIA recibió el vehículo, además de todos los detalles del estado del vehículo en que se encuentre al momento de la entrega. El vehículo objeto del presente contrato, no se encuentra afecto a ninguna prohibición, limitación de ninguna naturaleza o embargo que pueda limitar su uso.
+                 </p>
+                                        <div class="tercer" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Tercero: OBLIGACIONES DEL ARRENDATARIO</h5>
+                                            </p>
+                                            <br />
+                                            <p>
+                        3.1. Pagar oportunamente las rentas de arriendo.
+                    </p>
+                                            <p>
+                      3.2.  No manejar el vehículo en estado de ebriedad o bajo influencia del alcohol.
+                    </p>
+                                            <p>
+                      3.3.  No sobrecargar el vehículo con relación a su resistencia o capacidad o para lo que fue construido.
+                    </p>
+                                            <p>
+                      3.4.  No subarrendar el vehículo.
+                    </p>
+                                            <p>
+                      3.5.  Cumplir con la reglamentación de tránsito.
+                    </p>
+                                            <p>
+                      3.6.  Dejar el vehículo cerrado con llave y salvaguardarlo en lugares seguros y autorizados cuando no se utilice.
+                    </p>
+                                            <p>
+                      3.7.  Revisar en todo momento los indicadores de nivel de aceite o emergencia del tablero. Revisar periódicamente el nivel de aceite y agua del motor y la presión de los neumáticos.
+                    </p>
+                                            <p>
+                     3.8.   Conducir por caminos pavimentados o aptos para manejar el vehículo, respondiendo por daños causados al vehículo en caso de conducir por caminos en malas condiciones o fuera de caminos.
+                    </p>
+                                            <p>
+                      3.9.  Responder por los daños a cosas o a personas causados por el vehículo mientras el mismo se encuentre arrendado y/o en posesión física o jurídica del ARRENDATARIO, y en caso que dichos daños no fueran cubiertos por el seguro respectivo.  
+                    </p>
+                                            <p>
+                        3.10. Responder por los daños causados al vehículo o a las personas que viajen en el vehículo mientras el mismo se encuentre arrendado y/o en posesión física o jurídica del ARRENDATARIO, y en caso que dichos daños no fueran cubiertos por el seguro respectivo.
+
+                    </p>
+                                            <p>
+                        3.11. Responder por la multas e infracciones por violación a las leyes y reglamentos de tránsito o cualquier otra reglamentación.
+                    </p>
+                                            <p>
+                        3.12. Informar por escrito a la ARRENDADORA inmediatamente de ocurrido el hecho en caso de accidente, pérdida, robo, decomiso o apropiación indebida, efectuando una reseña del mismo e identificando a terceros involucrados. Efectuar la correspondiente denuncia en carabineros en caso de que corresponda.
+                    </p>
+                                            <p>
+                        3.13. Colaborar con la ARRENDADORA y la Compañía de Seguros en la investigación y defensa en cualquier reclamo o proceso judicial, poniendo a disposición a las personas involucradas o choferes en caso de que sea necesario.
+                    </p>
+                                            <p>
+                        3.14. Abstenerse de hacer pagos, celebrar arreglos o admitir culpa o responsabilidad por sí o por la ARRENDADORA.
+                    </p>
+                                            <p>
+                       3.15. Llevar los vehículos arrendados para efectuar todas las mantenciones, controles, revisiones y/o reparaciones, en los talleres que oportunamente le informe la ARRENDADORA mediante comunicación escrita o digital.
+                    </p>
+                                            <p>
+                        3.16. El ARRENDATARIO entiende y acepta que éste contrato lo hace directamente responsable por el vehículo que arrienda y sus piezas y accesorios, debiendo reembolsar por los daños de cualquier naturaleza ocasionados al vehículo y sus partes ocurridos bajo cualquier circunstancia durante la vigencia del contrato o en su posesión física, así como el lucro cesante ocasionado por la pérdida de uso del vehículo, siempre que no esté cubierto por la compañía de seguro.
+
+                    </p>
+                                            <p>
+                        3.17. Utilizar el o los vehículos con la debida diligencia y cuidado conforme al uso a que están destinados, de acuerdo con las especificaciones técnicas del fabricante. En caso de que el vehículo sea destinado a un uso intensivo, según los manuales de mantenimiento del vehículo, ya sea desde el inicio o durante el período de duración del alquiler, el Arrendatario se obliga a comunicar dicha situación al Arrendador, ya que esto podrá dar lugar a una revisión de la actual tarifa.
+                    </p>
+                                            <p>
+                        3.18. Conservar el vehículo en perfecto estado de funcionamiento, realizando cuantas revisiones y/o comprobaciones (estado de los neumáticos, niveles de aceite, agua, líquido de frenos, anticongelante, batería, testigos luminosos, etc.) sean impuestas o aconsejadas por la normativa vigente, el fabricante del vehículo, por el manual del conductor o por el manual de mantenimiento del vehículo.
+                    </p>
+                                            <p>
+                        3.19. No utilizar el vehículo para aplicaciones como Uber, Cabify, Beat, Didi, Taxi, Colectivo o Radiotaxi, o cualquier otra que sirva para movilizar pasajeros, sean estas onerosas o gratuitas.
+
+                    </p>
+                                        </div>
+                                        <div class="cuarto" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Cuarto: PLAZO</h5>
+                                            </p>
+                                            <p>
+                                                La duración del arrendamiento del vehículo es de
+                                                <span t-esc="account.template_id.recurring_rule_count" />
+                                                meses contados desde la fecha de entrega de la respectiva unidad. El presente Contrato de Arrendamiento y sus condiciones se mantendrá vigente mientras no se haya extinguido por: 1) el cumplimiento conforme de ambas partes de todas las obligaciones del Contrato de Arrendamiento, sin que existan obligaciones pendientes de cualquier naturaleza; 2) acuerdo de las Partes el que deberá quedar por escrito; 3) su resolución, o 4) su término anticipado de acuerdo a lo prescrito en la cláusula quinta u octava de este instrumento.
+                                            </p>
+                                            <p>
+                        Si las Partes lo convinieren, previa revisión de las condiciones técnicas del vehículo, podrá extenderse la vigencia del vehículo, en cuyo caso las condiciones comerciales y operativas de la prorroga se evaluarán entre las partes, quedando las mismas registradas en un nuevo contrato.
+
+                     </p>
+                                            <p>
+                        En razón de lo anterior y lo dispuesto en el artículo 1954 del Código Civil, no será necesario desahucio para poner término al presente contrato una vez llegada la fecha establecida para su término, siendo obligación del Arrendatario devolver el o los vehículos al final del arriendo. En caso de que no fueran devueltos por el Arrendatario en los plazos, deberá pagar un 5% diario del valor mensual pactado por cada día de demora en la entrega.
+                     </p>
+
+                                        </div>
+                                        <div class="quinto" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Quinto: CANCELACIÓN CONTRATO:</h5>
+                                            </p>
+                                            <p>
+                        Tanto el ARRENDATARIO como el ARRENDADOR podrán proceder a la cancelación del contrato después de su firma y en la eventualidad de que lo haga deberá dar aviso con al menos 30 días de anticipación.
+
+                    </p>
+
+                                        </div>
+                                        <div class="sexto" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Sexto. RENTA DE ARRENDAMIENTO:</h5>
+                                            </p>
+                                            <p>
+                                                <t t-foreach="account.recurring_invoice_line_ids" t-as="line">
+                                                    El ARRENDATARIO pagará como renta de arrendamiento la cantidad de
+                                                    <span t-esc="line.price_subtotal" />
+                                                    UF, independientemente de las demás prestaciones, comisiones o intereses previstos en este CONTRATO. Los pagos se efectuarán en pesos, moneda corriente de curso legal. Las rentas de arriendo son
+                                                    <span t-esc="account.template_id.recurring_rule_count" />
+                                                    y serán pagadas por la arrendataria de manera mensual y sucesivamente dentro de los primeros
+                                                    <span t-esc="account.payment_term_id.name" />
+                                                    , a contar de la fecha de entrega material del vehículo. En caso de que el día de pago corresponda a un día inhábil bancario, la renta se pagará el día hábil bancario inmediatamente siguiente.
+                                                </t>
+
+
+                                            </p>
+                                            <p>
+                                                La renta de arrendamiento regirá a partir de la entrega y plena posesión del vehículo donde se firmará un acta de entrega, hasta su restitución a entera satisfacción de la ARRENDADORA. La mora o el simple retardo del ARRENDATARIO en el pago de las rentas de arrendamiento devengadas, una vez vencido el plazo de
+                                                <span t-esc="account.payment_term_id.name" />
+                                                del mes correspondiente, para su pago, devengará a favor de la ARRENDADORA una multa moratoria diaria correspondiente al interés máximo convencional para operaciones no reajustables en moneda nacional. Las partes tendrán 30 días para encontrar en conjunto una solución a la mora, si pasado ese plazo no se ha pagado la deuda, la ARRENDADORA tendrá derecho a terminar ipso facto y sin necesidad de declaración judicial alguna el presente Contrato de Arrendamiento, o de demandar su cumplimiento forzado, en ambos casos con indemnización de perjuicios.
+                                            </p>
+                                            <p>
+                        Los vehículos detallados en la cláusula primera contarán con su dispositivo Televía (TAG) el que será de uso exclusivo de éste, no pudiendo ser removido por ningún motivo.
+
+                    </p>
+                                            <p>
+                        Las partes acuerdan que el TAG será contratado a nombre de la ARRENDADORA y mensualmente transferirá los gastos por esta materia más un recargo de 10% de administración al ARRENDATARIO mediante una factura quién tendrá 5 días para su pago.
+                    </p>
+                                            <p>
+                        En el evento que el dispositivo TAG o Televía se pierda y/o se deteriore, el costo de reposición será de cargo y obligación del Arrendatario.
+                    </p>
+                                            <p>
+                        El ARRENDATIARIO será responsable de cualquier cantidad que el arrendador se vea obligado a pagar por concepto de multas, infracciones, sanciones y cualquier otra violación normativa, legal o reglamentaria relacionada con un hecho u omisión del arrendatario o terceros durante la vigencia del presente contrato. El ARRENDADOR recargará  al ARRENDATARIO los cobros que se determinen con un recargo del 10% en concepto de gastos de administración.
+
+                    </p>
+                                            <p>
+                                                Se establece el pago por adelantado, a modo de garantía, el que será reembolsado al final del contrato y en ningún caso podrán ser abonados a los pagos mensuales. En este acto el ARRENDATARIO entrega a la ARRENDADORA
+                                                <span t-esc="account.x_studio_monto_garanta" />
+                                                por concepto de garantía.
+                                            </p>
+
+
+                                        </div>
+                                        <div class="septimo" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Séptimo: Seguro:</h5>
+                                            </p>
+                                            <p>
+                        La ARRENDADORA ha tomado un seguro que cubre los daños propios del vehículo y cualquier daño que con ella se cause a terceros en su persona o bienes. En caso que el vehículo arrendado sufra algún siniestro de los que estén cubiertos por el seguro referido, la ARRENDATARIA se obliga a pagarle a la ARRENDADORA el importe del deducible vigente al momento del siniestro, tanto respecto de daños propios como por daños a terceros.
+
+                    </p>
+                                            <p>
+                        La ARRENDADORA queda obligada a contratar una póliza de seguro que proteja los vehículos arrendados en virtud del presente Contrato, con las siguientes coberturas:
+                    </p>
+                                            <p>
+                                                <ul>Daños al vehículo (Hasta 100% del valor comercial)</ul>
+                                                <ul>Huelga y Terrorismo</ul>
+                                                <ul>Actos Maliciosos</ul>
+                                                <ul>Riesgos de la Naturaleza</ul>
+                                                <ul>Daños Vehículo Granizo</ul>
+                                                <ul>Sismo</ul>
+                                                <ul>Daños Materiales por la propia carga</ul>
+                                                <ul>Daños Materiales provocados por conductores</ul>
+                                                <ul>Daños a Terceros provocados por la Propia Carga</ul>
+                                                <ul>Daños a Terceros causados por conductor</ul>
+                                                <ul>Asistencia Al Vehículo</ul>
+                                                <ul>Responsabilidad Civil Daño Emergente (Hasta UF500)</ul>
+                                                <ul>Responsabilidad Civil Daño Moral (Hasta UF500)</ul>
+                                                <ul>Responsabilidad Civil Lucro Cesante (Hasta UF500)</ul>
+                                                <ul>Responsabilidad Civil en Exceso Combinada (Hasta UF1000)</ul>
+                                                <ul>Robo de Accesorios (Hasta por UF45)</ul>
+                                                <ul>Defensa Penal y Constitución de Fianzas (Hasta por UF50)</ul>
+
+
+                                            </p>
+                                            <p>
+                                                <strong>DEDUCIBLES:</strong>
+                                                <br />
+                                                <li>
+                                                    Por daños propios y a terceros:
+                                                    <span t-esc="account.deducible_propios_terceros" />
+                                                    UF
+                                                </li>
+                                                <li>
+                                                    Por actos maliciosos, terrorismo y huelga:
+                                                    <span t-esc="account.deducible_maliciosos" />
+                                                    UF
+                                                </li>
+                                                <li>
+                                                    Por robo de accesorios:
+                                                    <span t-esc="account.deducible_accesorios" />
+                                                    UF
+                                                </li>
+                                                <li>
+                                                    Robo o Pérdida total:
+                                                    <span t-esc="account.deducible_robo" />
+                                                    UF
+                                                </li>
+                                            </p>
+                                            <p>
+                        El ARRENDATARIO declara conocer las coberturas, características y condiciones del seguro que la arrendadora mantiene por cada vehículo detalladas anteriormente, obligándose a respetar sus cláusulas y condiciones y a asumir el pago de todos los daños no cubiertos que sufran los vehículos involucrados en accidentes y en todos los gastos no cubiertos por la compañía de seguros en que se deba incurrir producto de un siniestro.
+
+                    </p>
+                                            <p>
+                        El arrendatario también será responsable en el caso en que no efectúe la constancia o denuncia pertinente en la Comisaría o Unidad de Carabineros (en caso de corresponder) más cercana inmediatamente ocurrido.
+
+                    </p>
+                                            <p>
+                        Ante la ocurrencia de siniestros en forma persistente, deriven o no en pérdidas totales, o la ocurrencia de uno o más siniestros relevantes, circunstancias que determinará en cada caso la ARRENDADORA, las partes se obligan a negociar las condiciones para continuar con el arriendo y/o a tomar acciones en conjunto con la finalidad de lograr una disminución sustancial en la siniestralidad incurrida.
+
+                    </p>
+                                        </div>
+                                        <div class="octavo" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Octavo: MANTENIMIENTO.</h5>
+                                            </p>
+                                            <p>
+                                                La ARRENDATARIA se obliga a informar a la ARRENDADORA y poner el vehículo a disposición de la misma cada vez que el bien arrendado haya recorrido
+                                                <span t-esc="account.maintenance" />
+                                                kilómetros, para que ésta proceda a realizar los trabajos relativos al mantenimiento preventivo de acuerdo a las pautas de fábrica, aceptando una tolerancia de 1000 (mil) kilómetros. Si la ARRENDATARIA se excediera de dicha tolerancia y no informara al ARRENDADOR, se tendrá por extinguida la garantía, siendo la arrendataria la única y exclusiva responsable del pago total del costo del servicio de mantención y/o reparación de los vehículos todas las veces que ocurra este hecho. La ARRENDATARIA además será responsable de todos los daños y perjuicios que sean ocasionados por dicho retraso y la falta de informar que sufra la arrendadora o sus bienes.
+                                            </p>
+                                            <p>
+                        Será responsabilidad de la ARRENDATARIA la revisión de niveles de fluido y detener inmediatamente el vehículo y dar aviso de inmediato a la ARENDADORA, en caso de encendido de las luces de alarma o luces de testigo del vehículo tales como bajo nivel de aceite, falla en la batería, alta temperatura del motor, entre otros; y pérdida de aceite, agua o combustible. El presente contrato incluye mantenciones de la pauta del fabricante en los talleres oficiales hasta la terminación del contrato o hasta los kilómetros contratados.
+                    </p>
+                                            <p>
+                        Las Partes dejan expresa constancia que será exclusiva responsabilidad y costo de la Arrendataria poner a disposición los vehículos para el mantenimiento cuando sea necesario, en los talleres que le sea informado con la frecuencia indicada en el presente contrato.
+                    </p>
+
+                                        </div>
+                                        <div class="noveno" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Noveno: INCUMPLIMIENTO Y TERMINACIÓN ANTICIPADA DEL CONTRATO.</h5>
+                                            </p>
+                                            <p>
+                        El incumplimiento por parte de la ARRENDATARIA de cualesquiera de las obligaciones contenidas en el presente e contrato y sus Anexos, dará derecho a la ARRENDADORA para terminar el presente contrato o cualquiera de sus Anexos ipso facto y sin necesidad de requerimiento o declaración judicial, o para demandar su cumplimiento forzado, y en ambos casos con indemnización de perjuicios.
+
+                    </p>
+                                            <p>
+                        En caso que la ARRENDADORA decida ponerle término anticipado al presente contrato o a cualquiera de sus Anexos por incumplimiento del mismo, la ARRENDATARIA deberá restituir dentro del plazo de 48 horas, contadas de la notificación formal de la decisión de la ARRENDADORA, los Vehículos arrendados, quedando facultada la ARRENDADORA para retirar los Vehículos objeto del presente Contrato de Arrendamiento.
+
+                    </p>
+                                            <p>
+                        La ARRENDATARIA autoriza a la ARRENDADORA para almacenar, conservar, custodiar y transmitir a terceros, registro o banco de datos personales, información de carácter económico, financiero, bancario especialmente la referida al simple retardo, mora o incumplimiento de las obligaciones asumidas por la ARRENDATARIA en virtud del presente contrato, a fin de que sean ingresados en un sistema público de información comercial, pudiendo ser procesados, tratados y comunicados en cualquier forma o medio, conforme a lo dispuesto en el artículo cuarto de la Ley diecinueve mil seiscientos veintiocho sobre protección a la vida privada. Antes de cualquier publicación las partes tendrán 30 días para llegar a un acuerdo y solucionar el tema.
+
+                    </p>
+                                            <p>
+                        La ARRENDATARIA también podrá poner término anticipado al presente contrato antes del plazo estipulado en el mismo, decisión que deberá comunicar a la ARRENDADORA con al menos 30 días de anticipación de forma formal indicado en la comparecencia. La terminación anticipada del Contrato de Arrendamiento por parte de la ARRENDATARIA sólo tendrá efecto si, previamente, 1) se ha informado de forma formal; 2) ha transcurrido el plazo de 30 días señalado; 3) se ha restituido el o los Vehículos correspondientes y estos han sido recibidos conforme por la ARRENDADORA, declarando ésta expresamente y por escrito que los ha recibido a su total y entera satisfacción; 4) la ARRENDATARIA haya pagado a la ARRENDADORA el monto correspondiente al total de las tres primeras rentas y el 20% del saldo de las rentas de arrendamiento no devengadas del vehículo arrendado, es decir, aquellas comprendidas entre la terminación anticipada del contrato, y la fecha de terminación original del mismo, monto que deberá pagarse conjuntamente con la restitución de los Vehículos por concepto de cláusula penal.
+
+                    </p>
+                                            <p>
+                        Además, en caso de terminación del Contrato por el no pago de las rentas de arrendamiento según lo señalado en el presente contrato, la ARRENDATARIA se obliga a pagar a la ARRENDADORA, por concepto de cláusula penal, como avaluación convencional y anticipada de los perjuicios fijada por las partes una multa, equivalente al 20% del saldo de las rentas de arrendamiento no devengadas, es decir, aquellas comprendidas entre la terminación anticipada del contrato y la fecha de terminación original del mismo, monto que deberá pagarse conjuntamente con la restitución del vehículo por concepto de cláusula penal.
+                    </p>
+                                            <p>
+                        La Arrendadora podrá ejercer sus opciones sin necesidad de trámite ni declaración judicial alguna, bastando que dirija una carta certificada al Arrendatario comunicándole su decisión.
+
+                    </p>
+                                            <p>
+                        El Arrendatario autoriza en forma expresa al Arrendador a retener el vehículo arrendado cuando se encuentre en mora de cualquiera de las obligaciones que le impone el presente contrato o sus respectivos Anexos, en especial el no pago de una cualquiera de las rentas de arriendo.
+                    </p>
+                                        </div>
+                                        <div class="decimo" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Décimo: DEVOLUCIÓN DEL VEHÍCULO</h5>
+                                            </p>
+                                            <p>
+                        Al finalizar el plazo contractual pactado, el ARRENDATARIO se obliga a devolver en forma inmediata a la ARRENDADORA el vehículo junto con toda su accountumentación y accesorios, en correcto estado de funcionamiento y en las condiciones derivadas del buen uso normal durante su tiempo de utilización habida consideración del desgaste y uso normal para el cual fueron arrendados. La devolución del vehículo se efectuará en el lugar que fue entregado o donde las partes acuerden en su momento.
+
+                    </p>
+                                            <p>
+                        Una vez efectuada la devolución del vehículo, las partes verificarán el estado del mismo y el de sus elementos, firmando la correspondiente acta de devolución, en la que se harán constar las deficiencias o anomalías que se hubieran detectado. En el mismo accountumento se indicará el kilometraje final del vehículo. Las reparaciones que resulten necesarias efectuar en el vehículo, así como cualquier gasto para dejarlo en el estado que fue entregado con un uso normal, serán en su totalidad a cargo del ARRENDATARIO. En el caso de que, en el momento de la entrega del vehículo, el kilometraje del mismo excediera del inicialmente pactado, la diferencia se facturará al ARRENDATARIO según la tarifa detallada en las condiciones anteriores.
+                    </p>
+                                            <p>
+                        Las mejoras o modificaciones de cualquier naturaleza que la ARRENDATARIA introduzca al vehículo arrendado pertenecerán a la ARRENDADORA desde el momento de su incorporación y sin derecho a reembolso de su valor a la ARRENDATARIA; y no podrán ser retirados ni separados al término del arrendamiento, salvo que su retiro no cause detrimento a los Vehículos.
+
+                    </p>
+                                            <p>
+                        En todo caso si la ARRENDATARIA no hiciera entrega de los Vehículos en el plazo, lugar, forma y condiciones expresadas anteriormente, le quedará expresamente prohibido hacer uso de los mismos. Lo anterior es sin perjuicio que la ARRENDATARIA deba pagar a la ARRENDADORA el monto equivalente al 4 % de la renta mensual pactada por cada día de atraso hasta la restitución efectiva del vehículo arrendado. Además, la ARRENDADORA quedará facultada para retirar directamente los Vehículos.
+
+
+                    </p>
+
+                                        </div>
+                                        <div class="decimoprimero" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Décimo Primero: DE LOS CONDUCTORES.
+                    </h5>
+                                            </p>
+                                            <p>
+                        El Arrendatario se obliga a velar por que los conductores de los vehículos materia del arrendamiento respeten las leyes del tránsito, sus reglamentos e instrucciones de la autoridad o sus agentes, en la conducción de los mismos. Asimismo, se obliga para que sus conductores en caso de siniestro dejen las constancias respectivas y avisos a quien corresponda, de acuerdo a lo establecido en el presente contrato. De no hacerse el Arrendatario será obligado al pago o reembolso del costo de la reparación del vehículo.
+
+                    </p>
+                                            <p>
+                        Serán de cargo exclusivo del arrendatario, las multas sanciones, o indemnizaciones que se deriven de las infracciones, contravenciones, cuasidelitos y delitos que cometan los conductores de los vehículos arrendados durante la vigencia de este contrato y que no se encuentren cubiertos por el seguro. No obstante, lo anterior, en la eventualidad que cualquiera de los conductores sufriera, cometiera o se viera involucrado en un siniestro de cualquier naturaleza estando bajo la influencia del alcohol, será de exclusiva responsabilidad del Arrendatario el pago de cualquier suma de dinero o indemnización de perjuicios que se derive de infracciones, contravenciones, cuasidelitos y delitos, ya sea por vía extrajudicial o judicial que se pretenda en contra del Arrendador. Cualquier suma de dinero que el Arrendador se viera obligado o expuesto a pagar como indemnización por las causas mencionadas, deberá ser reembolsada o anticipada por el Arrendatario como también los costos de todo juicio o gestión administrativa o judicial en que tenga que intervenir por los mismos motivos, aún en el evento de no existir sentencia firme o ejecutoriada en su contra.
+
+                    </p>
+                                        </div>
+                                        <div class="decimosegundo" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Décimo Segundo: RESPONSABILIDAD.
+                    </h5>
+                                            </p>
+                                            <p>
+                    
+                            En caso que a consecuencia de cualquier hecho, omisión, negligencia, culpa o dolo de la ARRENDATARIA en el uso del Vehículo, se originen sanciones, multas, demandas o acciones de terceros en contra de la ARRENDADORA, la ARRENDATARIA se obliga a indemnizar de todos los perjuicios causados por este hecho a la ARRENDADORA, debiendo dejarla absolutamente indemne y pagar la totalidad de los costos o gastos que dichas acciones impliquen, de modo que no le signifiquen detrimento patrimonial alguno. Asimismo, la ARRENDATARIA deberá restituirle a la ARRENDADORA toda suma que esta última haya pagado en razón de un accidente, con reajustes e intereses. La responsabilidad de La Arrendataria se extiende a los hechos de terceros autorizados para hacer uso del o los vehículos dado en arriendo.
+                </p>
+                                        </div>
+                                        <div class="decimotercero" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Décimo Tercero: ARBITRAJE.
+                    </h5>
+                                            </p>
+                                            <p>
+                            Toda y cualquier dificultad que se suscite entre las partes con motivo de la interpretación, cumplimiento, incumplimiento, resolución, validez o invalidez del presente contrato, y/o de sus cláusulas, será resuelta breve y sumariamente en única instancia y sin ulterior recurso, por un árbitro en carácter de arbitrador designado de común acuerdo por ellas. Si no existiere acuerdo entre ellos, en la designación del árbitro, cualquier dificultad o controversia que se produzca entre las partes será sometida a Arbitraje mixto, conforme al Reglamento Procesal de Arbitraje vigente del Centro de Arbitraje y Mediación de Santiago. La sola circunstancia que cualesquiera de las partes soliciten la designación del árbitro a la Cámara de Comercio de Santiago A.G. significará que existe desacuerdo entre ellas para la designación del árbitro. Las partes confieren poder especial irrevocable a la Cámara de Comercio de Santiago A.G., para que, a solicitud escrita de cualquiera de ellas, designe al árbitro de entre los integrantes del cuerpo arbitral del Centro de Arbitraje y Mediación de Santiago. El árbitro será de derecho en cuanto al fondo, pero tendrá facultades de arbitrador en cuanto al procedimiento. En contra de sus resoluciones no procederá recurso alguno, por lo que las partes renuncian expresamente a ellos. El árbitro queda especialmente facultado para resolver todo asunto relacionado con su competencia y/o jurisdicción. Las partes podrán recusar, sin expresión de causa, cada una de ellas, la designación de hasta 3 personas designadas como árbitros por la Cámara de Comercio de Santiago A.G.-
+
+                        </p>
+                                        </div>
+                                        <div class="decimotercero" style="text-align:justify; font-size:14px;">
+                                            <p>
+                                                <h5 style="font-weight: bold;">Décimo Tercero: ARBITRAJE.
+                    </h5>
+                                            </p>
+                                            <p>
+                            Para todos los efectos derivados del presente contrato, las Partes fijan su domicilio en la comuna y ciudad de Santiago.
+
+                        </p>
+                                            <p>
+                            El presente contrato se otorga en dos ejemplares de idéntico tenor y forma, quedando uno en poder de cada una de las Partes.
+                        </p>
+                                            <strong>Personería: </strong>
+                                            La personería de don MARCELO STADE TORAL para actuar en nombre y representación de KLUG SpA consta en Certificado de Estatuto Actualizado extendido por el Registro de Empresas y Sociedad del Ministerio de Economía, Fomento y Turismo de fecha 2 de Diciembre de 2019
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div class="firma" style="text-align:justify; font-size:14px;">
+
+                                            <img t-if="account.x_studio_firma" t-att-src="image_data_uri(account.x_studio_firma)" style="max-height: 75px;" alt="firma_klug" />
+                                            <div class="texto_firma" style="border-bottom: 1px solid #000; width:300px;"></div>
+                                            <br />
+                                            <p style="font-weight: bold;">
+                                                Marcelo Stade Toral
+                                                <br />
+                                                KLUG SPA
+                                            </p>
+
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div class="firmados" style="text-align:justify; font-size:14px;">
+
+
+                                            <div class="texto_firmados" style="border-bottom: 1px solid #000; width:300px;"></div>
+                                            <br />
+                                            <p style="font-weight: bold;">
+                                                <span t-esc="account.partner_id.name" />
+                                                <br />
+                                                RUT.
+                                                <span t-esc="account.partner_id.vat" />
+                                            </p>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ======  Chatter ====== -->
+                        <div t-if="is_follower" id="discussion">
+                            <h3 class="mt-4">History</h3>
+                            <t t-call="portal.message_thread">
+                                <t t-set="object" t-value="account" />
+                                <t t-set="chatter_mode" t-value="'json'" />
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- ======  MODAL: Close Subscription ====== -->
+                    <div role="dialog" class="modal fade" id="wc-modal-close" t-if="display_close" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <header class="modal-header">
+                                    <h4 class="modal-title">Close Subscription</h4>
+                                </header>
+                                <form method="post" t-attf-action="/my/subscription/#{account.id}/close/?uuid=#{account.uuid}">
+                                    <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    <main class="modal-body">
+                                        <p>
+                                            If you confirm, your subscription will be closed right away. Your current invoicing period is valid until
+                                            <span t-field="account.recurring_next_date" />
+                                            .
+                                        </p>
+                                        <p>We always listen to our customer. Could you specify the reason for cancelling your subscription?</p>
+                                        <div class="form-group">
+                                            <select class="form-control" name="close_reason_id">
+                                                <t t-foreach="close_reasons" t-as="close_reason">
+                                                    <option t-att-value="close_reason.id" t-esc="close_reason.name" />
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="closing_text" style="width: 100%;" rows="4"></textarea>
+                                        </div>
+                                    </main>
+                                    <footer class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-primary contract-submit">Confirm</button>
+                                    </footer>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+
+        </xpath>
+
+    </template>
+
+
+</odoo>

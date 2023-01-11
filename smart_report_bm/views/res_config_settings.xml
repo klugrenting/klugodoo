@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="res_config_settings_view_form" model="ir.ui.view">
+			<field name="name">res.config.settings.view.form.inherit</field>
+			<field name="model">res.config.settings</field>
+			<field name="priority" eval="100"/>
+			<field name="inherit_id" ref="fleet.res_config_settings_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='fleet']"  position="inside">
+					<h2>Smart Report for Blueminds</h2>
+					<div class="row mt16 o_settings_container">
+						<div class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_left_pane">
+								<field name="api_odometer"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="api_odometer" string="API para Odómetro"/>
+								<div class="text-muted">
+									La API emitirá respuestas con los detalles del odómetro consultado, como
+									patente, fecha, odómetro (en metros) y unidad (mts) y respuestas de las pasadas por pórticos TAG
+									(“tag”), las multas (por vías exclusivas) detectadas (“multa”).
+								</div>
+								<div class="content-group">
+									<div class="row mt16" attrs="{'invisible': [('api_odometer', '=', False)]}">
+										<label class="col-lg-3 o_light_label" for="odo_user"/>
+										<field name="odo_user" attrs="{'required': [('api_odometer', '=', True)]}"/>
+										<label class="col-lg-3 o_light_label" for="odo_token"/>
+										<field name="odo_token" attrs="{'required': [('api_odometer', '=', True)]}"/>
+										<label class="col-lg-3 o_light_label" for="odo_url"/>
+										<field name="odo_url" attrs="{'required': [('api_odometer', '=', True)]}"/>
+										<label class="col-lg-3 o_light_label" for="tag_url"/>
+										<field name="tag_url" attrs="{'required': [('api_odometer', '=', True)]}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+<!--						<div class="col-xs-12 col-md-6 o_setting_box">-->
+<!--							<div class="o_setting_left_pane">-->
+<!--								<field name="api_tag"/>-->
+<!--							</div>-->
+<!--							<div class="o_setting_right_pane">-->
+<!--								<label for="api_tag" string="API para TAG y Multas"/>-->
+<!--								<div class="text-muted">-->
+<!--									La API emitirá respuestas de las pasadas por pórticos TAG-->
+<!--									(“tag”), las multas (por vías exclusivas) detectadas (“multa”)-->
+<!--								</div>-->
+<!--								<div class="content-group">-->
+<!--									<div class="row mt16" attrs="{'invisible': [('api_tag', '=', False)]}">-->
+<!--										<label class="col-lg-3 o_light_label" for="tag_user"/>-->
+<!--										<field name="tag_user" attrs="{'required': [('api_tag', '=', True)]}"/>-->
+<!--										<label class="col-lg-3 o_light_label" for="tag_token"/>-->
+<!--										<field name="tag_token" attrs="{'required': [('api_tag', '=', True)]}"/>-->
+<!--										<label class="col-lg-3 o_light_label" for="tag_url"/>-->
+<!--										<field name="tag_url" attrs="{'required': [('api_tag', '=', True)]}"/>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+					</div>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

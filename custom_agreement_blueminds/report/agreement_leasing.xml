@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <report
+        id="partner_agreement_contract_document_leasing"
+        model="agreement"
+        string="Contract Document Leasing"
+        name="custom_agreement_blueminds.report_agreement_document_leasing"
+        file="custom_agreement_blueminds.report_agreement_document_leasing"
+        report_type="qweb-pdf" />
+
+    <template id="report_agreement_document_leasing">
+        <t t-name="agreement.report_agreement_document_leasing">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.basic_layout">
+                        <div class="header">
+                            <header>
+                                <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 65px;" alt="Logo" />
+                                <span t-esc="doc.name[0:5]" style="padding-left:600px;"/>
+                            </header>
+                        </div>
+                        <div class="page">
+                            <h5 style="text-align:center;font-weight: bold;">
+                                CONTRATO DE LEASING OPERATIVO <br/> KLUG SpA <br/>Y
+                                <br />
+                                <span t-esc="doc.partner_id.name" />
+                                <br />
+                                <span t-esc="doc.start_date" />
+                            </h5>
+                            <br />
+                            <p style="text-align:justify; font-size:14px;">
+                                <strong>PARTE A: IDENTIFICACIÓN DE LAS PARTES</strong><br/>
+                                En Santiago, a
+                                <span t-esc="doc.start_date" />
+                                , por una parte entre Klug SpA., RUT: 77.098.135-2, domiciliado en Av. Presidente
+                                Kennedy 7440 Of. 321, comuna de Vitacura, Santiago, representada por su Gerente General, don Marcelo Stade Toral,
+                                RUT: 12.467.087-K, en adelante también referida con “el Arrendador”, y por la otra
+                                <span t-esc="doc.partner_id.name" />
+                                , cédula de identidad N°
+                                <span t-esc="doc.partner_id.vat" />
+                                , domiciliado en
+                                <span t-esc="doc.partner_id.street" />
+                                , Comuna
+                                <span t-esc="doc.partner_id.city" />
+                                , Santiago en adelante
+                                en adelante también referida como “el Arrendatario” se ha convenido el siguiente contrato de arrendamiento:
+                            </p>
+                            <p style="text-align:justify; font-size:14px;">
+                                <strong>PARTE B: REFERENTE A LA FLOTA</strong><br/>
+                                KLUG SpA entrega en arrendamiento a
+                                <span t-esc="doc.partner_id.name" />
+                                , los vehículos que se indican en el Anexo A, del presente
+                                instrumento, el cual, se entenderá como parte integrante del presente contrato para todos los efectos legales.
+                                La individualización de cada uno de los vehículos materia de este contrato (marca, modelo, año de fabricación y placa
+                                única), así como el canon de arrendamiento aplicable a cada uno de ellos, la fecha y lugar de entrega, la cantidad y valor
+                                de los kilómetros mensuales a recorrer por vehículo y otros datos adicionales, se encuentran debidamente detallados en
+                                el Anexo A.<br/>
+                                Se deja constancia, que en el futuro se podrán incorporar nuevas unidades a este contrato, los que se regirán por las
+                                condiciones establecidas en este instrumento, y que se individualizan en un nuevo Anexo (A1, A2, etc), el que también
+                                deberá ser firmado por las partes contratantes.
+                            </p>
+                            
+                            <p style="text-align:justify; font-size:14px;">
+                                <strong>PARTE C: REFERENTE A LA OPERACIÓN</strong><br/>
+                                <strong>SEGUNDO:</strong> Se deja constancia que, para la determinación del valor de las respectivas rentas de arrendamiento aplicable
+                                a cada unidad, se ha considerado como factor determinante una cantidad máxima de kilómetros a recorrer
+                                mensualmente, según se ha indicado para cada vehículo en el Anexo A, obligándose el Arrendatario a cancelar un valor
+                                adicional especificado en el Anexo A de este contrato por cada kilómetro que supere el especificado.<br/>
+                                El Arrendador examinará periódicamente cada uno de los vehículos arrendados a fin de fiscalizar el cumplimiento de la
+                                obligación de no exceder el kilometraje señalado en el Anexo A. Para este efecto el vehículo incluirá un dispositivo GPS,
+                                el cual no podrá ser alterado bajo circunstancia alguna.<br/>
+                                En el evento de determinarse que la cantidad de kilómetros utilizados excede el kilometraje establecido en el Anexo A,
+                                el Arrendatario se obliga a pagar el valor indicado en el Anexo A por cada kilómetro adicional al contratado para cada
+                                unidad.<br/>
+                                <strong>TERCERO:</strong> Los gastos de mantenimiento mecánico preventivo de los vehículos dados en arrendamiento, así como los
+                                gastos de permiso de circulación, revisión técnica y seguro obligatorio serán de cargo del Arrendador.<br/>
+                            
+                                Los vehículos serán sometidos a un programa de mantención periódica, previamente establecido por el Arrendador y
+                                que se entiende forman parte de este contrato, obligándose el Arrendatario a poner a disposición del Arrendador
+                                oportunamente los vehículos arrendados para estos efectos.<br/>
+                            
+                            
+                                Los kilometrajes en los cuales el Arrendatario deberá poner a disposición del Arrendador el respectivo vehículo para su
+                                mantención, se establecen respecto de cada uno de éstos en el Anexo A del presente instrumento.<br/>
+                        
+                                En el evento que el Arrendatario incurra en atraso en la entrega del vehículo para su mantención preventiva, deberá
+                                pagar al Arrendador una multa ascendente a 0,005 UF por cada kilómetro recorrido, que exceda del máximo
+                                determinado para su revisión y mantención preventiva.<br/>
+                                <strong>CUARTO:</strong> En el caso que el vehículo dado en arrendamiento requiera ser sometido a mantención, el Arrendador estará
+                                obligado a <strong>reemplazar hasta por un máximo de 10 días al año</strong> por cada vehículo que se encuentren en operación por el
+                                Arrendatario, respecto de aquellos que con ocasión de reparación requiera una detención para dichos efectos <strong>superior a
+                                12(doce) horas hábiles contados desde la recepción del vehículo en las instalaciones del Arrendador.</strong> En este caso éste
+                                último, se compromete a reemplazarlo por otro sin que dicho vehículo adicional de reemplazo sea cobrado
+                                adicionalmente al Arrendatario. En el evento de que el Arrendador no tenga disponibilidad de vehículos para entregar
+                                en reemplazo, se descontará del cobro mensual la parte correspondiente al número de días destinados a la mantención
+                                por cada vehículo afectado.<br/>
+                                <strong>QUINTO:</strong>El Arrendatario se compromete y obliga a utilizar los vehículos arrendados con la debida diligencia y cuidado,
+                                conforme a su naturaleza, entregarlos oportunamente para sus mantenciones preventivas periódicas – conforme se
+                                indicó en la cláusula precedente – a preocuparse que se utilice en ellos el combustible apropiado y en general,
+                                
+                                mantenerlos en buen estado de conservación y funcionamiento. Esta obligación, así como la información proporcionada
+                                por el Arrendatario respecto de los tipos de caminos (rurales, urbanos, ciudades, carreteras, etc.) por los cuales deben
+                                transitar los vehículos arrendados, son elementos esenciales que han sido considerados para determinar el valor de
+                                arriendo de cada unidad, por lo cual su inobservancia dará derecho al Arrendador a modificar en común acuerdo el
+                                canon de arriendo previamente acordado (para lo cual dará aviso mediante carta certificada con una anticipación de 30
+                                días respecto de cuándo comenzará a regir) según sean las circunstancias, e incluso se podrá poner término si es así
+                                acordado por las partes, sin perjuicio de los demás derechos que le correspondan al Arrendador de conformidad a la ley.
+                                El Arrendatario exigirá que sus usuarios no incurran en las siguientes acciones respecto de cada vehículo:
+                            </p>
+                            
+                            <p style="font-size:14px;">
+                                <li>Destinarlo al transporte público remunerado o al uso como vehículo de servicio público.</li>
+                                <li>Conducir bajo la influencia del alcohol, bajo el efecto de drogas, estupefacientes o sin portar todos los
+                                    documentos y licencias exigidas por la autoridad.</li>
+                                <li>En caso de accidente, huir del lugar de ocurrencia</li>
+                                <li>Permitir que los vehículos sean conducidos por personas que no están vinculadas laboral o contractualmente
+                                    con el Arrendatario, salvo aquellos casos de excepción en que el Arrendador haya autorizado expresamente y
+                                    por escrito al Arrendatario, a solicitud de este último, a que determinados vehículos sean conducidos por una
+                                    o más personas en particular que no cumplan con las condiciones antes indicadas.</li>
+                                <li><strong>Realizar en los vehículos reparaciones, alteraciones o modificaciones de cualquier tipo sin consentimiento
+                                    del Arrendador.</strong></li>
+                                <li>Llevarlo fuera del territorio nacional sin autorización expresa del Arrendador.</li>
+                                <li>Utilizarlo en transporte de carga o bultos pesados que excedan su capacidad.</li>
+                                <li>Conducir los vehículos en arriendo sin licencia de conducir y/o por personas con una edad inferior a 21 años.</li>
+                                
+    
+    
+                            </p>
+                            <p  style="text-align:justify; font-size:14px;">
+                                El Arrendatario responderá ante el arrendador por el incumplimiento de los usuarios de los vehículos arrendados, de las
+                                leyes y reglamentos del tránsito, así como de las instrucciones que imparta la autoridad competente o sus agentes.<br/>
+                                En consecuencia, el Arrendatario asume toda responsabilidad por las sanciones, penas y/o multas por infracciones del
+                                tránsito o de los reglamentos municipales ocurridas durante la vigencia del presente contrato. En caso que cualquier
+                                multa o cobro sea efectuado directamente al Arrendador y este se vea obligado a su pago, tendrá derecho a que dicho
+                                monto sea debidamente restituido por el Arrendatario, debidamente reajustado más los intereses corrientes que
+                                correspondan. Para ello, el Arrendador estará facultado para facturar el monto de estos cargos ya sea conjuntamente
+                                con el cobro de la renta mensual o en forma individual y separada. Esta facultad no se extinguirá con la terminación de
+                                este contrato, sino que se mantendrá vigente hasta 12 meses contados desde que ello se produzca, manteniendo
+                                durante ese plazo el derecho a cobrar los gastos indicados.
+                            </p>
+                            <p  style="text-align:justify; font-size:14px;">
+                               <strong>PARTE D: REFERENTE A LA MODALIDAD DE FACTURACIÓN Y PAGO</strong> <br/>
+                               <strong>SEXTO:</strong> El Arrendatario se obliga a pagar por el servicio establecido en el presente contrato de acuerdo a facturas
+                            mensuales que serán emitidas por el Arrendador al principio de cada mes. El Arrendatario se obliga a aprobar y pagar
+                            dichas facturas en un plazo máximo de 5 días hábiles contados desde la fecha de facturación. <br/>
+                            El canon de arriendo aplicable a cada uno de los vehículos arrendados se encuentra debidamente detallado en Anexo A.
+                            Dicho canon de arriendo se encuentra expresado en UF y a éste debe sumarse el impuesto al valor agregado (IVA). Para
+                            los efectos de este contrato se aplicará el valor de la Unidad de Fomento vigente al día de la emisión de la factura.<br/>
+                            En caso de mora o simple retardo en el pago de la renta de arrendamiento, éste devengará una multa correspondiente a
+                            gastos de cobranzas equivalente al 5% de la deuda vencida mensualmente o su proporcional de acuerdo a los días
+                            transcurridos entre la fecha de vencimiento de la respectiva factura según se indique en la misma y el día del pago
+                            efectivo, más el Impuesto al Valor Agregado (IVA), sin perjuicio de las acciones legales o causales de término de contrato
+                            que se establecen más adelante. Adicionalmente se faculta al Arrendador a publicar en boletín comercial y DICOM la
+                            morosidad que se genere por concepto de no pago.<br/>
+                            SÉPTIMO: Se establece un pago por adelantado a modo de garantía, el que será reembolsado al fin del contrato y en
+                            ningún caso podrán ser abonados a los pagos mensuales. El monto específico de la garantía queda establecido en el
+                            Anexo A.
+
+                            </p>
+                            
+                            <p  style="text-align:justify; font-size:14px;">
+                                <strong>PARTE E. REFERENTE A LOS SEGUROS</strong><br/>
+                                <strong>OCTAVO:</strong> El Arrendador mantendrá permanentemente asegurados los vehículos con un seguro de Responsabilidad Civil
+                                de Vehículos Motorizados para cubrir los riesgos de daños a terceros (materiales y corporales). Las coberturas y
+                                condiciones generales de las pólizas de seguros asociadas se indicarán en el Anexo A de este contrato.<br/>
+                                Desde ya, el Arrendatario autoriza al Arrendador a facturarle el monto que asciendan las reparaciones, deducibles,
+                                piezas faltantes y demás ítems señalados en los párrafos anteriores y o gastos asociados a estas reparaciones, daños o
+                                pérdidas no cubiertos por la póliza de seguro, en su caso, y se obliga a pagar al Arrendador en un plazo máximo de 15
+                                días corridos desde la recepción de la respectiva factura.<br/>
+                                En caso de cualquier accidente, pérdida o daños que afecte a alguno de los vehículos arrendados o que ocasione daños a
+                                terceros, en su persona, vehículos u otros bienes, el Arrendatario deberá poner en conocimiento por escrito de estos
+                                hechos al Arrendador, en un plazo no superior a las 24 horas corridas de ocurrido el siniestro, indicando el lugar, la fecha
+                                y circunstancias, además de una estimación de los daños acompañado de fotografías. Así mismo es obligación esencial
+                                del Arrendatario efectuar las constancias y denuncias ante las autoridades competentes en forma inmediata de su
+                                ocurrencia.<br/>
+                                Si el Arrendatario no efectúa los avisos, constancias y denuncias respectivas, oportuna y correctamente, en tiempo y
+                                forma, éste faculta desde ya al Arrendador para determinar, cobrar y facturar al Arrendatario los respectivos daños,
+                                renunciando a su derecho a reclamar de dicho cobro con posterioridad. El Arrendador tendrá un plazo de hasta 6 meses
+                                para emitir la respectiva factura por estos conceptos.<br/>
+                                No obstante lo anterior, el Arrendatario será responsable de todo siniestro, accidente, daño e indemnización de
+                                perjuicios, incluyendo daño moral, que pudiere producirse a terceros, en su persona, vehículos y bienes y a los bienes
+                                materia del presente contrato, que provengan del dolo o de la culpa grave debidamente comprobados, de parte de los
+                                usuarios de los vehículos arrendados y/o con motivo del uso indebido o de una mala utilización de los vehículos
+                                arrendados, obligándose a soportar las consecuencias pecuniarias y otras que sean producto de los hechos antes
+                                descritos, aun cuando la obligación de pagar las indemnizaciones tuviere lugar después de terminado el contrato.
+                                Asimismo, serán de cargo del Arrendatario, los costos de reparación o sustitución de los vehículos que provengan del
+                                uso inadecuado de los mismos.<br/>
+                                El Arrendatario deberá reembolsar al Arrendador las sumas de dinero que éste se vea obligado a pagar a terceros, en su
+                                calidad de propietario de los vehículos, como consecuencia de los hechos antes descritos, aun después de terminado el
+                                contrato.<br/>
+                                Las reparaciones de los vehículos se realizarán en el plazo máximo de 30 días contados desde la falla o daño que sufra el
+                                vehículo en cuestión. Queda expresamente prohibido acumular daños y no informarlos inmediatamente una vez
+                                ocurridos, aunque el daño no ocasione la paralización del vehículo, aplicándose para este caso lo dispuesto en el párrafo
+                                referente a los casos en que el Arrendatario no efectúa los avisos, constancias y denuncias respectivas, oportuna y
+                                correctamente en tiempo y forma.<br/>
+                                <strong>NOVENO:</strong> Sin perjuicio de lo señalado en las cláusulas precedentes, se deja constancia que la aplicación de los Seguros,
+                                su Cobertura, Exclusiones y Procedimientos a cumplir por el Arrendatario, se regirá de acuerdo con lo estipulado en el
+                                Anexo B que forma parte integral del presente contrato, para todos los efectos legales y que se firma por ambas partes
+                                en señal de conformidad.
+
+                            </p>
+                           
+                            <p  style="text-align:justify; font-size:14px;">
+                                <strong>PARTE F: REFERENTE A LOS INCUMPLIMIENTOS</strong><br/>
+                                <strong>DÉCIMO:</strong> El incumplimiento por una de las partes de cualquiera de las obligaciones establecidas para ella en el presente
+                                contrato, dará derecho a la otra parte a ponerle término de inmediato, sin derecho a reclamo ni indemnización alguna
+                                para la parte que hubiere incurrido en tal incumplimiento. Para tal efecto, la parte cumplidora informará a la parte
+                                incumplidora manifestando el o los hechos que han dado lugar al incumplimiento, concediendo un plazo de 30 días para
+                                que subsane la falta, y vencido que sea dicho plazo sin que se haya enmendado el incumplimiento, el contrato se
+                                entenderá terminado de pleno derecho. La terminación por estas circunstancias no afectará el derecho del Arrendador
+                                de cobrar todas las sumas adeudadas por conceptos de rentas impagas y de multas moratorias y gastos de cobranza
+                                hasta su pago íntegro.
+
+                            </p>
+                            <p  style="text-align:justify; font-size:14px;">
+                                <strong>PARTE G: REFERENTE AL PLAZO Y TÉRMINO DEL CONTRATO</strong><br/>
+                                    <strong>DÉCIMO PRIMERO:</strong> El contrato de arrendamiento regirá desde la entrega material de cada vehículo, por el plazo que se
+                                    establece en el Anexo A.<br/>
+                                    En razón de lo anterior, y conforme lo dispuesto en el artículo 1.954 del Código Civil, una vez vencido el plazo de vigencia
+                                    de este contrato, no será necesario desahucio para poner término al mismo.<br/>
+                                    Cada vehículo arrendado será restituido al término de su arriendo en el estado en que fue entregado al Arrendatario,
+                                    con todos sus accesorios y en buen estado de funcionamiento, habida consideración del deterioro o desgaste
+                                    ocasionados por el uso o goce legítimo.<br/>
+                                    <strong>DÉCIMO SEGUNDO:</strong> Una vez terminado el arriendo, ya sea por el cumplimiento del plazo de arriendo o por cualquier
+                                        causa, incluso debido al incumplimiento, al Arrendatario deberá restituir de inmediato los vehículos arrendados
+                                        mediante la entrega de los mismos en el lugar que le indique el Arrendador, y a falta de indicación deberá efectuarse en
+                                        cualquiera de las oficinas que este último tiene.<br/>
+                                        En el evento de producido la terminación del contrato, y requerida la restitución de los vehículos mediante email
+                                        enviado al Arrendatario, éste se negare a ello, ya sea expresa o tácitamente, se entenderá que existe un ánimo de
+                                        apropiación de los mismos, configurándose así la figura penal de apropiación indebida. Sin perjuicio de ello el
+                                        Arrendador podrá exigir la restitución inmediata de los vehículos por todos los medios que la ley contempla para tales
+                                        efectos.<br/>
+                                        Adicionalmente, requerido el Arrendatario en la forma indicada para la restitución de los vehículos y no producida tal
+                                        devolución, éste se obliga a indemnizar al Arrendador mediante el pago de una multa compensatoria ascendiente al 50%
+                                        de la renta mensual de arrendamiento respecto de cada vehículo arrendado, por cada mes o fracción de mes que medie
+                                        entre la terminación y la restitución física de cada uno de ellos. Esta indemnización compensatoria no impedirá el cobro
+                                        adicional de las rentas de arrendamiento adeudadas más los intereses moratorios respectivos.<br/>
+                                        <strong>DÉCIMO TERCERO:</strong> Sin perjuicio de lo dispuesto en las cláusulas anteriores, el Arrendatario podrá poner término
+                                        anticipado al presente contrato de arriendo, pero será condición para ejercer esta facultad, el que previamente haya
+                                        pagado al Arrendador una suma de dinero equivalente al 20% del valor de la tarifa mensual de cada vehículo arrendado
+                                        por el total de los meses que resten hasta la fecha de término contractualmente convenida según cada unidad.<br/>
+                                        La facultad concedida al Arrendatario en esta cláusula, estará también condicionada a que junto con el pago indicado se
+                                        haga total restitución de los vehículos arrendados en perfectas condiciones de conservación.<br/>
+                                        <strong>DÉCIMO CUARTO:</strong> Cualquier dificultad o controversia que se produzca entre los contratantes respecto de la aplicación,
+                                        interpretación, duración, validez o ejecución de este contrato o cualquier otro motivo será sometida a arbitraje,
+                                        conforme al Reglamento Procesal de Arbitraje del Centro de Arbitraje y Mediación de Santiago, vigente al momento de
+                                        solicitarlo.<br/>
+                                        Las partes confieren poder especial irrevocable a la Cámara de Comercio de Santiago A.G., para que, a petición escrita
+                                        de cualquiera de ellas, designe a un árbitro arbitrador en cuanto al procedimiento y de derecho en cuanto al fallo, de
+                                        entre los integrantes del cuerpo arbitral del Centro de Arbitraje y Mediación de Santiago.<br/>
+                                        En contra de las resoluciones del árbitro no procederá recurso alguno. El árbitro queda especialmente facultado para
+                                        resolver todo asunto relacionado con su competencia y/o jurisdicción.
+
+                            </p>
+                            <p style="text-align:justify; font-size:14px;">
+                               <strong>PARTE H: REFERENTE A OTROS</strong> 
+                                <strong>DÉCIMO QUINTO:</strong>Cada vehículo contará con su dispositivo de Televía (TAG) el que será de uso exclusivo de éste, no
+                                pudiendo ser removido por ningún motivo.<br/>
+                                Las partes acuerdan que el TAG será tomado a nombre del Arrendador y mensualmente transferirá los gastos por esta
+                                materia más una comisión por gestión equivalente al 10% del consumo al Arrendatario mediante una factura quien
+                                tendrá 5 días hábiles para su pago.
+                            </p>
+                            <p style="text-align:justify; font-size:14px;">
+                                <strong>PARTE I: REFERENTE A LAS PERSONERÍAS</strong> 
+                                <strong>DÉCIMO SEXTO:</strong>Para todos los efectos del presente contrato las partes fijan domicilio en la ciudad de Santiago y se
+                                someten a la jurisdicción de los tribunales arbitrales indicados en la cláusula Decimocuarta.<br/>
+                                Las personas que suscriben el presente contrato, declaran bajo juramento tener las facultades para obligar válidamente
+                                a sus representadas.<br/>
+                                Se suscribe el presente contrato en dos ejemplares, quedando uno para al Arrendador y otro para el Arrendatario.<br/>
+                                <strong>PERSONERÍAS:</strong>La personería de don MARCELO STADE TORAL para actuar en nombre y representación de KLUG SpA
+                                consta en Certificado de Estatuto Actualizado extendido por el Registro de Empresas y Sociedad del Ministerio de
+                                Economía, Fomento y Turismo de fecha 2 de Diciembre de 2019.
+                             </p>
+                             <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="firma" style="text-align:justify; font-size:14px;">
+                        <div class="texto_firma" style="border-bottom: 1px solid #000; width:300px;">
+
+                        </div>
+                        <br/>
+                        <p style="font-weight: bold;">
+                            Marcelo Stade Toral<br/>
+                            KLUG SPA
+                        </p>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="firmados" style="text-align:justify; font-size:14px;">
+                        <div class="texto_firmados" style="border-bottom: 1px solid #000; width:300px;">
+
+                        </div>
+                        <br/>
+                        <p style="font-weight: bold;">
+                            <span t-esc="doc.partner_id.name" /><br/>
+                            RUT. <span t-esc="doc.partner_id.vat" />
+                        </p>
+
+                    </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

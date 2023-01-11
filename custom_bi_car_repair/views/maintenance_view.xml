@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- View Calendar  -->
+        <record id="maintenance_request_calendar_inh_view" model="ir.ui.view">
+            <field name="name">maintenance.request.calendar.inh.view</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_calendar" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='maintenance_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='maintenance_type']" position="after">
+                    <field name="partner_id"/>
+                    <field name="fleet"/>
+                    <field name="street"/>
+                    
+                </xpath>
+                
+            </field>
+        </record>
+
+        <!-- View Form -->
+        <record id="maintenance_request_inh_view" model="ir.ui.view">
+            <field name="name">maintenance.request.inh.view</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">Técnico Responsable</attribute>
+                </xpath>
+                <xpath expr="//button[@name='archive_equipment_request']" position="after">
+                    <button string="Crear Factura" attrs="{'invisible': [('stage_id', '!=', 3)]}" name="create_account" type="object" class="btn-primary" />
+                    <button name="consume_car_parts" attrs="{'invisible': [('stage_id', '!=', 3)]}" string="Rebajar Inventario" type="object" class="btn-primary" />
+                </xpath>
+                <xpath expr="//field[@name='kanban_state']" position="before">
+
+                    <button type="object" name="account_move_button" class="oe_stat_button" icon="fa-usd" attrs="{'invisible': [('account_count', '=', 0)]}">
+                        <field name="account_count" widget="statinfo" string="Invoice" />
+                    </button>
+                    <button type="object" name="picking_button" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('picking_count', '=', 0)]}" groups="base.group_user">
+                        <field name="picking_count" widget="statinfo" string="Picking" />
+                    </button>
+
+
+                </xpath>
+                <xpath expr="//field[@name='close_date']" position="attributes">
+                    <attribute name="string" >Fecha Liquidación</attribute>
+                </xpath>
+                <xpath expr="//field[@name='request_date']" position="attributes">
+                    <attribute name="string" >Fecha Creación Orden</attribute>
+                </xpath>
+                <xpath expr="//field[@name='request_date']" position="before">
+                    <field name="partner_id" string="Cliente" />
+                    <field name="street" string="Lugar de reparación" />
+                    
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="sale_order_id" string="Origen" />
+                    <field name="total_neto" string="Subtotal" widget='integer' options="{'currency_field': 'currency_id'}" />
+                    <field name="total_tax" string="Iva 19%" widget='integer' options="{'currency_field': 'currency_id'}" />
+                    <field name="total_tax_incluide" string="Total" widget='integer' options="{'currency_field': 'currency_id'}" />
+
+
+                </xpath>
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="string">Diagnóstico</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='equipment_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page string="Datos de auto" name="data_auto">
+                            <group>
+                                <group>
+                                    <field name="fleet" />
+                                    <field name="brand" />
+                                    <field name="model" />
+                                    <field name="license_plate" />
+                                    <field name="year" />
+                                    <field name="color" />
+                                    <field name="odometer" />
+
+                                </group>
+                                <group>
+                                    <field name="image_brand" widget="image" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Servicios" name="services">
+                            <field name="maintenance_line_services" mode="tree,kanban">
+                                <tree string="Servicios" editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="description" />
+                                    <field name="quantity" />
+                                    <field name="price" widget="integer" />
+                                    <field name="total_subtotal_line_services" widget="integer" />
+
+                                </tree>
+                            </field>
+                            <group>
+                                <group>
+                                    <field name="total_price_services" string="Subtotal"/>
+                                </group>
+                                
+                                
+                            </group>
+                            
+
+                        </page>
+                        <page string="Repuestos" name="supplies">
+                            <field name="maintenance_line_products" mode="tree,kanban">
+                                <tree string="Insumos" editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="description" />
+                                    <field name="quantity" />
+                                    <field name="price" widget="integer" />
+                                    
+                                    <field name="total_subtotal_line_product" widget="integer" />
+                                    
+                                </tree>
+                            </field>
+                            <group>
+                                <group>
+                                    <field name="total_price_products" string="Subtotal" widget="integer"/>
+                                </group>
+                                
+                                
+                            </group>
+
+
+                        </page>
+                        <page string="Observaciones" name="data_check">
+                            <group>
+                                
+                                    <field name="observations" widget="html" />
+
+
+                                
+                                
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="sale_order_report_inherit" name="sale_order_report_inherit" inherit_id="studio_customization.odoo_studio_report_s_d2a0807d-7a68-4c77-b1bd-6a1196f63313">
+        <xpath expr="/t/t/div/div[1]" position="after">
+            <t t-if="doc.company_id.name == 'KLUG SPA' and doc.sale_order_template_id.name in 'Arriendo'">
+                <div class="row">
+                    <div class="col-4"><span style="font-weight: bolder;">Conductor</span></div>
+                <div class="col-4"><span style="font-weight: bolder;">RUT</span></div>
+                <div class="col-4"><span style="font-weight: bolder;">Licencia de Conducir</span></div>
+                </div>
+                <div class="row">
+                <div class="col-4"><span t-field="doc.x_studio_conductor"/></div>
+                <div class="col-4"><span t-field="doc.x_studio_conductor.vat"/></div>
+                <div class="col-4"><span t-field="doc.x_studio_licencia_de_conducir"/></div>
+                </div>
+              </t>
+              <t t-else="">
+
+              </t>
+            
+            
+          </xpath>
+          
+    </template>
+    <template id="sale_report_inherit_saleorder" name="sale_report_inherit_saleorder" inherit_id="sale.report_saleorder_document">
+      <!-- deja vacio el espacio donde esta el titulo para reemplazar su posicion arriba -->
+      <xpath expr="//h2[@class='mt16']" position="replace">
+
+      </xpath>
+
+      <xpath expr="//th[@name='th_taxes']" position="replace">
+        
+      </xpath>
+      <xpath expr="//td[@name='td_taxes']" position="replace">
+        
+      </xpath>
+
+
+    <!-- cambio de la parte superior del reporte de ventas y elimina attributos del header de odoo-->
+      <xpath expr="//t/t/t" position="replace">
+          <div class="row">
+              <div class="col-12">
+                    <h2 class="mt16">
+                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                    <span t-if="doc.state not in ['draft','sent']">Presupuesto # </span>
+                    <span t-if="doc.state in ['draft','sent']">Nota de venta # </span>
+                </t>
+                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <span>Pro-Forma Invoice # </span>
+                </t>
+                <span t-field="doc.name"/>
+                </h2>
+              </div>
+          </div>
+
+            <div class="row">
+            <div class="col-4" >
+                       <strong><i class="fa fa-user" aria-hidden="true"></i> Cliente</strong>
+                       <br/>
+                       Empresa: <span t-field="doc.partner_id.name" />
+                       <br/>
+                       RUT: <span t-field="doc.partner_id.vat" />
+                       <br/>
+                       Telefono: <span t-field="doc.partner_id.phone0" />
+                       <br/>
+                       Direccion: <span t-field="doc.partner_id.street" />
+                       <br/>
+                       
+                     </div>
+          <div class="col-4" style="margin-left:200px;">
+            <t t-if="doc.model">
+              <strong>
+                          <i class="fa fa-car" aria-hidden="true"></i>
+                          Vehículo
+                        </strong>
+                        <br/>
+                        <span t-field="doc.model" /> <span t-field="doc.brand" /> <span t-field="doc.model_year" />
+                        <br/>
+                        <strong>Matricula:</strong> <span t-field="doc.license_plate" />
+                        <br/>
+                        
+                        
+                        
+                      </t> 
+          </div>
+        
+        </div>
+        </xpath>
+    </template>
+</odoo>

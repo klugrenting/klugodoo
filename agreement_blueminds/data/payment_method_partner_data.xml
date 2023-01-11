@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+<!--Intermediario bancario-->
+<!--    <record id="payment_method_partner1" model="agreement.payment.intermediary">-->
+<!--        <field name="name">PAT Transdata</field>-->
+<!--        <field name="code">transdata</field>-->
+<!--        <field name="payment_method" ref="agreement_payment_method2"/>-->
+<!--    </record>-->
+<!--    <record id="payment_method_partner2" model="agreement.payment.intermediary">-->
+<!--        <field name="name">PAC Multibanco Santander</field>-->
+<!--        <field name="code">santander</field>-->
+<!--        <field name="payment_method" ref="agreement_payment_method1"/>-->
+<!--    </record>-->
+<!--    <record id="payment_method_partner3" model="agreement.payment.intermediary">-->
+<!--        <field name="name">PAT Kushki - Bajo Demanda</field>-->
+<!--        <field name="code">kushki</field>-->
+<!--        <field name="payment_method" ref="agreement_payment_method2"/>-->
+<!--    </record>-->
+<!--    <record id="payment_method_partner4" model="agreement.payment.intermediary">-->
+<!--        <field name="name">PAC Kushki - Webpay</field>-->
+<!--        <field name="code">webpay</field>-->
+<!--        <field name="payment_method" ref="agreement_payment_method1"/>-->
+<!--    </record>-->
+</odoo>

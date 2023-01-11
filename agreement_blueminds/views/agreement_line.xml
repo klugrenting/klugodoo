@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<!--
+  © 2021 Jescalante (Jamie Escalante <jamie.escalante7@gmail.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+<record id="contract_line_form" model="ir.ui.view">
+    <field name="name">agreement.line.form</field>
+    <field name="model">agreement.line</field>
+    <field name="arch" type="xml">
+        <form string="Contract Line">
+            <header>
+                <field name="state" widget="statusbar"/> <!--statusbar_visible="pre,vali,revisado,act,proceso,prueba,cerrado"-->
+            </header>
+            <sheet>
+                <div class="oe_title">
+                    <label for="name" class="oe_edit_only" string="Contract Line"/>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
+                <group name="main">
+                    <group name="left">
+                        <field name="is_template" invisible="1"/>
+                        <field name="partner_id" attrs="{'invisible':[('agreement_id','=', False)]}"/>
+                        <field name="agreement_id" attrs="{'invisible':[('agreement_id','=', False)]}"/>
+                        <field name="product_id" string="Servicio"/>
+                        <field name="product_principal" string="Vehículo" domain="[('fleet', '=', True)]"/>
+					    <field name="maintenance"/>
+                        <field name="gestor_id"/>
+                        <field name="fecha_inicio"/>
+                        <field name="fecha_fin"/>
+                        <field name="km_salida"/>
+                        <field name="estanque_salida"/>
+                        <field name="km_devo"/>
+                        <field name="estanque_devo"/>
+<!--                        <field name="reason_dis" attrs="{'required': [('state', '=', 'sol_baja')], 'invisible': [('state', 'not in', ['sol_baja', 'proceso', 'no_vigente'])]}"/>-->
+<!--                        <field name="description_dis" attrs="{'required': [('state', '=', 'sol_baja')], 'invisible': [('state', 'not in', ['sol_baja', 'proceso', 'no_vigente'])]}"/>-->
+<!--                        <field name="pass_line_rel" domain="[('state', 'in', ['proceso']), ('partner_id', '=', partner_id)]" attrs="{'required': [('type_line', '=', 2)], 'invisible': [('type_line', '!=', 2)]}"/>-->
+<!--                        <field name="pass_state_rele" attrs="{'required': [('type_line', '=', 2)], 'invisible': [('type_line', '!=', 2)]}"/>-->
+<!--                        <field name="pass_motivo_rel" attrs="{'required': [('type_line', '=', 2)], 'invisible': [('type_line', '!=', 2)]}"/>-->
+<!--                        <field name="pass_description_rel" attrs="{'required': [('type_line', '=', 2)], 'invisible': [('type_line', '!=', 2)]}"/>-->
+<!--                        <field name="fut_line_rel" attrs="{'invisible': [('fut_line_rel', '=', False)]}"/>-->
+<!--                        <field name="fut_state_rele" attrs="{'invisible': [('fut_line_rel', '=', False)]}"/>-->
+<!--                        <field name="fut_motivo_rel" invisible="1"/>-->
+<!--                        <field name="fut_description_rel" invisible="1"/>-->
+                    </group>
+                    <group name="right">
+                        <field name="place_contract"/>
+                        <field name="fecha_cobro" invisible="1"/>
+                        <label for="price"/>
+                        <div class="o_row">
+                            <field name="price" style="width: 50%%"/>
+                            <field name="currency_id_men" style="width: 1%%"/>
+                        </div>
+                        <label for="price_instalacion" string="Garantía"/>
+                        <div class="o_row">
+                            <field name="price_instalacion" style="width: 50%%"/>
+                            <field name="currency_id_inst" style="width: 1%%"/>
+                        </div>
+                        <label for="price_km_adi"/>
+                        <div class="o_row">
+                            <field name="price_km_adi" style="width: 50%%"/>
+                            <field name="currency_id_km" style="width: 1%%"/>
+                        </div>
+                        <field name="km_mes"/>
+                        <field name="warranty"/>
+                        <field name="date_entrega"/>
+                        <field name="signed_contract" filename="signed_contract_filename"/>
+                        <field name="signed_contract_filename" invisible="1"/>
+                    </group>
+                </group>
+                <field name="general_msj" nolabel="1"
+                        placeholder="observaciones..."/>
+                <notebook>
+                    <page name="invoicing" string="Invoices">
+                        <field name="invoicing_line_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="state"/>
+                                <field name="invoice_payment_state"/>
+                                <field name="agreement_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+<!--                    <page name="comision" string="Commission">-->
+<!--                        <group string="Commission Detail">-->
+<!--                            <field name="comisiona_id"/>-->
+<!--                            <field name="date_comision_pag"/>-->
+<!--                            <field name="state_comision"/>-->
+<!--                        </group>-->
+<!--                    </page>-->
+<!--                    <page name="tickets" string="Tickets">-->
+<!--                        <field name="tickets_line_ids" nolabel="1">-->
+<!--                            <tree editable="top">-->
+<!--                                <field name="name"/>-->
+<!--                                <field name="partner_id"/>-->
+<!--                                <field name="stage_id"/>-->
+<!--                                <field name="agreement_id" invisible="1"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </page>-->
+<!--                     <page name="descuentos" string="Discounts">-->
+<!--                        <field name="discounts_line_ids" nolabel="1">-->
+<!--                            <tree editable="top">-->
+<!--                                <field name="name"/>-->
+<!--                                <field name="code"/>-->
+<!--                                <field name="type"/>-->
+<!--                                <field name="fecha_inicio"/>-->
+<!--                                <field name="fecha_fin"/>-->
+<!--                                <field name="pricelist_id"/>-->
+<!--                                <field name="agreement_id" invisible="1"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                     </page>-->
+                </notebook>
+                <group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="contract_line_tree" model="ir.ui.view">
+    <field name="name">agreement.line.tree</field>
+    <field name="model">agreement.line</field>
+    <field name="arch" type="xml">
+        <tree string="Agreements">
+            <field name="partner_id" optional="hide"/>
+            <field name="agreement_id" optional="hide"/>
+            <field name="name" optional="show"/>
+            <field name="product_id" optional="show" string="Servicio"/>
+            <field name="product_principal" optional="show" string="Vehículo"/>
+            <field name="place_contract" optional="show"/>
+            <field name="km_salida" optional="hide"/>
+            <field name="estanque_salida" optional="hide"/>
+            <field name="km_devo" optional="hide"/>
+            <field name="estanque_devo" optional="hide"/>
+            <field name="gestor_id" optional="hide"/>
+            <field name="price" optional="show"/>
+            <field name="currency_id_men" optional="show"/>
+            <field name="price_instalacion" optional="hide"/>
+            <field name="currency_id_inst" optional="hide"/>
+            <field name="state" optional="show"/>
+        </tree>
+    </field>
+</record>
+
+<!--<record id="agreement_search" model="ir.ui.view">-->
+<!--    <field name="name">agreement.search</field>-->
+<!--    <field name="model">agreement</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <search string="Search Agreements">-->
+<!--            <field name="name" filter_domain="['|', ('name', 'ilike', self), ('code', 'ilike', self)]" string="Name or Number"/>-->
+<!--            <field name="partner_id"/>-->
+<!--            <separator/>-->
+<!--            <filter name="sale" string="Sale" domain="[('domain', '=', 'sale')]"/>-->
+<!--            <filter name="purchase" string="Purchase" domain="[('domain', '=', 'purchase')]"/>-->
+<!--            <separator/>-->
+<!--            <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>-->
+<!--            <group name="groupby">-->
+<!--                <filter name="partner_groupby" string="Partner"-->
+<!--                    context="{'group_by': 'partner_id'}"/>-->
+<!--                <filter name="signature_date_groupby" string="Signature Date"-->
+<!--                    context="{'group_by': 'signature_date'}"/>-->
+<!--                <filter name="domain_groupby" string="Domain"-->
+<!--                    context="{'group_by': 'domain'}"/>-->
+<!--            </group>-->
+<!--        </search>-->
+<!--    </field>-->
+<!--</record>-->
+
+    <record id="contract_line_action" model="ir.actions.act_window">
+        <field name="name">Lineas de Contrato</field>
+        <field name="res_model">agreement.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_maintenance_m_tree" model="ir.ui.view">
+            <field name="name">product.maintenance_m.tree</field>
+            <field name="model">product.maintenance_m</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Maintenance">
+                    <field name="sequence" widget="handle" />
+                    <field name="name"/>
+                    <field name="product_id"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="view_maintenance_m_form" model="ir.ui.view">
+        <field name="name">product.maintenance_m.form</field>
+        <field name="model">product.maintenance_m</field>
+        <field name="arch" type="xml">
+          <form string="Maintenance" class="o_sale_order">
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <field name="product_id" string="Service"/>
+<!--                        <field name="time_periodicy"/>-->
+                </group>
+                <notebook>
+                    <page string="Products" name="maintenance_m_line">
+                        <field name="maintenance_m_line">
+                            <tree string="Service" editable="bottom">
+                                <field name="sequence" widget="handle" />
+                                <field name="maintenance_id" invisible="1"/>
+                                <field name="type"/>
+                                <field name="number" sum="number"/>
+                                <field name="periodicity"/>
+                                <field name="time_spent" widget="float_time" required="True" sum="time_spent"/>
+                                <field name="product_id" options="{'no_open': True}" force_save="1" widget="product_configurator"/>
+                                <field name="quantity" sum="quantity"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids" widget="mail_activity"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+          </form>
+        </field>
+    </record>
+
+    <record id="action_maintenance_m" model="ir.actions.act_window">
+        <field name="name">Product Maintenance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.maintenance_m</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Maintenance,
+            </p>
+        </field>
+    </record>
+
+
+
+</odoo>

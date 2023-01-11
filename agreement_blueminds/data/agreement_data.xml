@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <data noupdate="0">
+        <!--Tipo de Lineas de Contrato - agreement.line-->
+<!--        <record id="agreement_line_type1" model="agreement.line.type">-->
+<!--            <field name="name">Nueva</field>-->
+<!--            <field name="code">1</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_line_type2" model="agreement.line.type">-->
+<!--            <field name="name">Relacionada a Anterior</field>-->
+<!--            <field name="code">2</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash;Tipo de persona - res partner&ndash;&gt;-->
+        <record id="agreement_type_partner1" model="etiqueta.person">
+            <field name="name">Representante Legal</field>
+        </record>
+
+        <record id="agreement_type_partner2" model="etiqueta.person">
+            <field name="name">Administrador de Contrato</field>
+        </record>
+
+        <record id="agreement_type_partner3" model="etiqueta.person">
+            <field name="name">Contacto Clave</field>
+        </record>
+
+        <record id="agreement_type_partner4" model="etiqueta.person">
+            <field name="name">Contacto de Servicio</field>
+        </record>
+
+        <record id="agreement_type_partner5" model="etiqueta.person">
+            <field name="name">Contacto Facturación</field>
+        </record>
+
+        <record id="agreement_type_partner6" model="etiqueta.person">
+            <field name="name">Contacto Comercial</field>
+        </record>
+
+<!--    &lt;!&ndash;Tipo de contibuyente&ndash;&gt;-->
+<!--        <record id="agreement_type_contrib1" model="agreement.type.contrib">-->
+<!--            <field name="name">Juridico</field>-->
+<!--            <field name="code">J</field>-->
+<!--        </record>-->
+
+<!--        <record id="agreement_type_contrib2" model="agreement.type.contrib">-->
+<!--            <field name="name">Natural</field>-->
+<!--            <field name="code">N</field>-->
+<!--        </record>-->
+<!--    &lt;!&ndash;    Tipo de contrato&ndash;&gt;-->
+<!--        <record id="agreement_type_partner1" model="agreement.type.partner">-->
+<!--            <field name="name">Empresa</field>-->
+<!--            <field name="code">01</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_type_partner2" model="agreement.type.partner">-->
+<!--            <field name="name">Hogar</field>-->
+<!--            <field name="code">02</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_type_partner3" model="agreement.type.partner">-->
+<!--            <field name="name">HORECA - Interno</field>-->
+<!--            <field name="code">03</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_type_partner4" model="agreement.type.partner">-->
+<!--            <field name="name">HORECA - Autoembotellado</field>-->
+<!--            <field name="code">04</field>-->
+<!--        </record>-->
+<!--    &lt;!&ndash;    Periodicidad de pago&ndash;&gt;-->
+<!--        <record id="agreement_payment_period1" model="agreement.payment.period">-->
+<!--            <field name="name">Mensual</field>-->
+<!--            <field name="code">M</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period2" model="agreement.payment.period">-->
+<!--            <field name="name">Trimestral</field>-->
+<!--            <field name="code">T</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period3" model="agreement.payment.period">-->
+<!--            <field name="name">Semestral</field>-->
+<!--            <field name="code">S</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period4" model="agreement.payment.period">-->
+<!--            <field name="name">Anual Anticipado (10X12) Año 1 y luego mensual</field>-->
+<!--            <field name="code">AM</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period5" model="agreement.payment.period">-->
+<!--            <field name="name">Anual Anticipado (10X12) Siempre</field>-->
+<!--            <field name="code">A</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period6" model="agreement.payment.period">-->
+<!--            <field name="name">Anual sin descuento (12X12)</field>-->
+<!--            <field name="code">AD</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period7" model="agreement.payment.period">-->
+<!--            <field name="name">Igual al Padre</field>-->
+<!--            <field name="code">ig</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_period8" model="agreement.payment.period">-->
+<!--            <field name="name">Dominio Padre</field>-->
+<!--            <field name="code">igp</field>-->
+<!--        </record>-->
+<!--    &lt;!&ndash;    Metodo de pago&ndash;&gt;-->
+<!--        <record id="agreement_payment_method1" model="agreement.payment.method">-->
+<!--            <field name="name">PAC</field>-->
+<!--            <field name="code">pac</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method2" model="agreement.payment.method">-->
+<!--            <field name="name">PAT</field>-->
+<!--            <field name="code">pat</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method3" model="agreement.payment.method">-->
+<!--            <field name="name">Transferencia</field>-->
+<!--            <field name="code">trf</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method4" model="agreement.payment.method">-->
+<!--            <field name="name">Botón de Pago</field>-->
+<!--            <field name="code">btn</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method5" model="agreement.payment.method">-->
+<!--            <field name="name">Kushki Crédito</field>-->
+<!--            <field name="code">cre</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method6" model="agreement.payment.method">-->
+<!--            <field name="name">Kushki Débito</field>-->
+<!--            <field name="code">deb</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method7" model="agreement.payment.method">-->
+<!--            <field name="name">Igual al Padre</field>-->
+<!--            <field name="code">ig</field>-->
+<!--        </record>-->
+<!--        <record id="agreement_payment_method8" model="agreement.payment.method">-->
+<!--            <field name="name">Dominio Padre</field>-->
+<!--            <field name="code">igp</field>-->
+<!--        </record>-->
+    <!--    agreement.l10ncl-->
+        <record id="agreement_l10ncl1" model="agreement.l10ncl">
+            <field name="name">Factura de Inicio</field>
+            <field name="code">29</field>
+        </record>
+        <record id="agreement_l10ncl2" model="agreement.l10ncl">
+            <field name="name">Factura</field>
+            <field name="code">30</field>
+        </record>
+        <record id="agreement_l10ncl3" model="agreement.l10ncl">
+            <field name="name">Factura de Ventas y Servicios no Afectos o Exentos de IVA</field>
+            <field name="code">32</field>
+        </record>
+        <record id="agreement_l10ncl4" model="agreement.l10ncl">
+            <field name="name">Factura Electrónica</field>
+            <field name="code">33</field>
+        </record>
+        <record id="agreement_l10ncl5" model="agreement.l10ncl">
+            <field name="name">Factura no Afecta o Exenta Electrónica</field>
+            <field name="code">34</field>
+        </record>
+        <record id="agreement_l10ncl6" model="agreement.l10ncl">
+            <field name="name">Boleta de Venta</field>
+            <field name="code">35</field>
+        </record>
+        <record id="agreement_l10ncl7" model="agreement.l10ncl">
+            <field name="name">Boleta exenta</field>
+            <field name="code">38</field>
+        </record>
+        <record id="agreement_l10ncl8" model="agreement.l10ncl">
+            <field name="name">Boleta Electrónica</field>
+            <field name="code">39</field>
+        </record>
+        <record id="agreement_l10ncl9" model="agreement.l10ncl">
+            <field name="name">Liquidación Factura</field>
+            <field name="code">40</field>
+        </record>
+        <record id="agreement_l10ncl10" model="agreement.l10ncl">
+            <field name="name">Boleta Exenta Electrónica</field>
+            <field name="code">41</field>
+        </record>
+        <record id="agreement_l10ncl11" model="agreement.l10ncl">
+            <field name="name">Liquidación Factura Electrónica</field>
+            <field name="code">43</field>
+        </record>
+        <record id="agreement_l10ncl12" model="agreement.l10ncl">
+            <field name="name">Factura de Compra</field>
+            <field name="code">45</field>
+        </record>
+        <record id="agreement_l10ncl13" model="agreement.l10ncl">
+            <field name="name">Factura de Compra Electrónica</field>
+            <field name="code">46</field>
+        </record>
+        <record id="agreement_l10ncl14" model="agreement.l10ncl">
+            <field name="name">Guía de Despacho</field>
+            <field name="code">50</field>
+        </record>
+        <record id="agreement_l10ncl15" model="agreement.l10ncl">
+            <field name="name">Guía de Despacho Electrónica</field>
+            <field name="code">52</field>
+        </record>
+        <record id="agreement_l10ncl16" model="agreement.l10ncl">
+            <field name="name">Nota de Débito</field>
+            <field name="code">55</field>
+        </record>
+        <record id="agreement_l10ncl17" model="agreement.l10ncl">
+            <field name="name">Nota de Débito Electrónica</field>
+            <field name="code">56</field>
+        </record>
+        <record id="agreement_l10ncl18" model="agreement.l10ncl">
+            <field name="name">Nota de Crédito</field>
+            <field name="code">60</field>
+        </record>
+        <record id="agreement_l10ncl19" model="agreement.l10ncl">
+            <field name="name">Nota de Crédito Electrónica</field>
+            <field name="code">61</field>
+        </record>
+        <record id="agreement_l10ncl20" model="agreement.l10ncl">
+            <field name="name">Boleta de Honorarios</field>
+            <field name="code">70</field>
+        </record>
+        <record id="agreement_l10ncl21" model="agreement.l10ncl">
+            <field name="name">Boleta de Honorarios Electrónica</field>
+            <field name="code">71</field>
+        </record>
+        <record id="agreement_l10ncl22" model="agreement.l10ncl">
+            <field name="name">Liquidación</field>
+            <field name="code">103</field>
+        </record>
+        <record id="agreement_l10ncl23" model="agreement.l10ncl">
+            <field name="name">SRF Solicitud de Registro de Factura</field>
+            <field name="code">108</field>
+        </record>
+        <record id="agreement_l10ncl24" model="agreement.l10ncl">
+            <field name="name">Factura de Exportación Electrónica</field>
+            <field name="code">110</field>
+        </record>
+        <record id="agreement_l10ncl25" model="agreement.l10ncl">
+            <field name="name">Nota de Débito de Exportación Electrónica</field>
+            <field name="code">111</field>
+        </record>
+        <record id="agreement_l10ncl26" model="agreement.l10ncl">
+            <field name="name">Nota de Crédito de Exportación Electrónica</field>
+            <field name="code">112</field>
+        </record>
+        <record id="agreement_l10ncl27" model="agreement.l10ncl">
+            <field name="name">Ajuste aumento Tipo de Cambio (código 500)</field>
+            <field name="code">500</field>
+        </record>
+        <record id="agreement_l10ncl28" model="agreement.l10ncl">
+            <field name="name">Ajuste disminución Tipo de Cambio (código 501)</field>
+            <field name="code">501</field>
+        </record>
+        <record id="agreement_l10ncl29" model="agreement.l10ncl">
+            <field name="name">Orden de Compra</field>
+            <field name="code">801</field>
+        </record>
+        <record id="agreement_l10ncl30" model="agreement.l10ncl">
+            <field name="name">Nota de pedido</field>
+            <field name="code">802</field>
+        </record>
+        <record id="agreement_l10ncl31" model="agreement.l10ncl">
+            <field name="name">Contrato</field>
+            <field name="code">803</field>
+        </record>
+        <record id="agreement_l10ncl32" model="agreement.l10ncl">
+            <field name="name">Resolución</field>
+            <field name="code">804</field>
+        </record>
+        <record id="agreement_l10ncl33" model="agreement.l10ncl">
+            <field name="name">Proceso ChileCompra</field>
+            <field name="code">805</field>
+        </record>
+        <record id="agreement_l10ncl34" model="agreement.l10ncl">
+            <field name="name">Ficha ChileCompra</field>
+            <field name="code">806</field>
+        </record>
+        <record id="agreement_l10ncl35" model="agreement.l10ncl">
+            <field name="name">(807) DUS</field>
+            <field name="code">807</field>
+        </record>
+        <record id="agreement_l10ncl36" model="agreement.l10ncl">
+            <field name="name">(808) B/L (Conocimiento de embarque)</field>
+            <field name="code">808</field>
+        </record>
+        <record id="agreement_l10ncl37" model="agreement.l10ncl">
+            <field name="name">(809) AWB Airway Bill</field>
+            <field name="code">809</field>
+        </record>
+        <record id="agreement_l10ncl38" model="agreement.l10ncl">
+            <field name="name">(810) MIC/DTA</field>
+            <field name="code">810</field>
+        </record>
+        <record id="agreement_l10ncl39" model="agreement.l10ncl">
+            <field name="name">(811) Carta de Porte</field>
+            <field name="code">811</field>
+        </record>
+        <record id="agreement_l10ncl40" model="agreement.l10ncl">
+            <field name="name">(812) Resolución del SNA donde califica Servicios de Exportación</field>
+            <field name="code">812</field>
+        </record>
+        <record id="agreement_l10ncl41" model="agreement.l10ncl">
+            <field name="name">(813) Pasaporte</field>
+            <field name="code">813</field>
+        </record>
+        <record id="agreement_l10ncl42" model="agreement.l10ncl">
+            <field name="name">(814) Certificado de Depósito Bolsa Prod. Chile.</field>
+            <field name="code">814</field>
+        </record>
+        <record id="agreement_l10ncl43" model="agreement.l10ncl">
+            <field name="name">(815) Vale de Prenda Bolsa Prod. Chile</field>
+            <field name="code">815</field>
+        </record>
+        <record id="agreement_l10ncl44" model="agreement.l10ncl">
+            <field name="name">(901) Factura de ventas a empresas del territorio preferencial Res. Ex. N° 1057</field>
+            <field name="code">901</field>
+        </record>
+        <record id="agreement_l10ncl45" model="agreement.l10ncl">
+            <field name="name">(902) Conocimiento de Embarque (Marítimo o aéreo)</field>
+            <field name="code">902</field>
+        </record>
+        <record id="agreement_l10ncl46" model="agreement.l10ncl">
+            <field name="name">(903) Documento Único de Salida (DUS)</field>
+            <field name="code">903</field>
+        </record>
+        <record id="agreement_l10ncl47" model="agreement.l10ncl">
+            <field name="name">(904) Factura de Traspaso</field>
+            <field name="code">904</field>
+        </record>
+        <record id="agreement_l10ncl48" model="agreement.l10ncl">
+            <field name="name">(905) Factura de Reexpedición</field>
+            <field name="code">905</field>
+        </record>
+        <record id="agreement_l10ncl49" model="agreement.l10ncl">
+            <field name="name">(906) Boletas Venta Módulos ZF (todas)</field>
+            <field name="code">906</field>
+        </record>
+        <record id="agreement_l10ncl50" model="agreement.l10ncl">
+            <field name="name">(907) Facturas Venta Módulo ZF (todas)</field>
+            <field name="code">907</field>
+        </record>
+        <record id="agreement_l10ncl51" model="agreement.l10ncl">
+            <field name="name">(911) Declaración de Ingreso a Zona Franca Primaria</field>
+            <field name="code">911</field>
+        </record>
+        <record id="agreement_l10ncl52" model="agreement.l10ncl">
+            <field name="name">(914) Declaración de Ingreso (DIN)</field>
+            <field name="code">914</field>
+        </record>
+        <record id="agreement_l10ncl53" model="agreement.l10ncl">
+            <field name="name">(919) Resumen Ventas de nacionales pasajes sin Factura</field>
+            <field name="code">919</field>
+        </record>
+        <record id="agreement_l10ncl54" model="agreement.l10ncl">
+            <field name="name">(HEM) Hoja de Entrada de Materiales (HEM)</field>
+            <field name="code">HEM</field>
+        </record>
+        <record id="agreement_l10ncl55" model="agreement.l10ncl">
+            <field name="name">(HES) Hoja de Entrada de Servicio (HES)</field>
+            <field name="code">HES</field>
+        </record>
+        <record id="agreement_l10ncl56" model="agreement.l10ncl">
+            <field name="name">(MIG) Movimiento de Mercancías (MIGO)</field>
+            <field name="code">MIG</field>
+        </record>
+        <record id="agreement_l10ncl57" model="agreement.l10ncl">
+            <field name="name">(CHQ) Cheque</field>
+            <field name="code">CHQ</field>
+        </record>
+        <record id="agreement_l10ncl58" model="agreement.l10ncl">
+            <field name="name">(PAG) Pagaré</field>
+            <field name="code">PAG</field>
+        </record>
+    </data>
+</odoo>

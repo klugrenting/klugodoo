@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    <template id="portal_my_home_fleet" customize_show="True" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Vehiculos</t>
+                <t t-set="url" t-value="'/my/fleet'" />
+                <t t-set="placeholder_count" t-value="'fleet_count'" />
+
+
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="portal_my_fleet" name="Mis Vehiculos">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Vehiculos</t>
+            </t>
+            <t t-if="not fleets">
+                <p>No tiene vehiculos.</p>
+            </t>
+            <t t-if="fleets" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Patente</th>
+                        <th class="text-center">Modelo</th>
+                        <th class="text-center">Estado</th>
+                        
+                    </tr>
+                </thead>
+                <t t-foreach="fleets" t-as="fleet">
+                    <tr>
+                       
+                        <td class="text-center">
+                            <a t-att-href="'/my/fleet/'+str(fleet.id)">
+                                <span t-esc="fleet.license_plate" />
+                            </a>
+                            
+                        </td>
+                        <td class="text-center">
+                            <span t-esc="fleet.name" />
+                        </td>
+                      
+                        <td class="text-center">
+
+                            <span t-esc="fleet.state_id.name" />
+                           
+                        </td>
+                      
+                    </tr>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+    <template id="fleet" name="fleet">
+
+
+        <t t-call="portal.portal_layout">
+            <t t-set="wrapwrap_classes" t-value="'o_portal_bg_dark'" />
+
+            <div class="row mt16 oe_website_contract o_portal_sidebar">
+
+                <!-- ====== Sidebar  ====== -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'" />
+
+                    <t t-set="entries">
+                        <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                            <li class="list-group-item flex-grow-1">
+                                <div>
+                                    <strong>
+                                        Kilometraje:
+                                        <strong>
+                                            
+                                            <t t-esc="'{0:,.0f}'.format(int(fleet['odometer'])).replace(',', '.')" /> Km
+                                        </strong>
+                                    </strong>
+                                </div>
+
+                            </li>
+                            <li t-if="fleet.manager_id" class="list-group-item flex-grow-1">
+                                <div class="small mb-1">
+                                    <strong class="text-muted">Gerente de Flota:</strong>
+                                </div>
+                                <div class="row flex-nowrap">
+                                    <div class="col flex-grow-0 pr-2">
+                                        <img class="rounded-circle mr4 float-left o_portal_contact_img" t-attf-src="#{image_data_uri(fleet.manager_id.image_1920)}" alt="Contact" />
+                                    </div>
+                                    <div class="col pl-0" style="min-width: 150px">
+                                        <span t-field="fleet.manager_id.name" t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}' />
+                                        <div>
+                                            <a t-if="is_follower" href="#discussion" class="small">
+                                                <i class="fa fa-comment"></i>
+                                                Enviar Mensaje
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- <div class="o_download_pdf_maintenance btn-toolbar flex-sm-nowrap">
+                                    
+                                <div class="btn-group flex-grow-1 mb-1">
+                                    <a class="btn btn-secondary btn-block o_print_btn o_portal_maintenance_print" t-attf-href="/report/pdf/custom_bi_car_repair.maintenance_template_view_temp_id/#{maintenance.id}" id="maintenance_template_view" title="Print" target="_blank"><i class="fa fa-print"/> Imprimir</a>
+                                </div>
+                            </div> -->
+
+                        </ul>
+                    </t>
+                </t>
+                <div class="col-12 col-lg">
+                    <div class="card oe_website_contract">
+                        <div class="card-header bg-white pb-2 pt-3">
+                            <div class="row">
+                                <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                    <h4 class="mb-0">
+                                        <small class="text-muted">Preview información de vehiculo -</small>
+                                        <span t-esc="fleet.name" />
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                <div class="col-6 col-lg flex-grow-1 mb-1 mb-lg-0">
+                                    
+                                    <div class="row">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr class="active">
+                                                    <th class="text-center">Marca</th>
+                                                    <th class="text-center">Modelo</th>
+                                                    <th class="text-center">Patente</th>
+                                                    <th class="text-center">Estado</th>
+                                                    
+                                                </tr>
+                                                
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <td><span t-esc="fleet.marca" /></td>
+                                                <td><span t-esc="fleet.modelo" /></td>
+                                                <td><span t-esc="fleet.license_plate" /></td>
+                                                <td><span t-esc="fleet.state_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Subscripcion activa</td>
+                                                    <td>Ultimo odometro</td>
+                                                    <td>Mantenciones Realizadas</td>
+                                                    <td>Descargar Documentos</td>
+                                                    </tr>
+                                                <tr>
+                                                    <td><span t-esc="fleet.subscription.name" /></td>
+                                                    <td><span t-esc="int(fleet.odometer)" widget="Integer"/> Km</td>
+                                                    <td>
+                                                    <t t-foreach="fleet.x_studio_mantenciones_realizadas" t-as="test">
+                                                        <span t-esc="test.x_name" />
+                                                    </t>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="fleet.attach_1">
+                                                            <a t-attf-href="#{ fleet.id }/download/1">
+                                                               Soap , 
+                                                            </a>
+                                                        </t>
+                                                        <t t-if="fleet.attach_2">
+                                                            <a t-attf-href='#{ fleet.id }/download/2'>
+                                                                Permiso de circulacion ,
+                                                            </a>
+                                                        </t>
+                                                        <t t-if="fleet.attach_3">
+                                                            <a t-attf-href='#{ fleet.id }/download/3'>
+                                                                Homologado
+                                                            </a>
+                                                        </t>
+                                                        <t t-else="">
+                                                            No tiene documentos
+                                                        </t>
+                                                        
+                                                       
+                                                       
+                                                       
+                                                        <!-- <span t-esc="fleet.attach_1" string="Documento 1" />
+                                                        <span t-esc="fleet.attach_1_fname" string="Documento 1" invisible="1"/>
+                                                        <span t-esc="fleet.attach_2" string="Documento 2" />
+                                                        <span t-esc="fleet.attach_3" string="Documento 3" /> -->
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        
+
+
+                                        <!-- <table>
+                                            <thead>
+                                                <tr class="active">
+                                                    <th class="text-center">Marca</th>
+                                                    <th class="text-center">Modelo</th>
+                                                    <th class="text-center">Patente</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="fleets" t-as="fleet">
+                                                    <tr>
+    
+                                                       <td>
+                                                        <span t-esc="fleets.marca" />
+                                                       </td>
+                                                        <td>
+                                                                <span t-esc="fleets.modelo" />
+                                                            
+                                                            
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span t-esc="fleets.license_plate" />
+                                                        </td>
+                                                      
+                                                        
+                                                      
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                           
+                                        </table> -->
+                                    </div></div></div></div></div>
+                    <div id="discussion">
+                        <h3 class="mt-4">Mensajes</h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="fleet" />
+                            <t t-set="chatter_mode" t-value="'json'" />
+                        </t>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+
+        </t>
+
+
+    </template>
+   
+
+    </data>
+</odoo>

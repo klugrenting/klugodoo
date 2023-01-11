@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="sale_order_car_services_inherit_form" model="ir.ui.view">
+            <field name="name">sale.order.car.services.inherit.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_quotation_send']" position="after">
+                    <button name="create_worker_order" type="object" string="Crear OT" attrs="{'invisible': ['|',('type_sale', '=', 'normal_sale_order'),('worker_order_count', '!=', 0)]}"/>
+                </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="object" name="worker_order_button" class="oe_stat_button" icon="fa-wrench">
+                        <field name="worker_order_count" widget="statinfo" string="Orden trabajo" />
+                    </button>
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='nota_cobro']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="type_sale" attrs="{'invisible': [('company_id', '!=', 3)]}"/>
+                    <field name="fleet" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                    <field name="brand" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                    <field name="model" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                    <field name="license_plate" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                    <field name="model_year" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                    <field name="responsible_id"/>
+                  </xpath>
+
+                <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                  <field name="description" attrs="{'invisible': [('type_sale', '=', 'normal_sale_order')]}"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//button[@name='359']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='agreement_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='agreement_line_ids']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='periodo_mes']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='inicio_fecha_alquiler']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='fin_fecha_alquiler']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='fecha_fact_prog']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='fecha_estimada']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type_sale', '!=', 'normal_sale_order')]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='optional_products']" position="attributes">
+                    <attribute name="string">Observaciones</attribute>
+                </xpath>
+                
+
+            </field>
+          </record>
+          <record id="sale_order_car_services_inherit_tree" model="ir.ui.view">
+            <field name="name">sale.order.car.services.inherit.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='date_order']" position="after">
+                <field name="model" string="Modelo" optional="hide"/>
+                <field name="license_plate" string="Patente" optional="hide"/>
+                <field name="description" string="Diagnostico" optional="hide"/>
+              </xpath>
+
+
+            </field>
+          </record>
+           <record id="sale_order_car_services_inherit_quotation_tree" model="ir.ui.view">
+            <field name="name">sale.order.car.services.inherit.quotation.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+              <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="model" string="Modelo" optional="hide"/>
+                <field name="license_plate" string="Patente" optional="hide"/>
+                <field name="description" string="Diagnostico" optional="hide"/>
+              </xpath>
+
+
+            </field>
+          </record>
+ 
+    </data>
+    
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="view_move_form_factoring" model="ir.ui.view">
+            <field name="name">view.move.form.factoring</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button string="Crear Cesión" type="object" name="validate_cesion" />
+                </xpath>
+                <notebook>
+                    <page string="Cesión de Documento" name="cesion_invoice">
+                        <group>
+                            <group>
+                                <field name='cesionario_id'/>
+                                <field name='cesion_number'/>
+                                <field name='sii_cesion_message'/>
+                                <field name='l10n_cl_dte_file_factoring'/>
+                            </group>
+                            <group>
+                                <label for="l10n_cl_dte_status_factoring" attrs="{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice']), ('l10n_latam_manual_document_number', '=', True), ('l10n_latam_use_documents', '=', False), ('country_code', '!=', 'CL')]}"/>
+                                <div attrs="{'invisible': ['|', ('l10n_latam_manual_document_number', '=', True), ('l10n_latam_use_documents', '=', False), ('country_code', '!=', 'CL')]}">
+                                    <field name='l10n_cl_dte_status_factoring' class="oe_inline"/>
+                                    <button name="l10n_cl_send_dte_cesion_to_sii" type="object" attrs="{'invisible': [('l10n_cl_dte_status_factoring', '!=', 'not_sent')]}" context="{'send_immediately': True}" string="⇒ Enviar ahora al SII" class="oe_inline oe_link" groups="base.group_user"/>
+                                    <button name="l10n_cl_verify_cesion_dte_status" type="object" attrs="{'invisible': [('l10n_cl_dte_status_factoring', '!=', 'ask_for_status')]}" context="{'send_immediately': True}" string="⇒ Consultar Estado" class="oe_inline oe_link" groups="base.group_user"/>
+                                </div>
+                                <field name="l10n_cl_sii_cesion_send_ident"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name='declaracion_jurada'/>
+<!--                            <field name="imagen_ar_ids" editable="bottom" widget="one2many" attrs="{'readonly':[('sii_cesion_result', 'not in', ['', False])]}">-->
+<!--                              <tree editable="top/bottom">-->
+<!--                                <field name="image" filename="name" required="True" />-->
+<!--                                <field name="name" />-->
+<!--                                <field name="move_id" invisible="True" />-->
+<!--                              </tree>-->
+<!--                            </field>-->
+                        </group>
+                    </page>
+                </notebook>
+        </field>
+    </record>
+    </data>
+</odoo>

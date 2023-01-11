@@ -1,0 +1,82 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_agreement_read,Read access on agreement to Employees,model_agreement,base.group_user,1,0,0,0
+access_agreement_full,Full access on agreement grp,model_agreement,base.group_system,1,1,1,1
+access_agreement_type_read,Read access on agreement type to Employees,model_agreement_type,base.group_user,1,0,0,0
+access_agreement_type_full,Full access on agreement type grp,model_agreement_type,base.group_system,1,1,1,1
+access_agreement_readonly,agreement readonly,model_agreement,base.group_user,1,0,0,0
+access_agreement_allusers,agreement all users,model_agreement,base.group_user,1,1,1,0
+access_agreement_manager,agreement manager,model_agreement,base.group_user,1,1,1,1
+access_agreement_recital_readonly,recital readonly,model_agreement_recital,base.group_user,1,0,0,0
+access_agreement_recital_allusers,recital all users,model_agreement_recital,base.group_user,1,1,1,0
+access_agreement_recital_manager,recital manager,model_agreement_recital,base.group_user,1,1,1,1
+access_agreement_section_readonly,section readonly,model_agreement_section,base.group_user,1,0,0,0
+access_agreement_section_allusers,section all users,model_agreement_section,base.group_user,1,1,1,0
+access_agreement_section_manager,section manager,model_agreement_section,base.group_user,1,1,1,1
+access_agreement_clause_readonly,clause readonly,model_agreement_clause,base.group_user,1,0,0,0
+access_agreement_clause_allusers,clause all users,model_agreement_clause,base.group_user,1,1,1,0
+access_agreement_clause_manager,clause manager,model_agreement_clause,base.group_user,1,1,1,1
+access_agreement_appendix_readonly,appendix readonly,model_agreement_appendix,base.group_user,1,0,0,0
+access_agreement_appendix_allusers,appendix all users,model_agreement_appendix,base.group_user,1,1,1,0
+access_agreement_appendix_manager,appendix manager,model_agreement_appendix,base.group_user,1,1,1,1
+access_agreement_line_readonly,agreement line readonly,model_agreement_line,base.group_user,1,0,0,0
+access_agreement_line_allusers,agreement line all users,model_agreement_line,base.group_user,1,1,1,0
+access_agreement_line_manager,agreement line manager,model_agreement_line,base.group_user,1,1,1,1
+access_agreement_stage_readonly,stage readonly,model_agreement_stage,base.group_user,1,0,0,0
+access_agreement_stage_manager,stage manager,model_agreement_stage,base.group_user,1,1,1,1
+access_agreement_type_readonly,type readonly,model_agreement_type,base.group_user,1,0,0,0
+access_agreement_type_manager,type manager,model_agreement_type,base.group_user,1,1,1,1
+access_agreement_subtype_readonly,subtype readonly,model_agreement_subtype,base.group_user,1,0,0,0
+access_agreement_subtype_manager,subtype manager,model_agreement_subtype,base.group_user,1,1,1,1
+access_agreement_renewaltype_readonly,renewaltype readonly,model_agreement_renewaltype,base.group_user,1,0,0,0
+access_agreement_renewaltype_manager,renewaltype manager,model_agreement_renewaltype,base.group_user,1,1,1,1
+access_agreement_increasetype_readonly,increasetype readonly,model_agreement_increasetype,base.group_user,1,0,0,0
+access_agreement_increasetype_manager,increasetype manager,model_agreement_increasetype,base.group_user,1,1,1,1
+access_agreement_document_readonly,document readonly,model_agreement_document,base.group_user,1,0,0,0
+access_agreement_document_allusers,document all users,model_agreement_document,base.group_user,1,1,1,0
+access_agreement_document_manager,document manager,model_agreement_document,base.group_user,1,1,1,1
+access_agreement_period_allusers,period all users,model_agreement_payment_period,base.group_user,1,1,1,0
+access_agreement_method_allusers,method all users,model_agreement_payment_method,base.group_user,1,1,1,0
+access_agreement_rentals_line_allusers,rentals_line all users,model_rentals_line,base.group_user,1,1,1,0
+access_agreement_invoice_line_allusers,invoice_line all users,model_invoice_line,base.group_user,1,1,1,0
+access_agreement_line_keys_allusers,agreement_line_keys all users,model_agreement_line_keys,base.group_user,1,1,1,0
+access_agreement_type_partner_allusers,typePartner all users,model_agreement_type_partner,base.group_user,1,1,1,0
+access_agreement_test_day_allusers,agreement_test_day all users,model_agreement_test_day,base.group_user,1,1,1,0
+access_etiqueta_person,access_etiqueta_person,model_etiqueta_person,base.group_user,1,1,1,1
+access_agreement_type_contrib,access_agreement_type_contrib,model_agreement_type_contrib,base.group_user,1,1,1,1
+access_create_test,access_create_test,model_create_test,base.group_user,1,1,1,1
+access_agreement_signed_extra,access_agreement_signed_extra,model_agreement_signed_extra,base.group_user,1,1,1,1
+access_agreement_extra,access_agreement_extra,model_agreement_extra,base.group_user,1,1,1,1
+access_type_signed_extra,access_type_signed_extra,model_type_signed_extra,base.group_user,1,1,1,1
+access_zona_comercial,access_zona_comercial,model_zona_comercial,base.group_user,1,1,1,1
+access_comuna_comercial,access_comuna_comercial,model_comuna_comercial,base.group_user,1,1,1,1
+access_sector_comercial,access_sector_comercial,model_sector_comercial,base.group_user,1,1,1,1
+access_zona_mantencion,access_zona_mantencion,model_zona_mantencion,base.group_user,1,1,1,1
+access_comuna_mantencion,access_comuna_mantencion,model_comuna_mantencion,base.group_user,1,1,1,1
+access_sector_mantencion,access_sector_mantencion,model_sector_mantencion,base.group_user,1,1,1,1
+access_agreement_extra_charges,access_agreement_extra_charges,model_agreement_extra_charges,base.group_user,1,1,1,1
+access_means,means,model_means,base.group_user,1,1,1,1
+access_capabilities,capabilities,model_capabilities,base.group_user,1,1,1,1
+access_type_document_extra,type.document.extra,model_type_document_extra,base.group_user,1,1,1,1
+access_agreement_payment_intermediary,agreement.payment.intermediary,model_agreement_payment_intermediary,base.group_user,1,1,1,1
+agreement_blueminds.access_agreement_full,Full access on agreement grp,agreement_blueminds.model_agreement,sales_team.group_sale_manager,1,1,1,1
+agreement_blueminds.access_agreement_type_full,Full access on agreement type grp,agreement_blueminds.model_agreement_type,sales_team.group_sale_manager,1,1,1,1
+access_crm_line,crm.line,agreement_blueminds.model_crm_line,sales_team.group_sale_salesman,1,1,1,1
+access_crm_rline,crm.rline,agreement_blueminds.model_crm_rline,sales_team.group_sale_salesman,1,1,1,1
+access_crm_canal,access_crm_canal,model_crm_canal,base.group_user,1,1,1,1
+access_crm_subcanal,access_crm_subcanal,model_crm_subcanal,base.group_user,1,1,1,1
+access_product_maintenance_m,access_product_maintenance_m,model_product_maintenance_m,base.group_user,1,1,1,1
+access_product_maintenance_m_line,access_product_maintenance_m_line,model_product_maintenance_m_line,base.group_user,1,1,1,1
+access_agreement_discount,access_agreement_discount,model_agreement_discount,base.group_user,1,1,1,1
+access_agreement_penalty,access_agreement_penalty,model_agreement_penalty,base.group_user,1,1,1,1
+access_agreement_l10ncl,access_agreement_l10ncl,model_agreement_l10ncl,base.group_user,1,1,1,1
+access_penalty_type,access_penalty_type,model_penalty_type,base.group_user,1,1,1,1
+access_version,access_version,model_product_version,base.group_user,1,1,1,1
+access_related,product.related,agreement_blueminds.model_product_related,sales_team.group_sale_manager,1,1,1,1
+access_res_country_state_region,access_res_country_state_region,model_res_country_state_region,base.group_user,1,1,1,1
+access_res_country_provinces,access_res_country_provinces,model_res_country_provinces,base.group_user,1,1,1,1
+access_res_country_commune,access_res_country_commune,model_res_country_commune,base.group_user,1,1,1,1
+access_agreement_line_type,access_agreement_line_type,model_agreement_line_type,base.group_user,1,1,1,1
+access_agreement_modelos,access_agreement_modelos,model_agreement_modelos,base.group_user,1,1,1,1
+access_sale_order_detail,access_sale_order_detail,model_sale_order_detail,base.group_user,1,1,1,1
+access_sale_order_detaill,access_sale_order_detaill,model_sale_order_detaill,base.group_user,1,1,1,1
+

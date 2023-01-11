@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+	<data>
+		<record id="fleet_vehicle_view_form_inherith" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.inherit</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acquisition_date']" position="before">
+                    <field  name="product_id" domain="[('fleet', '=', True)]"/>
+                </xpath>
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page string="Datos Vehículo" name="Data_vehicle">
+                        <group>
+                            <group>
+                                <field name="marca"/>
+                                <field name="modelo"/>
+                                <field name="chasis"/>
+                                <field name="motor"/>
+                                <field name="cilindrada"/>
+                                <field name="anio"/>
+                            </group>
+                            <group>
+                                <field name="transmision"/>
+                                <field name="color_kg"/>
+                                <field name="combustible"/>
+                                <field name="tipo_vehiculo"/>
+                                <field name="patente"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</odoo>

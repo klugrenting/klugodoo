@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<odoo>
+    <data>
+        <template id="factoring_document">
+            <DTECedido xmlns="http://www.sii.cl/SiiDte" version="1.0">
+                <DocumentoDTECedido t-att-ID="doc_id">
+                    <t t-esc="signed_dte"/>
+                    <TmstFirma t-esc="stamp"/>
+                </DocumentoDTECedido>
+            </DTECedido>
+        </template>
+
+        <template id="cesion_document">
+            <Cesion xmlns="http://www.sii.cl/SiiDte" version="1.0">
+                <DocumentoCesion t-att-ID="doc_id">
+                    <SeqCesion t-esc="move.cesion_number"/>
+                    <IdDTE>
+                        <TipoDTE t-esc="move.l10n_latam_document_type_id.code"/>
+                        <RUTEmisor t-esc="format_vat(move.company_id.vat)"/>
+                        <RUTReceptor t-esc="format_vat(move.partner_id.vat)"/>
+                        <Folio t-esc="move.l10n_latam_document_number"/>
+                        <FchEmis t-esc="move.invoice_date"/>
+                        <MntTotal t-esc="float_repr(amounts['total_amount'], 0)"/>
+                    </IdDTE>
+                    <Cedente>
+                        <RUT t-esc="format_vat(move.company_id.vat)"/>
+                        <RazonSocial t-esc="move.company_id.name"/>
+                        <Direccion t-esc="format_length('%s %s' % (move.company_id.partner_id.street, (move.company_id.partner_id.street2 or '')), 60)"/>
+                        <eMail t-esc="move.company_id.l10n_cl_dte_email"/>
+                        <RUTAutorizado>
+                            <RUT t-esc="format_vat(move.company_id.vat)"/>
+                            <Nombre t-esc="move.company_id.name"/>
+                        </RUTAutorizado>
+                        <DeclaracionJurada t-esc="move.declaracion_jurada"/>
+                    </Cedente>
+                    <Cesionario>
+                        <RUT t-esc="format_vat(move.cesionario_id.vat)" />
+                        <RazonSocial t-esc="move.cesionario_id.name"/>
+                        <Direccion t-esc="move.cesionario_id.street"/>
+                        <eMail t-esc="move.cesionario_id.email"/>
+                    </Cesionario>
+                    <MontoCesion t-esc="float_repr(amounts['total_amount'], 0)"/>
+                    <UltimoVencimiento t-esc="move.invoice_date_due"/>
+                    <eMailDeudor t-esc="move.partner_id.email"/>
+                    <TmstCesion t-esc="stamp"/>
+                </DocumentoCesion>
+            </Cesion>
+        </template>
+
+        <template id="dte_subtemplete_factoring">
+            <Caratula version="1.0">
+                <RutCedente t-esc="format_vat(move.company_id.vat)"/>
+                <RutCesionario t-esc="format_vat(move.cesionario_id.vat)"/>
+                <NmbContacto t-esc="move.company_id.name"/>
+                <FonoContacto t-esc="move.company_id.phone"/>
+                <MailContacto t-esc="move.company_id.email"/>
+                <TmstFirmaEnvio t-esc="stamp"/>
+            </Caratula>
+            <Cesiones>
+                <t t-esc="factoring_dte"/>
+                <t t-esc="cesion_dte"/>
+            </Cesiones>
+        </template>
+
+        <template id="documento_dte_factoring">
+            <DocumentoAEC t-att-ID="doc_id">
+                <t t-call="l10n_cl_factoring.dte_subtemplete_factoring"/>
+            </DocumentoAEC>
+        </template>
+
+        <template id="dte_factoring">
+            <AEC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sii.cl/SiiDte" xsi:schemaLocation="http://www.sii.cl/SiiDte AEC_v10.xsd" version="1.0">
+                <t t-call="l10n_cl_factoring.documento_dte_factoring"/>
+            </AEC>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="report_invoice_and_cedible">
+            <t t-call="l10n_cl.report_invoice">
+                <t t-set="cedible" t-value="True" />
+            </t>
+        </template>
+
+        <record id="action_print_copy_cedible" model="ir.actions.report">
+            <field name="name">Imprimir Copia y Cedible</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10n_cl_report_cedible.report_invoice_and_cedible</field>
+            <field name="report_file">l10n_cl_report_cedible.report_invoice_and_cedible</field>
+            <field name="attachment">(object.state in ('open','paid')) and ('FyC_'+(object.number or '').replace('/','')+'.pdf')</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
