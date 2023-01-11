@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for sale.order -->
+       <record id="seq_agreement" model="ir.sequence">
+            <field name="name">Agreement secuencia parent</field>
+            <field name="code">agreement_seq</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+         <record id="seq_agreement_plantilla" model="ir.sequence">
+            <field name="name">Agreement secuencia plantilla</field>
+            <field name="code">agreement_seq_plantilla</field>
+            <field name="prefix">PL</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for crm -->
+       <record id="seq_crm" model="ir.sequence">
+            <field name="name">CRM secuencia</field>
+            <field name="code">crm_seq</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+       </record>
+
+        <record id="seq_agreement_document" model="ir.sequence">
+            <field name="name">Agreement Document</field>
+            <field name="code">agreement.document</field>
+            <field name="prefix">DOC</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

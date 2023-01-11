@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+	<data>
+		<record id="related_product_template_form" model="ir.ui.view">
+            <field name="name">product.template.principal.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="fleet"/>
+                        <label for="fleet"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+	</data>
+</odoo>

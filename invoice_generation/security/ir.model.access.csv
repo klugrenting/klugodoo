@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_generation_queue,invoice.generation.queue,model_invoice_generation_queue,,1,1,1,1
+access_invoice_generation_queue_currency,invoice.generation.queue.currency,model_invoice_generation_queue_currency,,1,1,1,1
+access_invoice_gen,invoice.gen,model_invoice_gen,,1,1,1,1
+access_invoice_gen_currency,invoice.gen.currency,model_invoice_gen_currency,,1,1,1,1

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_gen_wzd" model="ir.ui.view">
+            <field name="name">invoice.gen.wzd</field>
+            <field name="model">invoice.gen</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                            <field name="scheduled_date" required="1"/>
+                            <field name="not_date" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="type_gen" invisible="1"/>
+                            <field name="uf_rate" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="rates_currency" string="Tasas">
+                            <field name="currency_rate_ids">
+                                <tree editable="top" create="0">
+                                    <field name="invoice_gen_id" invisible="1"/>
+                                    <field name="currency_id"/>
+                                    <field name="date" invisible="1"/>
+                                    <field name="rate"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('not_date', '=', False)]}"><bold>La fecha pautada debe ser estrictamente mayor a la fecha de hoy</bold></div>
+                        <button name="generate_invoices" string="Generar" type="object" class="oe_highlight"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_invoice_gen" model="ir.actions.act_window">
+            <field name="name">Generación de Facturas</field>
+            <field name="res_model">invoice.gen</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="wizard_invoice_gen_categ" name="Facturación Masiva" parent="account.menu_finance_receivables" sequence="30"/>
+
+        <menuitem id="wizard_invoice_gen" name="Generación de Facturas" parent="wizard_invoice_gen_categ"
+                action="action_invoice_gen" sequence="1"/>
+    </data>
+</odoo>

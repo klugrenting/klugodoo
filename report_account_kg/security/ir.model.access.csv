@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_crm_inherit_line,crm.line,custom_crm_inherith.model_crm_line,sales_team.group_sale_salesman,1,1,1,1
+access_zona_ejecutivo,access_zona_ejecutivo,model_zona_ejecutivo,base.group_user,1,1,1,1
+access_maihue_ejecutivo,access_maihue_ejecutivo,model_maihue_ejecutivo,base.group_user,1,1,1,1
+access_crm_canal,access_crm_canal,model_crm_canal,base.group_user,1,1,1,1
+access_crm_subcanal,access_crm_subcanal,model_crm_subcanal,base.group_user,1,1,1,1

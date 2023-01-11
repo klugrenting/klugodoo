@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="inherit_crm_agreement_view_form_id" model="ir.ui.view">
+        <field name="name">crm.lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <button name="action_schedule_meeting" position="after">
+                <button class="oe_stat_button" type="object"
+                    name="action_view_agreement" icon="fa-pencil-square-o" attrs="{'invisible': [('type', '=', 'lead')]}">
+                    <field name="agreement_count" widget="statinfo" string="Contratos"/>
+                </button>
+            </button>
+            <xpath expr="//header" position='inside'>
+                <button name="create_agreement" string="Crear Contrato" type="object" class="oe_highlight" attrs="{'invisible':[('agreement_count','!=',0)]}"/>
+            </xpath>
+<!--            <xpath expr="//field[@name='date_deadline']" position="before">-->
+<!--                    <field name="type_contrib_partner"/>-->
+<!--                    <em colspan="2" attrs="{'invisible': [('check_exception', '=', False)]}" style="color:red;">Warning: Select an exceptional template, this must be pre-approved.</em>-->
+<!--                    <field name="template_agreement_id" domain="[('id', 'in', template_domain)]" required="1"/>-->
+<!--                    <field name="template_domain" widget="many2many_tags"/>-->
+<!--                    <field name="check_exception" invisible="1"/>-->
+<!--                    <field name="exception"/>-->
+<!--                    <field name="valid_exception" readonly="1"/>-->
+<!--                    <field name="payment_method" required="1" domain="[('id', 'in', payment_method_domain)]"/>-->
+<!--                    <field name="payment_method_domain" widget="many2many_tags"/>-->
+<!--                    <field name="type_partner" required="1" domain="[('id', 'in', type_partner_domain)]"/>-->
+<!--                    <field name="type_partner_domain" widget="many2many_tags"/>-->
+<!--                    <field name="agreement_id"></field>-->
+<!--                    <field name="crm_captado_id"/>-->
+<!--                    <field name="crm_gestionado_id"/>-->
+<!--                    <field name="canal_id"/>-->
+<!--                    <field name="subcanal_id"/>-->
+<!--            </xpath>-->
+            <xpath expr="//notebook" position="inside">
+                <page name="products" string="Servicios">
+                    <field name="crm_line_ids" nolabel="1">
+                        <tree editable="top">
+                            <field name="product_id" optional="show"/>
+                            <field name="crm_id" invisible="1"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="name" invisible="1"/>
+                            <field name="partner_contact_id" optional="show"/>
+                            <field name="partner_invoice_id" optional="show"/>
+                            <field name="location" optional="show"/>
+                            <field name="qty" invisible="1"/>
+                            <field name="uom_id" groups="uom.group_uom" invisible="1"/>
+                            <field name="price" optional="show"/>
+                        </tree>
+                    </field>
+                </page>
+<!--                <page name="products" string="Servicios Reales">-->
+<!--                    <field name="crm_line_serv_real">-->
+<!--                      <tree>-->
+<!--                        <field name="product_id" optional="show"/>-->
+<!--                        <field name="crm_id" invisible="1"/>-->
+<!--                        <field name="partner_id" invisible="1"/>-->
+<!--                        <field name="name" invisible="1"/>-->
+<!--                        <field name="partner_contact_id" optional="show"/>-->
+<!--                        <field name="partner_invoice_id" optional="show"/>-->
+<!--                        <field name="location" optional="show"/>-->
+<!--                        <field name="qty" invisible="1"/>-->
+<!--                        <field name="uom_id" groups="uom.group_uom" invisible="1"/>-->
+<!--                        <field name="price" optional="show"/>-->
+<!--                    </tree>-->
+<!--                    </field>-->
+<!--                </page>-->
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

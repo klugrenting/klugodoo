@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="agreement_line_inherit_module_name" model="ir.ui.view">
+            <field name="name">agreement.line.view.form.inherit</field>
+            <field name="model">agreement.line</field>
+            <field name="inherit_id" ref="agreement_blueminds.contract_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='km_mes']" position="after">
+                    <field name="deducible"/>
+                    <field name="deducible_robo"/>
+                </xpath>
+                <xpath expr="//field[@name='maintenance']" position="attributes">
+                    <attribute name="string" >Frecuencia de mantencion</attribute>
+                </xpath>
+                <xpath expr="//page[@name='invoicing']" position="after">
+                    <page name="entrega" string="Datos Entrega">
+                        
+                    </page>
+                    <page name="devolucion" string="Datos devolucion">
+                        
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="agreement_inherit_module_name" model="ir.ui.view">
+            <field name="name">agreement.view.form.inherit</field>
+            <field name="model">agreement</field>
+            <field name="inherit_id" ref="agreement_blueminds.agreement_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="required">0</attribute>
+                </xpath> 
+                <xpath expr="//field[@name='type_contrib_partner']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_template', '!=', False)]}</attribute>
+                </xpath>
+                
+            </field>
+        </record>
+        
+    
+    </data>
+    
+
+</odoo>

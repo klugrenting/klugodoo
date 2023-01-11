@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record model="ir.ui.view" id="partner_form">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="etiqueta_person" widget="many2many_tags" default="1" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                <field name="type_contrib"/>
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <div name="phone" class="o_row">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                    <field name="phone0" placeholder="Telefono" widget="phone"/>
+                </div>
+                <div name="categoria" class="o_row">
+                    <field name="etiqueta_telefono" placeholder="Categoria"/>
+                    <span>+</span>
+                    <field name="add_another_number"/>
+                </div>
+                 <div class="o_row" attrs="{'invisible': [('add_another_number', '==', False)]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                    <field name="phone1" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': [('add_another_number', '==', False)]}">
+                    <field name="etiqueta1" placeholder="Categoria" attrs="{'required': [('add_another_number', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number1"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', ('add_another_number', '==', False), ('add_another_number1', '==', False)]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone2" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number1', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', ('add_another_number', '==', False), ('add_another_number1', '==', False)]}">
+                    <field name="etiqueta2" placeholder="Categoria" attrs="{'required': [('add_another_number1', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number2"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False)]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone3" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number2', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False)]}">
+                    <field name="etiqueta3" placeholder="Categoria" attrs="{'required': [('add_another_number2', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number3"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('add_another_number3', '==', False)]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone4" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number3', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('add_another_number3', '==', False)]}">
+                    <field name="etiqueta4" placeholder="Categoria" attrs="{'required': [('add_another_number3', '==', True)]}"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="means_ids" widget="many2many_tags"/>
+                <field name="capabilities_ids" widget="many2many_tags"/>
+                <field name="fact_integral"/>
+                <field name="status_payment"/>
+                <field name="status_method_payment"/>
+                <field name="vinculation_id"/>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="agreement" string="Agreements">
+                    <group>
+                        <field name="agreement_ids" nolabel="1"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[1]/field[@name='name']" position="replace">
+                <field name="name" string="Nombre" attrs="{'required':['|', '|', '|', '|', '|',('type','=', 'contact'), ('type','=', 'invoice'), ('type','=', 'delivery'), ('type','=', 'other'), ('type','=', 'private'), ('etiqueta_person','in',[1, 2, 3, 4, 5, 6])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[1]/field[@name='name']" position="after">
+                <field name="sucursal"/>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[1]/field[@name='function']" position="replace">
+                <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('type','!=', 'contact')]}" string="Puesto de trabajo / relación contratante"/>
+                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' attrs="{'invisible': [('type','!=', 'contact')]}"/>
+                <!-- <field name="phone_code" readonly="1" attrs="{'invisible': [('type','!=', 'contact')]}"/> -->
+            </xpath>
+
+
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[2]/field[@name='phone']" position="replace">
+                <field name="phone" placeholder="Telefono" widget="phone" attrs="{'invisible': [('type', '==', 'contact')]}"/>
+                <div name="phone" class="o_row" attrs="{'invisible': [('type', '!=', 'contact')]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                    <field name="phone0" attrs="{'required': [('etiqueta_person', 'in', [2, 4, 5, 6])]}" placeholder="Telefono" widget="phone"/>
+                </div>
+                <div name="categoria" class="o_row" attrs="{'invisible': [('type', '!=', 'contact')]}">
+                    <field name="etiqueta_telefono" placeholder="Categoria" attrs="{'required': [('etiqueta_person', 'in', [2, 4, 5, 6])]}"/>
+                    <span>+</span>
+                    <field name="add_another_number"/>
+                </div>
+                 <div class="o_row" attrs="{'invisible': ['|', ('add_another_number', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                    <field name="phone1" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', ('add_another_number', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="etiqueta1" placeholder="Categoria" attrs="{'required': [('add_another_number', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number1"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone2" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number1', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="etiqueta2" placeholder="Categoria" attrs="{'required': [('add_another_number1', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number2"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone3" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number2', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="etiqueta3" placeholder="Categoria" attrs="{'required': [('add_another_number2', '==', True)]}"/>
+                    <span>+</span>
+                    <field name="add_another_number3"/>
+                </div>
+
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('add_another_number3', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="phone_code" style="width: 1%%" readonly="1"/>
+                   <field name="phone4" style="width: 50%%" placeholder="Telefono" attrs="{'required': [('add_another_number3', '==', True)]}" widget="phone"/>
+                </div>
+                <div class="o_row" attrs="{'invisible': ['|', '|', '|', '|', ('add_another_number', '==', False), ('add_another_number1', '==', False), ('add_another_number2', '==', False), ('add_another_number3', '==', False), ('type', '!=', 'contact')]}">
+                    <field name="etiqueta4" placeholder="Categoria" attrs="{'required': [('add_another_number3', '==', True)]}"/>
+                </div>
+
+                <div class="o_row">
+                    <field name="l10n_latam_identification_type_id" options="{'no_open': True, 'no_create': True}" domain="country_id and ['|', ('country_id', '=', False), ('country_id', '=', country_id)] or []" attrs="{'required': [('etiqueta_person', 'in', [1])], 'invisible': [('type','!=', 'contact')]}"/>
+                </div>
+                <div class="o_row">
+                    <span class="oe_read_only"> - </span>
+                    <field name="vat" placeholder="Number" attrs="{'required': [('etiqueta_person', 'in', [1])], 'invisible': [('type','!=', 'contact')]}"/>
+                </div>
+                <field name="etiqueta_person" string="Tipo de Contacto" widget="many2many_tags" attrs="{'invisible': [('type', '!=', 'contact')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group" position="after">
+                <group>
+                    <field name="geolocation_x" attrs="{'invisible': [('type', '==', 'contact')]}"/>
+                    <field name="geolocation_y" attrs="{'invisible': [('type', '==', 'contact')]}"/>
+                    <field name="geolocation_url" attrs="{'invisible': [('type', '==', 'contact')]}"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='state_id']" position="replace">
+                <field name="state_id" placeholder="State" class="o_address_state" attrs="{'required' : [('type', '=', 'other')]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[1]/div/div/field[@name='street2']" position="after">
+                <field name="commune" class="o_address_state" placeholder="Comuna" style="width: 33%%" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)], 'required' : [('type', '=', 'other')]}" options="{'no_create_edit': True}" />
+            </xpath>
+
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[2]/field[@name='mobile']" position="replace"/>
+            <xpath expr="//field[@name='child_ids']/form/sheet/group/group[2]/field[@name='email']" position="replace">
+                <field name="email" attrs="{'required': [('etiqueta_person', 'in', [2, 4, 5, 6])]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

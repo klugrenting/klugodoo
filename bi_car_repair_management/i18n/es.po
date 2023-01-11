@@ -42,7 +42,7 @@ msgstr ""
 "<p>Estimado ${object.partner_id.name}\n"
 ",</p>\n"
 "<p>\n"
-"Hemos cerrado su solicitud de reparación de automóviles ahora.\n"
+"Hemos cerrado su solicitud de Servicio técnico ahora.\n"
 "</p>\n"
 "\n"
 "<p>\n"
@@ -80,7 +80,7 @@ msgid ""
 "\t\t\t\t\t<span class=\"caret\"/>"
 msgstr ""
 "<span class=\"Text\">\n"
-"Reparación de autos\n"
+"Servicio Técnico\n"
 "</span>\n"
 "<span class=\"caret\"/>"
 
@@ -152,7 +152,7 @@ msgstr "<strong>Coche: </strong>"
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.bi_create_car_repair
 msgid "<strong>Car Repair Details</strong>"
-msgstr "<strong>Detalles de reparación de automóviles</strong>"
+msgstr "<strong>Detalles de Servicio Técnico</strong>"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_template_view
@@ -252,7 +252,7 @@ msgstr "<fuerte>Proyecto: </fuerte>"
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_template_view
 msgid "<strong>Repair Date : </strong>"
-msgstr "<strong>Fecha de reparación: </strong>"
+msgstr "<strong>Fecha de Servicio: </strong>"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_template_view
@@ -437,26 +437,26 @@ msgstr "Piezas de automóvil"
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_form_view
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_tree_view
 msgid "Car Repair"
-msgstr "Reparación de autos"
+msgstr "Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_comment
 msgid "Car Repair Customer Rating"
-msgstr "Calificación del cliente de reparación de automóviles"
+msgstr "Calificación del cliente de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_diagnosys__car_repair_estimation_ids
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_workorder__car_repair_estimation_ids
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_diagnosys_form_view
 msgid "Car Repair Estimation"
-msgstr "Estimación de reparación de automóviles"
+msgstr "Estimación de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.header
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_home_car_repair
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_home_menu_car_repair
 msgid "Car Repair Request"
-msgstr "Solicitud de reparación de automóviles"
+msgstr "Solicitud de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.actions.act_window,name:bi_car_repair_management.action_car_repair_team
@@ -464,22 +464,22 @@ msgstr "Solicitud de reparación de automóviles"
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_team_form_view
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_team_tree_view
 msgid "Car Repair Team"
-msgstr "Equipo de reparación de automóviles"
+msgstr "Equipo de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.ui.menu,name:bi_car_repair_management.menu_car_repair_team
 msgid "Car Repair Teams"
-msgstr "Equipos de reparación de automóviles"
+msgstr "Equipos de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_account_analytic_line__car_repair_timesheet_id
 msgid "Car Repair Timesheet"
-msgstr "Hoja de tiempo de reparación de automóviles"
+msgstr "Hoja de tiempo de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.ui.menu,name:bi_car_repair_management.main_sub_menu_car_repair
 msgid "Car Repairs"
-msgstr "Reparación de autos"
+msgstr "Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_home_menu_car_repair
@@ -800,7 +800,7 @@ msgstr "Bueno"
 #. module: bi_car_repair_management
 #: model:ir.module.category,description:bi_car_repair_management.module_category_car_repair
 msgid "Helps you manage your Car Repairing."
-msgstr "Le ayuda a administrar su reparación de automóviles."
+msgstr "Le ayuda a administrar su Servicio Técnico."
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields.selection,name:bi_car_repair_management.selection__car_diagnosys__priority__3
@@ -988,7 +988,7 @@ msgstr "modelo del vehiculo"
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_request_view
 msgid "My Car Repair Request"
-msgstr "Solicitud de reparación de mi automóvil"
+msgstr "Solicitud de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_diagnosys__name
@@ -1162,12 +1162,12 @@ msgstr "Clasificación"
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.bi_create_car_repair
 msgid "Reason For Repair"
-msgstr "Motivo de la reparación"
+msgstr "Motivo de la Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.bi_create_car_repair
 msgid "Reason For Repair In Details"
-msgstr "Motivo de la reparación en detalles"
+msgstr "Motivo de la Servicio Técnico en detalles"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_diagnosys__remaining_hours
@@ -1183,17 +1183,17 @@ msgstr "Reabierto"
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_repair__repair_request_date
 msgid "Repair Request Date"
-msgstr "Fecha de solicitud de reparación"
+msgstr "Fecha de solicitud de Servicio"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_repair__car_service_type_id
 msgid "Repair Type"
-msgstr "Tipo de reparación"
+msgstr "Tipo de Servicio"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_repair__repairing_duration
 msgid "Repairing Duration"
-msgstr "Duración de la reparación"
+msgstr "Duración de la Servicio"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_car_repair
@@ -1273,7 +1273,7 @@ msgstr "Enviar"
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.bi_create_car_repair
 msgid "Submit Car Repair Request"
-msgstr "Enviar solicitud de reparación de automóviles"
+msgstr "Enviar solicitud de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_diagnosys__tag_ids
@@ -1312,7 +1312,7 @@ msgstr "Gracias"
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.car_repair_rating_thank_you
 msgid "Thank you for giving review for Car Repair Request Feedback."
 msgstr ""
-"Gracias por dar su opinión sobre la solicitud de comentarios de reparación "
+"Gracias por dar su opinión sobre la solicitud de comentarios de Servicio Técnico "
 "de automóviles."
 
 #. module: bi_car_repair_management
@@ -1340,7 +1340,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_car_repair
 msgid "There are currently no Car Repair Request for your account."
 msgstr ""
-"Actualmente no hay ninguna solicitud de reparación de automóviles para su "
+"Actualmente no hay ninguna solicitud de Servicio Técnico para su "
 "cuenta."
 
 #. module: bi_car_repair_management
@@ -1462,7 +1462,7 @@ msgstr ""
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.portal_my_car_repair
 msgid "Your Car Repair Request"
-msgstr "Su solicitud de reparación de automóviles"
+msgstr "Su solicitud de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model_terms:ir.ui.view,arch_db:bi_car_repair_management.bi_create_car_repair
@@ -1482,7 +1482,7 @@ msgstr "Su teléfono"
 #. module: bi_car_repair_management
 #: model:ir.model.fields,field_description:bi_car_repair_management.field_car_repair_estimate__diagnosys_id
 msgid "car Repair Estimate"
-msgstr "estimación de reparación de automóviles"
+msgstr "estimación de Servicio Técnico"
 
 #. module: bi_car_repair_management
 #: model:ir.model,name:bi_car_repair_management.model_car_diagnosys

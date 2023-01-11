@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+    <record id="fleet_vehicle_odometer_view_form_inherith_bm" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.form.inherith</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="amount"/>
+                <field name="concession"/>
+                <field name="description"/>
+                <field name="category"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_odometer_view_tree_inherith_bm" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.tree.inherith</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='unit']" position="after">
+                <field name="amount"/>
+                <field name="concession"/>
+                <field name="description"/>
+                <field name="category"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

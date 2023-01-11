@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+
+    <record id="bm_product_pricelist_view_tree" model="ir.ui.view">
+        <field name="name">product.pricelist.tree</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="vigente"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="bm_product_pricelist_form_view" model="ir.ui.view">
+        <field name="name">bm.product.pricelist.view.form</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="vigente" nolabel="1" widget="radio" options="{'horizontal': true}"/>
+                <field name="pricelist_type" nolabel="1" widget="radio" options="{'horizontal': true}"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('pricelist_type','=', 'C')]}</attribute>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='item_ids']/tree/field[@name='min_quantity']" position="before">
+                <field name="payment_method_p" widget="many2many_tags"/>
+                <field name="payment_period_p" widget="many2many_tags"/>
+                <field name="zone" widget="many2many_tags"/>
+                <field name="comuna_id" widget="many2many_tags"/>
+                <field name="type_partner" widget="many2many_tags"/>
+                <field name="currency_id_m"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="bm_product_pricelist_item_form_view" model="ir.ui.view">
+        <field name="name">bm.product.pricelist.item.form</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="pricelist_type"/>
+            </xpath>
+            <xpath expr="//field[@name='min_quantity']" position="after">
+                <field name="payment_method_p" attrs="{'invisible': [('pricelist_type', '=', 'E')], 'required': [('pricelist_type', '=', 'C')]}" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="payment_period_p" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('pricelist_type', '=', 'E')], 'required': [('pricelist_type', '=', 'C')]}"/>
+                <field name="zone" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('pricelist_type', '=', 'E')], 'required': [('pricelist_type', '=', 'C')]}"/>
+                <field name="comuna_id" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('pricelist_type', '=', 'E')]}"/>
+                <field name="type_partner" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('pricelist_type', '=', 'E')], 'required': [('pricelist_type', '=', 'C')]}"/>
+                <field name="currency_id_m" options="{'no_create': True}" attrs="{'invisible': [('pricelist_type', '=', 'E')], 'required': [('pricelist_type', '=', 'C')]}"/>
+                <field name="vigente"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

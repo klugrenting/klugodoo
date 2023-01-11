@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="agreement_type_agreement" model="agreement.type">
+        <field name="name">Agreement</field>
+    </record>
+
+    <record id="agreement_type_contract" model="agreement.type">
+        <field name="name">Contract</field>
+    </record>
+
+</odoo>

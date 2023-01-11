@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+    <record id="inv_gen_view_order_form" model="ir.ui.view">
+        <field name="name">inv.gen.sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="uf_rate"/>
+                <field name="queue_id"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="xrb_rental_order_view_tree" model="ir.ui.view">-->
+<!--        <field name="name">xrb.rental.order.tree</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale_renting.rental_order_view_tree"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='name']" position="after">-->
+<!--                <field name="invoice_id" string="Factura Asoc."/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+  </data>
+</odoo>

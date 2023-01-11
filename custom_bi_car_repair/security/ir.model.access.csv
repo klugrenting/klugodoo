@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+maintenance_line_products,maintenance_line_products,custom_bi_car_repair.model_maintenance_line_products,,1,1,1,1
+maintenance_line_services,maintenance_line_services,custom_bi_car_repair.model_maintenance_line_services,,1,1,1,1

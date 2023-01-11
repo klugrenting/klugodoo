@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="book_missing_view_form" model="ir.ui.view">
+            <field name="name">book_missing_view_form</field>
+            <field name="model">generate.book.missing</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_generate" string="Confirmar" type="object" class="oe_highlight"/>
+                        <button string="Cancelar" class="btn btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_book_missing_view" model="ir.actions.act_window">
+            <field name="name">Generar Libros</field>
+            <field name="res_model">generate.book.missing</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="book_missing_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="action_book_missing_menu" name="Generar Libros" parent="account.menu_finance_reports" action="action_book_missing_view"/>
+
+    </data>
+</odoo>

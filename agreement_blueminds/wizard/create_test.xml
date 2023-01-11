@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+  © 2021 Jescalante (Jamie Escalante <jamie.escalante7@gmail.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record id="view_create_test_form" model="ir.ui.view">
+            <field name="name">Invoice Orders</field>
+            <field name="model">create.test</field>
+            <field name="arch" type="xml">
+                <form string="Crear Instalacion">
+                    <p class="oe_grey">
+                        Esta instalacion creara un ticket para la instalacion del equipo
+                    </p>
+                    <group>
+                        <field name="type"/>
+                    </group>
+                    <group>
+                        <field name="date_test" invisible="1"/>
+                    </group>
+                    <field name="notes" placeholder="Escriba aquí cualquier otra información"/>
+                    <footer>
+                        <button name="create_test" string="Crear Instalacion" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_view_create_test" model="ir.actions.act_window">
+        <field name="name">Crear Instalacion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">create.test</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <!-- TODO: check if we need this -->
+    </record>
+</odoo>

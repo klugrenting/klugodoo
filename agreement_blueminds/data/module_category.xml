@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+© 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="agreement" model="ir.module.category">
+        <field name="name">Agreement</field>
+        <field name="sequence">80</field>
+    </record>
+
+</odoo>

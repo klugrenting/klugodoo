@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <report
+        id="partner_agreement_contract_document_anexo"
+        model="agreement"
+        string="Contract Document Anexo"
+        name="custom_agreement_blueminds.report_agreement_document_anexo"
+        file="custom_agreement_blueminds.report_agreement_document_anexo"
+        report_type="qweb-pdf" />
+
+    <template id="report_agreement_document_anexo">
+        <t t-name="agreement.report_agreement_document_anexo">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.basic_layout">
+                        <div class="header">
+                        <header>
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 65px;" alt="Logo" />
+                            <span t-esc="doc.name[0:5]" style="padding-left:600px;"/>
+                        </header>
+                    </div>
+                    
+                    <div class="page">
+                        <h5 style="text-align:center;font-weight: bold;">
+                            ANEXO A<br/>
+                            CONTRATO DE LEASING OPERATIVO <br/> KLUG SpA <br/>Y
+                            <br />
+                            <span t-esc="doc.partner_id.name" />
+                            <br />
+                            <span t-esc="doc.start_date" />
+                        </h5>
+                        <br />
+                        <p  style="text-align:justify; font-size:14px;">
+                            Con fecha <span t-esc="doc.start_date.strftime('%d/%m/%Y')" />, se establece que las características del vehículo, sus
+                            rentas mensuales y otros, se regirán por los datos a continuación:
+
+                        </p>
+                        <t t-foreach="doc.line_ids" t-as="line">
+                        <div class="row">
+                            <div class="col-4">
+                                Marca / Modelo / Placa: 
+                                <br/>
+                                Plazo:
+                                <br/>
+                                Renta:
+                                <br/> 
+                                Kilómetros mensuales:
+                                <br/>
+                                Valor kilometro extra:
+                                <br/> 
+                                Fecha Estimada Entrega:
+                                <br/>
+                            </div>
+                            <div class="col-8" style="text-align:left;">
+                            <strong>    <span t-esc="line.product_principal.marca" /> /  <span t-esc="line.product_principal.modelo" /> / <span t-esc="line.product_principal.patente" /> <br/> 
+                                <span t-esc="line.place_contract" /> <br/>
+                                <span t-esc="line.price" /> UF mensual <br/>
+                                <span t-esc="line.km_mes" /> mensuales <br/>
+                                $ <span t-esc="line.price_km_adi" /><br/>
+                                <span t-esc="line.fecha_fin.strftime('%d/%m/%Y')" />
+                            </strong>    
+
+                            </div>
+                        </div>
+                        <br/>
+                        <p>
+                            Los valores señalados están expresados en UF (Unidades de Fomento) a los que se les
+deberá agregar el Impuesto al Valor Agregado (IVA). El valor de la UF será vigente al día de
+la emisión de cada factura.
+                        </p>
+                        <p>
+                           <strong> GARANTÍA:</strong>
+                        </p>
+                        <p>
+                            Se establece el pago por adelantado y a modo de garantía, la suma equivalente a un mes
+                            de arriendo IVA incl., monto que será reembolsado al fin del contrato y que en ningún
+                            caso podrá ser abonado a los pagos mensuales.  Para este caso la garantía asciende a la
+                            suma de <span t-esc="line.price_instalacion" />
+                        </p>
+                        <p>
+                        <strong>   MANTENCIONES: </strong>
+                        </p>
+                        <p>
+                            El Arrendatario deberá poner el vehículo individualizado en este Anexo a disposición del
+                            Arrendador cada <span t-esc="line.maintenance" /> kilómetros que registre su odómetro.
+                        </p>
+                        <p>
+                        <strong> SEGURO: </strong>
+                        </p>
+                        <p>
+                        <strong>   KLUG SPA </strong>contratará para el vehículo arrendado un seguro con las características que se
+                            detallan más adelante, debiendo mantenerlo vigente por el período que dure el contrato.
+                        </p>
+                        <div class="row">
+                            <div class="col-4">
+                                Marca / Modelo / Placa: 
+                                <br/>
+                                Cobertura:
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                Adicionales:
+                                <br/>
+                                <br/>
+                                Deducibles:
+                                
+                            </div>
+                            <div class="col-8" style="text-align:left;">
+                                <strong>
+                                <span t-esc="line.product_principal.marca" /> /  <span t-esc="line.product_principal.modelo" /> / <span t-esc="line.product_principal.patente" /> <br/>
+                                Daños propios y Robo<br/>
+                                Daños a terceros y/o Responsabilidad Civil 500UF(Unidad de<br/>
+                                Fomento) por vehículo<br/><br/>
+                                Actos Maliciosos, Terrorismo, Huelga
+                                Responsabilidad Civil en exceso
+                                <br/>
+                                <br/>
+                                Robo / Pérdida Total<span>   </span>    <span t-esc="line.deducible_robo" /> UF
+                                <br/>
+                                Daños propios  <span>   </span>       <span t-esc="line.deducible" /> UF
+                                <br/>
+                                Robo Accesorios  <span>   </span>      <span t-esc="line.deducible" /> UF
+                                
+                            </strong>
+                            </div>
+                        </div>
+                        <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="firma" style="text-align:justify; font-size:14px;">
+                        <div class="texto_firma" style="border-bottom: 1px solid #000; width:300px;">
+
+                        </div>
+                        <br/>
+                        <p style="font-weight: bold;">
+                            Marcelo Stade Toral<br/>
+                            KLUG SPA
+                        </p>
+
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="firmados" style="text-align:justify; font-size:14px;">
+                        <div class="texto_firmados" style="border-bottom: 1px solid #000; width:300px;">
+
+                        </div>
+                        <br/>
+                        <p style="font-weight: bold;">
+                            <span t-esc="doc.partner_id.name" /><br/>
+                            RUT. <span t-esc="doc.partner_id.vat" />
+                        </p>
+
+                    </div>
+                        </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

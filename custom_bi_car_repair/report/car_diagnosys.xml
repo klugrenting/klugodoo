@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+        <template id="maintenance_template_view_temp_id">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-call="custom_bi_car_repair.maintenance_template_view" />
+				</t>
+			</t>
+		</template>
+        
+        <record id="manintenance_request_report_id" model="ir.actions.report">
+            <field name="name">imprimir OT</field>
+            <field name="model">maintenance.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_bi_car_repair.maintenance_template_view_temp_id</field>
+            <field name="report_file">custom_bi_car_repair.maintenance_template_view_temp_id</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_maintenance_request"/>
+
+        </record>
+
+        
+
+		<template id="maintenance_template_view">
+			<t t-call="web.external_layout">
+                <t t-set="o" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                
+				<div class="page" style="margin-top:0px;">
+                    <div class="row">
+                        <div class="col-8" style="font-size:18px;">
+                            <strong>LIQUIDACION ORDEN DE TRABAJO # <span t-field="o.name" /></strong> 
+                         </div>
+                    </div>
+                    <br/>
+                   <div class="row">
+                    <div class="col-4" >
+                       <strong><i class="fa fa-user" aria-hidden="true"></i> Cliente</strong>
+                       <br/>
+                       <strong>Empresa: </strong> <span t-field="o.partner_id.name" />
+                       <br/>
+                       <strong> RUT: </strong> <span t-field="o.partner_id.vat" />
+                       <br/>
+                       <strong> Telefono:</strong> <span t-field="o.partner_id.phone0" />
+                       <br/>
+                       <strong> Direccion:</strong> <span t-field="o.partner_id.street" />
+                       <br/>
+                       <strong>Lugar de reparación:</strong> <span t-field="o.street" />
+                    </div>
+                    <div class="col-4" style="text-align:right;">
+                        <img t-if="o.image_brand" t-att-src="image_data_uri(o.image_brand)" style="max-height: 45px;" alt="logo_brand" />
+                    </div>
+                    <div class="col-4">
+                        
+                        <strong>
+                          <i class="fa fa-car" aria-hidden="true"></i>
+                          Vehículo
+                        </strong>
+                        <br/>
+                        <span t-field="o.model" /> <span t-field="o.brand" /> <span t-field="o.year" />
+                        <br/>
+                        <strong>Matricula:</strong> <span t-field="o.license_plate" />
+                        <br/>
+                        <strong> Color: </strong> <span t-field="o.color" />
+                        <br/>
+                        <t t-if="o.odometer">
+                          <strong> Kilometraje: </strong> <span t-field="o.odometer" />
+                        </t>
+                        <br/>
+                        <strong> Fecha Creación Orden: </strong> <span t-field="o.request_date" />
+						            <br/>
+            						<t t-if="o.close_date">
+                          <strong>Fecha Liquidación: </strong> <span t-esc="o.close_date.strftime('%d/%m/%Y')"/>
+                      </t>
+                      <br/>
+                      <t t-if="o.user_id">
+                        <strong> Técnico Asignado: </strong> <span t-esc="o.user_id.name"/>
+                      </t>
+                    </div>
+                   </div>
+                   <br/>
+                   
+                   
+                   <div class="row">
+                    <table class="table table-borderless" style="max-height:14px;">
+                        <thead>
+                        <tr style="border-bottom: solid 1px;max-height:14px;">
+                            <th>
+                                Servicios Realizados
+                            </th>
+                            <th style="text-align:center;">
+                            Cantidad 
+                            </th>
+                            <th>Precio Unit</th>
+                            <th>
+                               Total neto 
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.maintenance_line_services" t-as="line">
+                                <tr>
+                                    <td style="width:45%;padding:0px;">
+                                        <span t-field="line.description"/>
+                                    </td>
+                                    <td style="text-align:center;width:15%;padding:0px;">
+                                        <span t-esc="line.quantity"/> 
+                                    </td>
+                                    <td style="width:20%;padding:0px;">                                     
+
+                                      $ <t t-esc="'{0:,.0f}'.format(int(line['price'])).replace(',', '.')" />
+
+                                    </td>
+                                    <td style="width:20%;padding:0px;">
+                                       $ <t t-esc="'{0:,.0f}'.format(int(line['total_subtotal_line_services'])).replace(',', '.')" />
+                                    </td>
+                                </tr>
+                                
+
+                            </t>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                        <tr style="border-bottom: solid 1px;">
+                            <th>
+                                Repuestos Utilizados
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                           
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.maintenance_line_products" t-as="lines">
+                                <tr style="text-align:left;">
+                                    <td style="width:45%;padding:0px;">
+                                        <span t-field="lines.description"/>
+                                    </td>
+                                    <td style="text-align:center;width:15%;padding:0px;">
+                                        <span t-field="lines.quantity"/>
+                                    </td>
+                                    <td style="width:20%;padding:0px;">
+                                       $ <t t-esc="'{0:,.0f}'.format(int(lines['price'])).replace(',', '.')"/>
+                                    </td>
+                                    <td style="width:20%;padding:0px;">
+                                      $  <t t-esc="'{0:,.0f}'.format(int(lines['total_subtotal_line_product'])).replace(',', '.')"/>
+                                    </td>
+                                </tr>
+
+                            </t>
+                            
+                        </tbody>
+                    </table>
+                    
+                   </div>
+                   <div class="row" style="margin-top:50px;">
+                   
+                    <div class="col-6"></div>
+                   <div class="col-6" style="text-align:right;">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td style="padding:0px;">
+                                Subtotal
+                            </td>
+                            <td style="padding:0px;">
+                                $ <t t-esc="'{0:,.0f}'.format(int(o['total_neto'])).replace(',', '.')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px;">
+                                IVA 19%
+                            </td>
+                            <td style="padding:0px;">
+                                $ <t t-esc="'{0:,.0f}'.format(int(o['total_tax'])).replace(',', '.')"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0px;">Total:</td>
+                            <td style="padding:0px;">
+                               <strong>$ <t t-esc="'{0:,.0f}'.format(int(o['total_tax_incluide'])).replace(',', '.')"/>
+                            </strong>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                   </div>
+                               
+                            
+                           
+                            
+                        
+                   </div>
+
+              
+                   
+                
+               </div>
+               <div class="footer">
+                <footer>
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-if="o.description">
+                           <i class="fa fa-wrench" aria-hidden="true"></i>
+                           <strong>Diagnóstico:</strong> <span t-field="o.description" />
+   
+                           </t>
+     
+                           <t t-if="o.observations">
+                           <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                           <strong>Observaciones:</strong> <span t-raw="o.observations"/>
+                         </t>
+                       </div>
+                       
+                      </div>
+                <div class="firmas" style="margin-top:50px;">
+                    
+                        <div class="row">
+                            <div class="firma" style="text-align:center; font-size:12px;margin-left:50px;">
+                                <div class="texto_firma" style="border-bottom: 1px solid #000; width:300px;">
+        
+                                </div>
+                                <br/>
+                                <p style="font-weight: bold;">
+                                    <span t-esc="o.user_id.name" /><br/>
+                                    KLUG SERVICIOS SPA
+                                </p>
+        
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="firmados" style="text-align:center; font-size:12px;margin-left:50px;">
+                                <div class="texto_firmados" style="border-bottom: 1px solid #000; width:300px;">
+        
+                                </div>
+                                <br/>
+                                <p style="font-weight: bold;">
+                                    <span t-esc="o.partner_id.name" /><br/>
+                                    RUT. <span t-esc="o.partner_id.vat" />
+                                </p>
+        
+                            </div>
+                        </div>
+                    
+                    </div>
+                </footer>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

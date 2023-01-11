@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!--
+  © 2021 Jescalante (Jamie Escalante <jamie.escalante7@gmail.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+<odoo>
+
+    <record id="view_discount_m_form" model="ir.ui.view">
+        <field name="name">agreement.discount_m.form</field>
+        <field name="model">agreement.discount</field>
+        <field name="arch" type="xml">
+            <form string="Descuentos" class="o_sale_order">
+                <header>
+                    <button string="Confirm" type="object" name="confirm" class="oe_highlight" attrs="{'invisible': [('state', 'not in', 'draft')]}"/>
+                    <field name="state" widget="statusbar" clickable="True" options="{'fold_field': 'fold'}" />
+                </header>
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="pricelist_id" required="1" groups="product.group_product_pricelist" options="{'no_open':True,'no_create': True}"/>
+                        <field name="product_id" required="1"/>
+                        <field name="type" required="1"/>
+                        <field name="code"/>
+                        <field name="aplic"/>
+                    </group>
+                    <group>
+                        <field name="agreement_id" domain="[('is_template', '=', False)]" required="1"/>
+                        <field name="agreement_line_id" domain="[('agreement_id', '=', agreement_id)]" required="1"/>
+                        <field name="fecha_inicio" required="1" /> <!--widget="daterange" options="{'related_end_date': 'fecha_fin'}"-->
+                        <field name="fecha_fin" invisible="1" /> <!--widget="daterange" options="{'related_end_date': 'fecha_fin'}"-->
+                        <field name="intervalo" /> <!--widget="daterange" options="{'related_end_date': 'fecha_fin'}"-->
+                    </group>
+                </group>
+            </sheet>
+          </form>
+        </field>
+    </record>
+
+    <record id="view_discount_m_tree" model="ir.ui.view">
+        <field name="name">agreement.discount_m.tree</field>
+        <field name="model">agreement.discount</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Descuentos">
+                <field name="name"/>
+                <field name="pricelist_id"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+                <field name="type"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="contract_line_action" model="ir.actions.act_window">
+        <field name="name">Lineas de Contrato</field>
+        <field name="res_model">agreement.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_discount_m" model="ir.actions.act_window">
+        <field name="name">Descuentos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">agreement.discount</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Discount,
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Multas-->
+
+        <record id="view_penalty_form" model="ir.ui.view">
+        <field name="name">agreement.penalty.form</field>
+        <field name="model">agreement.penalty</field>
+        <field name="arch" type="xml">
+            <form string="Multas" class="o_sale_order">
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="type" required="1"/>
+                        <field name="type_id" required="1"/>
+                    </group>
+                    <group>
+                        <field name="pricelist_id" required="1" groups="product.group_product_pricelist" options="{'no_open':True,'no_create': True}"/>
+                        <field name="code"/>
+                        <field name="med_apl"/>
+                    </group>
+                </group>
+            </sheet>
+          </form>
+        </field>
+    </record>
+
+    <record id="view_penalty_tree" model="ir.ui.view">
+        <field name="name">agreement.penalty.tree</field>
+        <field name="model">agreement.penalty</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Multas">
+                <field name="name"/>
+                <field name="pricelist_id"/>
+                <field name="type"/>
+                <field name="code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="penalty_action" model="ir.actions.act_window">
+        <field name="name">Multas</field>
+        <field name="res_model">agreement.penalty</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_penalty" model="ir.actions.act_window">
+        <field name="name">Multas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">agreement.penalty</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Penalty,
+            </p>
+        </field>
+    </record>
+</odoo>

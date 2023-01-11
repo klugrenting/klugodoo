@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2022 (Jamie Escalante <jescalante@blueminds.cl>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <!-- Agreement Extra List View-->
+    <record model="ir.ui.view" id="agreement_extra_tree">
+        <field name="name">Agreement Extra Tree</field>
+        <field name="model">agreement.extra</field>
+        <field name="arch" type="xml">
+            <tree string="Documentos Extra" default_order='agreement_id, sequence' delete="false">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="type_extra"/>
+                <field name="title" invisible="1"/>
+                <field name="required_sign"/>
+                <field name="require_maihue"/>
+                <field name="agreement_id" invisible="1"/>
+                <field name="active" invisible="1"/>
+                <field name="is_template" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Agreement Extra Form View -->
+    <record model="ir.ui.view" id="agreement_extra_form">
+        <field name="name">Agreement Extra Form</field>
+        <field name="model">agreement.extra</field>
+        <field name="arch" type="xml">
+            <form string="Documentos Extra">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <div name="header">
+                        <button name="%(agreement_blueminds.partner_agreement_contract_document_preview)d" string="Vista Anticipada" type="action" class="oe_highlight"/>
+                        <button name="%(partner_agreement_contract_document)d" string="Imprimir" type="action" class="oe_highlight"/>
+                    </div>
+                    <notebook>
+                        <page name="type" string="Información">
+                            <group>
+                                <group>
+                                    <field name="type_extra" required="1"/>
+                                    <field name="title" invisible="1"/>
+                                    <field name="agreement_id" invisible="1"/>
+                                    <field name="firma" widget="radio"/>
+                                </group>
+                                <group>
+                                    <field name="required_sign"/>
+                                    <field name="require_maihue"/>
+                                    <field name="sequence"/>
+                                    <field name="signed_contract" filename="signed_contract_filename" attrs="{'invisible': [('firma', '!=', 'fisica')]}"/>
+                                    <field name="signed_contract_filename" invisible="1"/>
+                                    <field name="is_template" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="signature" string="Firmas">
+                            <group>
+                                <group string="Cliente">
+                                    <field name="partner_id" invisible="1"/>
+                                    <field name="partner_signed_date" invisible="1"/>
+                                    <field name="partner_signed_user_id" attrs="{'required': [('firma_type', '=', 'avanzada')]}" string="Firmante R1" domain="[('etiqueta_person','in',[1]), ('parent_id', '=', partner_id)]"/>
+                                    <field name="fecha_repres1"/>
+                                    <field name="fecha_envio1"/>
+                                    <field name="state_firm1"/>
+                                    <field name="company_signed_user_dos_id" domain="[('etiqueta_person','in',[1]), ('parent_id', '=', partner_id)]"/>
+                                    <field name="fecha_repres2"/>
+                                    <field name="fecha_envio2"/>
+                                    <field name="state_firm2"/>
+                                    <field name="company_signed_user_tres_id" domain="[('etiqueta_person','in',[1]), ('parent_id', '=', partner_id)]"/>
+                                    <field name="fecha_repres3"/>
+                                    <field name="fecha_envio3"/>
+                                    <field name="state_firm3"/>
+                                </group>
+                                <group string="Compañía">
+                                    <field name="firma_type"/>
+                                    <field name="company_signed_date"/>
+                                    <field name="company_signed_user_id" attrs="{'required': [('firma_type', '=', 'avanzada')]}"/>
+                                    <field name="state_firm4"/>
+                                    <field name="signed_contract" filename="signed_contract_filename" invisible="1"/>
+                                    <field name="signed_contract_filename" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="content" widget="html" class="oe-bordered-editor" options="{'style-inline': true, 'codeview': true }" attrs="{'readonly': [('is_template','=', False)]}"/>
+                    <field name="dynamic_content" invisible="1" widget="html" nolabel="1" options="{&quot;safe&quot;: True}"/>
+                    <group class="oe_edit_only" attrs="{'invisible': [('firma', '=', 'fisica')]}">
+                        <field name="field_domain" widget="domain" nolabel="1"
+                               options="{'model': 'agreement.recital'}" />
+                        <group>
+                            <field name="default_value"/>
+                            <field name="copyvalue"/>
+                        </group>
+                        <p>
+                            This section (on the left) allows you to add dynamic fields inside the content.
+                            <ol>
+                                <li>Select the field using the popup</li>
+                                <li>Ingrese el valor predeterminado si el campo está vacío</li>
+                                <li>Copy and paste the placeholder expression in the content</li>
+                            </ol>
+                        </p>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Agreement Recital Search View -->
+    <record model="ir.ui.view" id="agreement_extra_search">
+        <field name="name">Agreement Extra Search</field>
+        <field name="model">agreement.extra</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="group_agreement" icon="terp-partner" context="{'group_by':'agreement_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions opening views on models -->
+    <record model="ir.actions.act_window" id="agreement_extra_action">
+        <field name="name">Documentos Extra</field>
+        <field name="res_model">agreement.extra</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

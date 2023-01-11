@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="view_sale_subscription_invoice" model="ir.ui.view">
+            <field name="name">Crear Facturas</field>
+            <field name="model">sale.subscription.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Facturas Recurrentes">
+                    <p class="oe_grey">
+                        Invoices will be created in draft so that you can review
+                        them before validation.
+                    </p>
+                    <group>
+                        
+                    </group>
+                    <footer>
+                        <button name="create_invoices" id="create_invoice_open" string="Crear y ver Factura" type="object"
+                             class="btn-primary" data-hotkey="q"/>
+                        
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_sale_subscription" model="ir.actions.act_window">
+            <field name="name">Crear Facturas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.subscription.invoice</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <!-- TODO: check if we need this -->
+            <field name="binding_model_id" ref="sale_subscription.model_sale_subscription" />
+            <field name="binding_view_types">list</field>
+        </record>
+
+
+        
+    
+    </data>
+    
+
+</odoo>
